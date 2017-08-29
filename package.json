@@ -1,0 +1,13 @@
+{
+  "name": "ElectronappSample",
+  "productName": "Electron tutorial app",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.7.5",
+    "electron-packager": "^9.0.0"
+  }
+}
