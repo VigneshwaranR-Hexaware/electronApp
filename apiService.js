@@ -2,7 +2,7 @@ module.exports = function apiClass () {
 this.ApiRequest = function (userSays) 
 {
 var apiai = require('apiai');
-var app =  apiai("84a42b482cf74b9c9914495c757de603");
+var app =  apiai("87d03c487fbc4351896cc5d405bde312");
 var request = app.textRequest(userSays, {
 sessionId: '0111'
 });
