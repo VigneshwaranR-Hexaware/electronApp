@@ -6,6 +6,11 @@
   "scripts": {
     "start": "electron ."
   },
+  "dependencies": {
+    "apiai": "2.0.5",
+    "body-parser": "^1.15.2",
+    "express": "^4.15.3"
+  },
   "devDependencies": {
     "electron": "^1.7.5",
     "electron-packager": "^9.0.0"
