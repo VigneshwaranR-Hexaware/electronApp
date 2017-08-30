@@ -3,8 +3,7 @@ const app =electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
-const apiService=require('./apiService')
-console.log(apiService.apiClass());
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
