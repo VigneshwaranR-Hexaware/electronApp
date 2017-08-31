@@ -1,23 +1,6 @@
 var result="";
 $(function() {
   var test;
- 
-  
-//   $("#botbody").text(test);
-//   $("#txtChatarea").keypress(function (e) {
-//   if(e.which == 13) {
-//   //submit form via ajax, this is not JS but server side scripting so not showing here
-//   $("#txtChatarea").append('<p class="speech">'+ $(this).val()+'</p>'+"<br/>");
-//   test=$(this).val();
-//   $('#botbody').prepend($(this).val()+"<br />");
-
-  
-//   $(this).val("");
-//   e.preventDefault();
-//   }
-// });
-
-
 $(".mytext").on("keyup", function(e){
     if (e.which == 13){
         var text = $(this).val();
@@ -37,10 +20,10 @@ resetChat();
 
 });
 var me = {};
-me.avatar = "https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48";
+me.avatar = "http://www.vfsglobal.com/images/services_solutions/header.png";
 
 var you = {};
-you.avatar = "https://a11.t26.net/taringa/avatares/9/1/2/F/7/8/Demon_King1/48x48_5C5.jpg";
+you.avatar = "http://www.vfsglobalmobile.com/images/vfs-global-logo.png";
 
 function formatAMPM(date) {
     var hours = date.getHours();
