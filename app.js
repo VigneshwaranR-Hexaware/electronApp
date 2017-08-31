@@ -1,6 +1,12 @@
 var result="";
+var me = {};
+me.avatar = "https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48";
+var you = {};
+you.avatar = "https://a11.t26.net/taringa/avatares/9/1/2/F/7/8/Demon_King1/48x48_5C5.jpg";
+
 $(function() {
   var test;
+
 $(".mytext").on("keyup", function(e){
     if (e.which == 13){
         var text = $(this).val();
@@ -14,16 +20,9 @@ $(".mytext").on("keyup", function(e){
         }
     }
 });
-
 //-- Clear Chat
 resetChat();
-
 });
-var me = {};
-me.avatar = "http://www.vfsglobal.com/images/services_solutions/header.png";
-
-var you = {};
-you.avatar = "https://media.glassdoor.com/sqll/301141/vfs-global-services-pvt-limited-squarelogo-1395082767223.png";
 
 function formatAMPM(date) {
     var hours = date.getHours();
@@ -35,7 +34,6 @@ function formatAMPM(date) {
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }            
-
 //-- No use time. It is a javaScript effect.
 function insertChat(who, text, time = 0){
     var control = "";
@@ -45,21 +43,22 @@ function insertChat(who, text, time = 0){
         
         control = '<li style="width:100%">' +
                         '<div class="msj macro">' +
-                        '<div class="avatar"><img class="img-circle" style="width:50%;" src="'+ me.avatar +'" /></div>' +
+                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
                             '<div class="text text-l">' +
                                 '<p>'+ text +'</p>' +
                                 '<p><small>'+date+'</small></p>' +
                             '</div>' +
                         '</div>' +
                     '</li>';                    
-    }else{
+    }
+    else{
         control = '<li style="width:100%;">' +
                         '<div class="msj-rta macro">' +
                             '<div class="text text-r">' +
                                 '<p>'+text+'</p>' +
                                 '<p><small>'+date+'</small></p>' +
                             '</div>' +
-                        '<div class="avatar" style="padding:0px 0px 0px 5px !important"><img class="img-circle" style="width:50%;" src="'+you.avatar+'" /></div>' +                                
+                        '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="'+you.avatar+'" /></div>' +                                
                   '</li>';
     }
     setTimeout(
