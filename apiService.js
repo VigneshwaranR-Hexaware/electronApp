@@ -1,15 +1,27 @@
+
+var cards = require("./cards");
+
 module.exports = function apiClass () {
     this.ApiRequest = function (userSays) 
     {
     var apiai = require('apiai');
-    var app =  apiai("84a42b482cf74b9c9914495c757de603");
+    var app =  apiai("a45481357d4f41ffab53fb3b64e33636");
     var request = app.textRequest(userSays, {
     sessionId: '0111'
     });
 
     request.on('response', function(response) {
-        result=response.result.fulfillment.speech;
-        insertChat("you", result);  
+        console.log(response);
+
+        insertChat("you", response.result.fulfillment.speech);  
+
+        for(var i in response.result.fulfillment.messages){
+            if(response.result.fulfillment.messages[i].type > 0){
+                let cardHTML = cards(response.result.fulfillment.messages[i]);
+                insertChat("you", cardHTML);
+            }
+        }
+
     });
 
     request.on('error', function(error) {

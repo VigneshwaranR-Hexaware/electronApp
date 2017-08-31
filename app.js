@@ -1,8 +1,8 @@
 var result="";
 var me = {};
-me.avatar = "https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48";
+me.avatar = "http://www.vfsglobal.com/russian/images/Disclaimer/header.png";
 var you = {};
-you.avatar = "https://a11.t26.net/taringa/avatares/9/1/2/F/7/8/Demon_King1/48x48_5C5.jpg";
+you.avatar = "http://www.curiosityme.com/wp-content/uploads/2015/08/VFS-Logo-700x400.jpg";
 
 $(function() {
   var test;

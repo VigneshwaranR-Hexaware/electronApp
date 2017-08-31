@@ -36,7 +36,8 @@
 .frame{
     background:#e0e0de;
     height:505px;
-    overflow:hidden;
+    max-width:400pxs;
+    overflow: scroll;
     padding:0;
 }
 .frame > div:last-of-type{
@@ -93,4 +94,4 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
- 
+
