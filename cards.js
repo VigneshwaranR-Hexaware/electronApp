@@ -10,10 +10,11 @@ class CardDesign {
 
     plotCardOne(){
 
-        var html = `<div class="facebook_card_1">
-            <h2>${this.data.title}</h2>
+        var html = `<div class="card">
+        <img src="${this.data.imageUrl}" alt="${this.data.title}"height="100" width="100" />    
+        <h2>${this.data.title}</h2>
             <p>${this.data.subtitle}</p>
-            <img src="${this.data.imageUrl}" alt="${this.data.title}" />
+            
             <!--- put your buttons here -->        
         </div>`;
 

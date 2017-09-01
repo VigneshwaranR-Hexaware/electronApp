@@ -16,6 +16,7 @@ module.exports = function apiClass () {
         insertChat("you", response.result.fulfillment.speech);  
 
         for(var i in response.result.fulfillment.messages){
+            console.log(i);
             if(response.result.fulfillment.messages[i].type > 0){
                 let cardHTML = cards(response.result.fulfillment.messages[i]);
                 insertChat("you", cardHTML);

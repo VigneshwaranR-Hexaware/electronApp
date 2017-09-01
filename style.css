@@ -35,13 +35,14 @@
 }
 .frame{
     background:#e0e0de;
-    height:505px;
-    max-width:400pxs;
-    overflow: scroll;
-    padding:0;
+    clear: both;
+    width: 96.6257668711%;
+    height: 479px;
+    margin: 5px 0 2% 1.8357%;
+    overflow-y: scroll;
 }
 .frame > div:last-of-type{
-    position:absolute;bottom:5px;width:100%;display:flex;
+    position:fixed;bottom:5px;width:100%;display:flex;
 }
 ul {
     width:100%;
@@ -95,3 +96,13 @@ html, body {
     overflow-x: hidden;
 }
 
+.card{
+    background:#e0e0de;
+    clear: both;
+    width: 96.6257668711%;
+    height: 400px;
+    margin: 5px 0 2% 1.8357%;
+    
+}
+
+/* col-sm-3 col-sm-offset-4 */
