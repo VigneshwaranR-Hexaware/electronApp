@@ -12,7 +12,7 @@ class CardDesign {
 
         var html = `<div class="card">
         <img src="${this.data.imageUrl}" alt="${this.data.title}"height="100" width="100" />    
-        <h2>${this.data.title}</h2>
+        <h2 style="font-size: 20px;">${this.data.title}</h2>
             <p>${this.data.subtitle}</p>
             
             <!--- put your buttons here -->        

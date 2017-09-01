@@ -14,7 +14,7 @@ function createWindow () {
     }
     else{
     win = new BrowserWindow({
-        width: 400, height: 600,
+        width: 400, height: 800,
         // webPreferences:{
         // devTools:false
         // },
