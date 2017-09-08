@@ -7,79 +7,11 @@ class CardDesign {
         this.responseType = responseType;
 
         this.html = ['<div class="facebook_card_1">'];
-    }
-
-
-    plotCardOne() {
-
-        var html = `<div class="card">
-        <img src="${this.data.imageUrl}" alt="${this.data.title}"height="100" width="100" />    
-        <h2 style="font-size: 20px;">${this.data.title}</h2>
-            <p>${this.data.subtitle}</p>
-
-            <!--- put your buttons here -->        
-        </div>`;
-
-        // if (this.responseType == "card") {
-        //     return this.getCardHTML();
-        // } else {
-        //     return this.getCarouselHTML();
-        // }
-        num = num + 1;
-        divid = "carousel-example-generic" + num
-        var html = '<div id=' + divid + ' class="carousel slide" data-ride="carousel"><ol class="carousel-indicators">' +
-            '<li data-target="#' + divid + '" data-slide-to="0" class="active"></li>' +
-            '<li data-target="#' + divid + '" data-slide-to="1"></li>' +
-            '<li data-target="#' + divid + '" data-slide-to="2"></li></ol>' +
-            '<div class="carousel-inner">' +
-            '<div class="item active">' +
-            '<div class="row">' +
-            '<div class="col-xs-12">' +
-            '<div class="thumbnail adjust1">' +
-            '<div class="col-md-2 col-sm-2 col-xs-12">' +
-            '</div> <div class="col-md-10 col-sm-10 col-xs-12">' +
-            '<div class="caption">' +
-            '<p class="text-info lead adjust2">I can"t wait to test this out.</p>' +
-            '<p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>' +
-            '<blockquote class="adjust2">' +
-            '<p>Abhijit Goswami</p>' +
-            '<small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small>' +
-            '</blockquote>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div> <div class="item">' +
-            '<div class="row">' +
-            '<div class="col-xs-12">' +
-            '<div class="thumbnail adjust1"> <div class="col-md-2 col-sm-2 col-xs-12"> <img class="media-object img-rounded img-responsive" src="http://placehold.it/100"> </div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="caption"> <p class="text-info lead adjust2">I can not wait to test this out.</p> <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p> <blockquote class="adjust2"> <p>Abhijit Goswami</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example2.com</cite></small> </blockquote> </div> </div> </div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '<div class="item">' +
-            '<div class="row">' +
-            '<div class="col-xs-12">' +
-            '<div class="thumbnail adjust1">' +
-            '<div class="col-md-2 col-sm-2 col-xs-12">' +
-            '<img class="media-object img-rounded img-responsive" src="http://placehold.it/100">' +
-            '</div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="caption"> <p class="text-info lead adjust2">I can not wait to test this out.</p> <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p> <blockquote class="adjust2"> <p>Abhijit Goswami</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example3.com</cite></small> </blockquote> </div> </div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>  <a class="left carousel-control" href="#' + divid + '" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> <a class="right carousel-control" href="#' + divid + '" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>' +
-            '</div>';
-
-        return html;
-    }
-
-
+    }   
     addTitle(title) {
         this.title = title;
         this.html.push(`<h3>${title}</h3>`);
     }
-
     addSubTitle(subtitle) {
         this.html.push(`<p>${subtitle}</p>`);
     }
@@ -96,7 +28,6 @@ class CardDesign {
         this.html.push('</div>');
         return this.html.join("");
     }
-
     getHTMLNew() {
         if (this.responseType == "card") {
             return this.getCardHTML();
@@ -113,8 +44,6 @@ class CardDesign {
         else {
             return "custom payload";
         }
-
-
     }
     getCardHTML() {
         // var title=this.data.title;
@@ -138,7 +67,6 @@ class CardDesign {
             }
         }
     }
-
     getCarouselHTML() {
         num = num + 1;
         var html = `<div class="card">`;
@@ -227,11 +155,5 @@ class CardDesign {
 module.exports = function (card, responseType) {
 
     return new CardDesign(card, responseType).getHTMLNew();
-    // card_1.addTitle(card.title);
-    // card_1.addSubTitle(card.subtitle);
-    // card_1.addThumbnail(card.imageUrl);
-
-    // return card_1.plotCardOne(card);
-
-    // return "undefined card";
+    
 }
