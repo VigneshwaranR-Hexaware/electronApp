@@ -16,6 +16,7 @@ module.exports = function apiClass () {
        insertChat("you", response.result.fulfillment.speech); 
        var isCardorCarousel=false; 
        var isImage=false; 
+        var isQuickReply=false; 
         //To find Card || Carousel
         var count=0;
         for(var i in response.result.fulfillment.messages){
@@ -26,6 +27,9 @@ module.exports = function apiClass () {
             }
             if(response.result.fulfillment.messages[i].type == 3){
                 isImage=true;         
+            }
+            if(response.result.fulfillment.messages[i].type == 2){
+                isQuickReply=true;         
             }
         }
         if(isCardorCarousel){
@@ -39,9 +43,14 @@ module.exports = function apiClass () {
             insertChat("you", cardHTML);                       
         }
     }
-    else if(isImage) 
+    if(isImage) 
     {
         let cardHTML = cards(response.result.fulfillment.messages,"image");
+        insertChat("you", cardHTML);   
+    }
+     if(isQuickReply) 
+    {
+        let cardHTML = cards(response.result.fulfillment.messages,"quickreply");
         insertChat("you", cardHTML);   
     }
 
