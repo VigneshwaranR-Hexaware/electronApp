@@ -173,6 +173,10 @@ body{
         border-bottom-left-radius: 3px;
         width: 130%;   
     }
+    p{
+        margin: 0 3px 10px;
+    }
+    
     
 
 /* col-sm-3 col-sm-offset-4 */
