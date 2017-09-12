@@ -108,7 +108,7 @@ function insertChat(who, text, time = 0) {
         if (who == "me") {
             control = '<div class="row msg_container base_sent">' +
                 '<div class="col-md-10 col-xs-10">' +
-                '<div class="messages msg_sent">' +
+                '<div class="messages msg_sent" style="margin-left:3px;">' +
                 '<p>' + text + '</p>' +
                 '<p><small>' + date + '</small></p>' +
                 '</div>' +

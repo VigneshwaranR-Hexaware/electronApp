@@ -156,7 +156,7 @@ body{
     .chatinputBox{
         height: 49px;
         width: 200px;
-        position: absolute;
+       
     }
 
     .input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn-group:not(:last-child)>.btn, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -173,10 +173,10 @@ body{
         border-bottom-left-radius: 3px;
         width: 130%;   
     }
-    .container{
-        margin-top:100px;
-    
+    #btn-input{
+        width:345px;
     }
+   
     
 
 /* col-sm-3 col-sm-offset-4 */

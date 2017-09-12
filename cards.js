@@ -49,13 +49,13 @@ class CardDesign {
                 if (this.data[i].imageUrl != undefined && this.data[i].imageUrl != "") {
                     html += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="100" />`;
                 }
-                html += `<h2 style="font-size: 12px;"><b>${this.data[i].title}</b></h2>`;
+                html += `<h2 style="font-size: 12px; margin-left: 7px;"><b>${this.data[i].title}</b></h2>`;
                 if (this.data[i].subtitle != undefined && this.data[i].subtitle != "") {
-                    html += `<p style="font-size: 11px;">${this.data[i].subtitle}</p>`;
+                    html += `<p style="font-size: 11px; margin-left: 10px;">${this.data[i].subtitle}</p>`;
                 }
                 if (this.data[i].buttons != undefined) {
                     for (var j = 0; j < this.data[i].buttons.length; j++) {
-                        html += `<input type="button" value="${this.data[i].buttons[j].text}" onclick="yesornoButtonClick('${this.data[i].buttons[j].postback}')">`
+                        html += `<input type="button" style="margin-left: 5px;" value="${this.data[i].buttons[j].text}" onclick="yesornoButtonClick('${this.data[i].buttons[j].postback}')">`
                     }
                 }
                 html += `</div>`;
@@ -85,17 +85,21 @@ class CardDesign {
                         mulCardHtml += `<div class="item"><div class="row">`;
                     }
                     if (this.data[i].imageUrl != undefined && this.data[i].imageUrl != "") {
-                        mulCardHtml += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="100" />`;
+                        mulCardHtml += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="70" />`;
                     }
-                    mulCardHtml += `<h2 style="font-size: 12px;"><b>${this.data[i].title}</b></h2>`;
+                    mulCardHtml += `<h2 style="font-size: 12px;margin-left: 17px;"><b>${this.data[i].title}</b></h2>`;
                     if (this.data[i].subtitle != undefined && this.data[i].subtitle != "") {
-                        mulCardHtml += `<p style="font-size: 12px;">${this.data[i].subtitle}</p>`;
+                        mulCardHtml += `<p style="font-size: 12px;margin-left: 20px;">${this.data[i].subtitle}</p>`;
                     }
                     if (this.data[i].buttons != undefined) {
                         for (var j = 0; j < this.data[i].buttons.length; j++) {
-                            mulCardHtml += `<input type="button" value="${this.data[i].buttons[j].text}" onclick="yesornoButtonClick('${this.data[i].buttons[j].postback}')">`
+                            if(j==0){
+                            mulCardHtml += `<input type="button" style="margin-left: 20px;" value="${this.data[i].buttons[j].text}" onclick="yesornoButtonClick('${this.data[i].buttons[j].postback}')">`
+                        }else
+                        {
+                             mulCardHtml += `<input type="button" style="margin-left: 7px;" value="${this.data[i].buttons[j].text}" onclick="yesornoButtonClick('${this.data[i].buttons[j].postback}')">`
                         }
-                    }
+                    }}
                     mulCardHtml += `</div></div>`;
                 }
                 loopCount = loopCount + 1;
