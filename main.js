@@ -15,9 +15,9 @@ function createWindow () {
     else{      
     win = new BrowserWindow({
         width: 450, height: 400,
-        // webPreferences:{
-        // devTools:false
-        // },
+        webPreferences:{
+        devTools:false
+        },
         title: "VFS Global",
         icon:'./vfs-global.jpg',
         x:550,
