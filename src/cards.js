@@ -37,6 +37,9 @@ class CardDesign {
         else if (this.responseType == "quickreply") {
             return this.getQuickReplyHTML();
         }
+         else if (this.responseType == "quickreplyfromapiai") {
+            return this.getQuickReplyHTMLFromApiai();
+        }
         else {
             return "custom payload";
         }
@@ -135,6 +138,21 @@ class CardDesign {
                         for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
                         html+= `<input type="button" value="${this.data[i].payload.facebook.quick_replies[j].title}" onclick="yesornoButtonClick('${this.data[i].payload.facebook.quick_replies[j].payload}')" style="margin:1px 2px 2px 1px;">`
                         } 
+                }
+                html += `</div>`;
+                return html;
+            }
+        }
+    }
+    getQuickReplyHTMLFromApiai() {
+        for (var i in this.data) {
+            if (this.data[i].type == 2) {
+                var html = `<div>`;
+                html += `<h2 style="font-size: 20px;margin-left:5px;">${this.data[i].title}</h2>`
+                if (this.data[i].replies != undefined) {
+                    for (var j = 0; j < this.data[i].replies.length; j++) {
+                        html += `<p style="margin-left:8px;">${this.data[i].replies[j]}</p>`;
+                    }
                 }
                 html += `</div>`;
                 return html;

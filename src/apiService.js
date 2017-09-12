@@ -5,8 +5,8 @@ module.exports = function apiClass () {
     this.ApiRequest = function (userSays) 
     {
     var apiai = require('apiai');
-    //var app =  apiai("a45481357d4f41ffab53fb3b64e33636");
-    var app =  apiai("0bd2ed7b44db4673b5fe19c7e70c8d0c");
+    var app =  apiai("a45481357d4f41ffab53fb3b64e33636");
+    //var app =  apiai("0bd2ed7b44db4673b5fe19c7e70c8d0c");
     var request = app.textRequest(userSays, {
     sessionId: '0111'
     });
@@ -17,6 +17,7 @@ module.exports = function apiClass () {
        var isCardorCarousel=false; 
        var isImage=false; 
         var isQuickReply=false; 
+         var isQuickReplyFromApiai=false; 
         //To find Card || Carousel
         var count=0;
         for(var i in response.result.fulfillment.messages){
@@ -29,7 +30,7 @@ module.exports = function apiClass () {
                 isImage=true;         
             }
             if(response.result.fulfillment.messages[i].type == 2){
-                isQuickReply=true;         
+               isQuickReplyFromApiai=true;          
             }
             if(response.result.fulfillment.messages[i].type == 4){
                 console.log(response.result.fulfillment.messages[i])
@@ -56,6 +57,11 @@ module.exports = function apiClass () {
      if(isQuickReply) 
     {
         let cardHTML = cards(response.result.fulfillment.messages,"quickreply");
+        insertChat("you", cardHTML);   
+    }
+     if(isQuickReplyFromApiai) 
+    {
+        let cardHTML = cards(response.result.fulfillment.messages,"quickreplyfromapiai");
         insertChat("you", cardHTML);   
     }
 

@@ -144,7 +144,7 @@ function resetChat() {
 
 function yesornoButtonClick(text) {   
     insertChat("me", text);
-    var apiClass = require('./apiService.js');
+    var apiClass = require('./src/apiService');
     var app = new apiClass();
     var resp = app.ApiRequest(text);
     $(".msg_container_base").stop().animate({ scrollTop: $(".msg_container_base")[0].scrollHeight}, 1000);
