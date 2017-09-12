@@ -1,11 +1,8 @@
 
 class CardDesign {
-
     constructor(card, responseType) {
-
         this.data = card;
         this.responseType = responseType;
-
         this.html = ['<div class="facebook_card_1">'];
     }   
     addTitle(title) {
@@ -21,7 +18,6 @@ class CardDesign {
     }
 
     addButton() {
-
     }
 
     getHTML() {
@@ -136,24 +132,14 @@ class CardDesign {
         for (var i in this.data) {
             if (this.data[i].type == 4) {
                 if(this.data[i].payload.facebook.quick_replies.length >0 ){
-                    //for(var i in this.data[i].payload.facebook.quick_replies[i]){
+                    
                         html += `<p>${this.data[i].payload.facebook.text}</p>`
                         for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
                             
                         html+= `<input type="button" value="${this.data[i].payload.facebook.quick_replies[j].title}" onclick="yesornoButtonClick('${this.data[i].payload.facebook.quick_replies[j].payload}')" style="margin:1px 2px 2px 1px;">`
                         } 
-                    //}
+                    
                 }
-                
-                
-                
-                // 
-                // html += `<h2 style="font-size: 20px;">${this.data[i].title}</h2>`
-                // if (this.data[i].replies != undefined) {
-                //     for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
-                //         html += `<p>${this.data[i].replies[j]}</p>`;
-                //     }
-                // }
                 html += `</div>`;
                 return html;
             }
@@ -162,8 +148,6 @@ class CardDesign {
 
 
 }
-
-
 
 module.exports = function (card, responseType) {
 
