@@ -53,9 +53,9 @@ class CardDesign {
                 if (this.data[i].imageUrl != undefined && this.data[i].imageUrl != "") {
                     html += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="100" />`;
                 }
-                html += `<h2 style="font-size: 20px;">${this.data[i].title}</h2>`;
+                html += `<h2 style="font-size: 12px;"><b>${this.data[i].title}</b></h2>`;
                 if (this.data[i].subtitle != undefined && this.data[i].subtitle != "") {
-                    html += `<p>${this.data[i].subtitle}</p>`;
+                    html += `<p style="font-size: 11px;">${this.data[i].subtitle}</p>`;
                 }
                 if (this.data[i].buttons != undefined) {
                     for (var j = 0; j < this.data[i].buttons.length; j++) {
@@ -94,9 +94,9 @@ class CardDesign {
                     if (this.data[i].imageUrl != undefined && this.data[i].imageUrl != "") {
                         mulCardHtml += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="100" />`;
                     }
-                    mulCardHtml += `<h2 style="font-size: 20px;">${this.data[i].title}</h2>`;
+                    mulCardHtml += `<h2 style="font-size: 12px;"><b>${this.data[i].title}</b></h2>`;
                     if (this.data[i].subtitle != undefined && this.data[i].subtitle != "") {
-                        mulCardHtml += `<p>${this.data[i].subtitle}</p>`;
+                        mulCardHtml += `<p style="font-size: 12px;">${this.data[i].subtitle}</p>`;
                     }
                     if (this.data[i].buttons != undefined) {
                         for (var j = 0; j < this.data[i].buttons.length; j++) {
@@ -132,15 +132,28 @@ class CardDesign {
         }
     }
     getQuickReplyHTML() {
+        var html = `<div>`;
         for (var i in this.data) {
-            if (this.data[i].type == 2) {
-                var html = `<div class="card">`;
-                html += `<h2 style="font-size: 20px;">${this.data[i].title}</h2>`
-                if (this.data[i].replies != undefined) {
-                    for (var j = 0; j < this.data[i].replies.length; j++) {
-                        html += `<p>${this.data[i].replies[j]}</p>`;
-                    }
+            if (this.data[i].type == 4) {
+                if(this.data[i].payload.facebook.quick_replies.length >0 ){
+                    //for(var i in this.data[i].payload.facebook.quick_replies[i]){
+                        html += `<p>${this.data[i].payload.facebook.text}</p>`
+                        for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
+                            
+                        html+= `<input type="button" value="${this.data[i].payload.facebook.quick_replies[j].title}" onclick="yesornoButtonClick('${this.data[i].payload.facebook.quick_replies[j].payload}')" style="margin:1px 2px 2px 1px;">`
+                        } 
+                    //}
                 }
+                
+                
+                
+                // 
+                // html += `<h2 style="font-size: 20px;">${this.data[i].title}</h2>`
+                // if (this.data[i].replies != undefined) {
+                //     for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
+                //         html += `<p>${this.data[i].replies[j]}</p>`;
+                //     }
+                // }
                 html += `</div>`;
                 return html;
             }

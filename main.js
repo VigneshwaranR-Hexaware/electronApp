@@ -14,13 +14,13 @@ function createWindow () {
     }
     else{
     win = new BrowserWindow({
-        width: 400, height: 800,
+        width: 300, height: 500,
         // webPreferences:{
         // devTools:false
         // },
         title: "VFS Global",
         icon:'./vfs-global.jpg',
-        x:950,
+        x:750,
         y:250
       })
     }
