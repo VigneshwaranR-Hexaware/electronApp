@@ -67,7 +67,6 @@ class CardDesign {
         num = num + 1;
         var html = `<div class="card">`;
         divid = "carousel-example-generic" + num;
-
         var listHtml = "";
         var mulCardHtml = "";
         var loopCount = 0
@@ -78,7 +77,6 @@ class CardDesign {
                 } else {
                     listHtml += `<li data-target="#${divid}" data-slide-to="${i}"></li>`;
                 }
-
                 //starts with card
                 if (this.data[i].type == 1) {
                     if (loopCount == 0) {
@@ -86,7 +84,6 @@ class CardDesign {
                     } else {
                         mulCardHtml += `<div class="item"><div class="row">`;
                     }
-
                     if (this.data[i].imageUrl != undefined && this.data[i].imageUrl != "") {
                         mulCardHtml += `<img src="${this.data[i].imageUrl}" alt="${this.data[i].title}" height="100" width="100" />`;
                     }
@@ -105,8 +102,6 @@ class CardDesign {
                 //end
             }
         }
-
-
         html += `<div id="${divid}" class="carousel slide" data-ride="carousel"><ol class="carousel-indicators">`;
         html += listHtml + `</ol>`;
         html += `<div class="carousel-inner">`
@@ -132,25 +127,18 @@ class CardDesign {
         for (var i in this.data) {
             if (this.data[i].type == 4) {
                 if(this.data[i].payload.facebook.quick_replies.length >0 ){
-                    
                         html += `<p>${this.data[i].payload.facebook.text}</p>`
                         for (var j = 0; j < this.data[i].payload.facebook.quick_replies.length; j++) {
-                            
                         html+= `<input type="button" value="${this.data[i].payload.facebook.quick_replies[j].title}" onclick="yesornoButtonClick('${this.data[i].payload.facebook.quick_replies[j].payload}')" style="margin:1px 2px 2px 1px;">`
                         } 
-                    
                 }
                 html += `</div>`;
                 return html;
             }
         }
     }
-
-
 }
 
 module.exports = function (card, responseType) {
-
     return new CardDesign(card, responseType).getHTMLNew();
-    
 }
