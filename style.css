@@ -3,8 +3,7 @@
     clear: both;
     width: 96.6257668711%;
     height: 224px;
-    margin: 5px 0 2% 1.8357%;
-    
+    margin: 5px 0 2% 1.8357%;    
 }
 
 body{
@@ -40,7 +39,7 @@ body{
     background: #e5e5e5;
     margin: 0;
     padding: 5px 5px 5px 5px;
-    height:560px;
+    height:300px;
     width:365px;
     overflow-x:hidden;
     }
@@ -156,7 +155,8 @@ body{
     }
     .chatinputBox{
         height: 49px;
-        width: 170%;
+        width: 200px;
+        position: absolute;
     }
 
     .input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn-group:not(:last-child)>.btn, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
@@ -172,6 +172,10 @@ body{
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px;
         width: 130%;   
+    }
+    .container{
+        margin-top:100px;
+    
     }
     
 

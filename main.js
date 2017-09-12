@@ -10,18 +10,18 @@ function createWindow () {
   const trayControl = new appTray(iconPath)
   trayControl.on('click',function(){
     if(win){
-      win.show();
+      win.show();  
     }
-    else{
+    else{      
     win = new BrowserWindow({
-        width: 300, height: 500,
-        // webPreferences:{
-        // devTools:false
-        // },
+        width: 450, height: 400,
+        webPreferences:{
+        devTools:false
+        },
         title: "VFS Global",
         icon:'./vfs-global.jpg',
-        x:750,
-        y:250
+        x:550,
+        y:100
       })
     }
   win.setMenu(null);
