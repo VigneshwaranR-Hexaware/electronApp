@@ -90,7 +90,7 @@ $(function () {
                 var apiClass = require('./src/apiService');
                 var app = new apiClass()
                 var resp = app.ApiRequest(text);
-                $(".msg_container_base").stop().animate({ scrollTop: $(".msg_container_base")[0].scrollHeight}, 1000);
+                //$(".msg_container_base").stop().animate({ scrollTop: $(".msg_container_base")[0].scrollHeight}, 1000);
                 
             }
         }

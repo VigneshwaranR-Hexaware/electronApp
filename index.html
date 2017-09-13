@@ -1,4 +1,98 @@
-  <html>
+<!DOCTYPE html>
+<html>
+  <title>VFS Global</title>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style type="text/css">
+          .main-container{
+            position: absolute;
+            height: 100%;
+         }
+
+          .transprarent{
+            background-color: transparent;
+          }
+
+          .top-toolbar h3 {
+            padding: 0px;
+            margin: 0px;
+          }
+
+         .chat-body{
+            width: 92%;
+            height: 84%;
+            position: fixed;
+            background-color: #dddddd;
+            border-radius: 4px;
+         }
+
+         .bottom-toolbar{
+           position: fixed;
+           bottom: 10px;
+         }
+    
+        </style>
+        <script src="lib/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="src/app.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="style/style.css">-->
+    </head>
+
+    <body>
+        <div class="container-fluid main-container">
+          <div class="row"><div class="col-md-12">&nbsp;</div></div>
+          <div class="row top-toolbar">
+              <div class="col-xs-6">
+                 <h3>VFS Global</h3>
+              </div>
+              <div class="col-xs-6">
+                 <div class="input-group">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary transprarent pull-right" type="button">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn btn-secondary transprarent pull-right" type="button">
+                      <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>                      
+                    </button>
+                  </span>
+                </div>    
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-xs-12 container">                
+                <div id="msg_container" class="chat-body">chat log area</div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-12 bottom-toolbar">
+                 <div class="input-group">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">
+                      <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn btn-secondary" type="button">
+                      &#128515;
+                    </button>
+                  </span>
+                  <input type="text" class="form-control" id="btn-input" placeholder="Write your message here...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">
+                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>                      
+                    </button>
+                  </span>
+                </div>    
+            </div>
+          </div>
+          
+        </div>
+    </body>
+</html>
+
+
+
+
+  <!--<html>
   <head>
       <meta charset="UTF-8">
       <title>VFS Global</title>
@@ -29,5 +123,5 @@
       </div>
   </body> 
   </html>
-  
+  -->
   
