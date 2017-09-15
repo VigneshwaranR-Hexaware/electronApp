@@ -20,6 +20,10 @@ class CardDesign {
             console.log(this.data);
             return messageTpl.plaintext(this.data);
         }
+        if(this.responseType == "card"){
+            console.log(JSON.stringify(this.data));
+            return messageTpl.card(this.data);
+        }
     }
 
 }

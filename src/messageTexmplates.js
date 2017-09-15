@@ -41,3 +41,55 @@ module.exports.plaintext = (data) => {
 
     return html;
 }
+
+
+
+module.exports.card = (data) => {
+    debugger;
+    
+        let html = `<li class="list-group-item">
+        <div class="pmd-card pmd-card-default pmd-z-depth">
+            <!-- Card header -->
+            <div class="pmd-card-title">
+                <div class="media-left">
+                    <a class="avatar-list-img" href="javascript:void(0);">
+                        <img src="${data.senderAvatar}" class="img-responsive">
+                    </a>
+                </div>
+                <div class="media-body media-middle">
+                    <h3 class="pmd-card-title-text">${data.senderName}</h3>
+                    <span class="pmd-card-subtitle-text">Secondary text</span>
+                </div>
+            </div>
+            
+            <!-- Card media -->
+            <div class="pmd-card-media">
+                <img src="${data.payload[1].imageUrl}" width="1184" height="666" class="img-responsive">
+            </div>
+            
+            <!-- Card body -->
+            <div class="pmd-card-title">
+                <h2 class="pmd-card-title-text">${data.payload[1].title}</h2>
+                <span class="pmd-card-subtitle-text">Secondary text</span>	
+            </div>	
+            
+            <div class="pmd-card-body">${data.payload[1].subtitle}</div>
+            
+            <!-- Card media actions -->
+            <div class="pmd-card-actions">
+                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">share</i></button>
+                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
+                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
+            </div>
+            
+            <!-- Card actions -->
+            <div class="pmd-card-actions">
+                <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Primary</button>
+                <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Action</button>
+            </div>
+        </div>
+        </li>`;
+    
+    
+        return html;
+    }

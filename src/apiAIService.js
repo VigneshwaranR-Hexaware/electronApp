@@ -80,7 +80,13 @@ module.exports = (config) => {
 
                 if(isCardorCarousel){
                     if(count == 1){
-                        let cardHTML = cards(response.result.fulfillment.messages, "card");
+                        let cardHTML = cards({
+                            "payload": response.result.fulfillment.messages,
+                            "senderName": config.botTitle,
+                            "senderAvatar": config.botAvatar,
+                            "time": utils.currentTime(),
+                            "className": ''
+                        }, "card");
                         callback(null, cardHTML);
                     } else {
                         let cardHTML = cards(response.result.fulfillment.messages, "carousel");
