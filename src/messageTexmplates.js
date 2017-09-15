@@ -42,12 +42,13 @@ module.exports.plaintext = (data) => {
     return html;
 }
 
-
-
 module.exports.card = (data) => {
     debugger;
-    
-        let html = `<li class="list-group-item">
+    let html;
+    let cardButtons= "";
+    let cardBody;
+    for(let i in data.payload){
+     cardBody = `<li class="list-group-item">
         <div class="pmd-card pmd-card-default pmd-z-depth">
             <!-- Card header -->
             <div class="pmd-card-title">
@@ -58,38 +59,55 @@ module.exports.card = (data) => {
                 </div>
                 <div class="media-body media-middle">
                     <h3 class="pmd-card-title-text">${data.senderName}</h3>
-                    <span class="pmd-card-subtitle-text">Secondary text</span>
                 </div>
             </div>
             
             <!-- Card media -->
             <div class="pmd-card-media">
-                <img src="${data.payload[1].imageUrl}" width="1184" height="666" class="img-responsive">
+                <img src="${data.payload[i].imageUrl}" width="1184" height="666" class="img-responsive">
             </div>
             
             <!-- Card body -->
             <div class="pmd-card-title">
-                <h2 class="pmd-card-title-text">${data.payload[1].title}</h2>
-                <span class="pmd-card-subtitle-text">Secondary text</span>	
-            </div>	
-            
-            <div class="pmd-card-body">${data.payload[1].subtitle}</div>
-            
-            <!-- Card media actions -->
-            <div class="pmd-card-actions">
+                <h2 class="pmd-card-title-text">${data.payload[i].title}</h2>
+                <span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>	
+            </div>`
+            if(data.buttons){
+            cardButtons=`<div class="pmd-card-actions">
                 <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">share</i></button>
                 <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
                 <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
-            </div>
-            
-            <!-- Card actions -->
-            <div class="pmd-card-actions">
-                <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Primary</button>
-                <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Action</button>
-            </div>
-        </div>
-        </li>`;
-    
-    
-        return html;
+            </div>`
+            }
+         html=cardBody+cardButtons+`</div></li>`;
     }
+    return html;
+}
+
+
+// module.exports.quickreplies =(data)=>{
+//     debugger;   
+//     var quickRepliesHtml;
+//     console.log(data);
+//     for(let i in data.payload){
+//         for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
+//          <a class="pmd-chip-action">
+//         <div class="pmd-chip pmd-chip-no-icon">${data.payload[i].payload.facebook.quick_replies[j].title}</div>
+//         </a>
+
+//             //quickRepliesHtml =`<div class="pmd-chip pmd-chip-no-icon">`
+             
+//                 //quickRepliesHtml +=`<p>}</p>
+//                // <a class="pmd-chip-action" href="javascript:void(0);"></a>`
+//            //quickRepliesHtml += `</div>`
+//          }
+//     }
+//     return quickRepliesHtml;
+// }
+
+
+
+// <!--Chips with text and an icon-->
+// <div class="pmd-chip pmd-chip-contact"> 
+// 	<img src="http://propeller.in/assets/images/avatar-icon-40x40.png" alt="avatar"> Trevor Hensen <a class="pmd-chip-action" href="javascript:void(0);"><i class="material-icons">close</i></a>
+// </div>

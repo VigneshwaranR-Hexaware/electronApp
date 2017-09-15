@@ -58,11 +58,12 @@ module.exports = (config) => {
                 let isQuickReplyFromApiai = false;
                 //To find Card || Carousel
                 let count = 0;
+                let hasbutton;
 
                 for(let i in response.result.fulfillment.messages){
-                    console.log(i);
                     if(response.result.fulfillment.messages[i].type == 1){
                         count = count + 1;
+                        hasbutton=(response.result.fulfillment.messages[i].buttons.length > 0) ? true :false;
                         isCardorCarousel = true;           
                     }
                     if(response.result.fulfillment.messages[i].type == 3){
@@ -85,6 +86,7 @@ module.exports = (config) => {
                             "senderName": config.botTitle,
                             "senderAvatar": config.botAvatar,
                             "time": utils.currentTime(),
+                            "buttons":hasbutton,
                             "className": ''
                         }, "card");
                         callback(null, cardHTML);
@@ -100,7 +102,13 @@ module.exports = (config) => {
                 }
 
                 if(isQuickReply){
-                    let cardHTML = cards(response.result.fulfillment.messages, "quickreply");
+                    let cardHTML = cards({
+                        "payload": response.result.fulfillment.messages,
+                            "senderName": config.botTitle,
+                            "senderAvatar": config.botAvatar,
+                            "time": utils.currentTime(),
+                            "className": ''
+                    }, "quickreplies");
                     callback(null, cardHTML);
                 }
 
