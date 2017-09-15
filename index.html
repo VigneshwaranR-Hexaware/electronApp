@@ -7,30 +7,20 @@
     <title>VFS Global</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <style type="text/css">
-        .main-container{
-          background-color: #fff;
-        }
 
-        .chat-body{
-          max-height: 384px;
-          overflow-y: scroll;
-        }
-      </style>
+    <!--Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <!--Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Propeller css -->
+    <link href="Propeller/css/propeller.min.css" rel="stylesheet">
 
-      <!-- Propeller css -->
-      <link href="Propeller/css/propeller.min.css" rel="stylesheet">
-
-      <!--<link rel="stylesheet" type="text/css" href="style/style.css">-->
-    </head>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+  </head>
 
     <body>
         <!-- jQuery before Propeller.js -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
-        <!--<script type="text/javascript" src="src/app.js"></script>-->
+        <script type="text/javascript" src="src/app.js"></script>
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -63,126 +53,9 @@
           </div>
 
           <div class="row">
-                <div class="chat-body pmd-z-depth ">
-                    <ul id="msg_container" class="list-group pmd-list pmd-card-list">
-                      <li class="list-group-item">
-                          <div class="media-left">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                              <p class="mute"><small>sent now</small></p>
-                          </div>
-                      </li>
-                      <li class="list-group-item">
-                          <div class="media-right pull-right">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                              <p class="mute"><small>sent at 12:39 pm</small></p>
-                          </div>
-                      </li>
-                      <li class="list-group-item">
-                          
-                          <!-- Default card starts -->
-                            <div class="pmd-card pmd-card-default pmd-z-depth">
-
-                                <!-- Card header -->
-                                <div class="pmd-card-title">
-                                    <div class="media-left">
-                                        <a class="avatar-list-img" href="javascript:void(0);">
-                                            <img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="40" height="40">
-                                        </a>
-                                    </div>
-                                    <div class="media-body media-middle">
-                                        <h3 class="pmd-card-title-text">Two-line item</h3>
-                                        <span class="pmd-card-subtitle-text">Secondary text</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- Card media -->
-                                <div class="pmd-card-media">
-                                    <img src="http://propeller.in/assets/images/profile-pic.png" width="1184" height="666" class="img-responsive">
-                                </div>
-                                
-                                <!-- Card body -->
-                                <div class="pmd-card-title">
-                                    <h2 class="pmd-card-title-text">Title goes here</h2>
-                                    <span class="pmd-card-subtitle-text">Secondary text</span>	
-                                </div>	
-                                
-                                <div class="pmd-card-body">
-                                    Cards provide context and an entry point to more robust information and views. Don't overload cards with extraneous information or actions.
-                                </div>
-                                
-                                <!-- Card media actions -->
-                                <div class="pmd-card-actions">
-                                    <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">share</i></button>
-                                    <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
-                                    <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
-                                </div>
-                                
-                                <!-- Card actions -->
-                                <div class="pmd-card-actions">
-                                    <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Primary</button>
-                                    <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Action</button>
-                                </div>
-                            </div>
-                            <!--Default card ends -->
-                      </li>
-                      <li class="list-group-item">
-                          <div class="media-left">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                          </div>
-                      </li>
-                      <li class="list-group-item">
-                          <div class="media-left">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                          </div>
-                      </li>
-                      <li class="list-group-item">
-                          <div class="media-left">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                          </div>
-                      </li>
-                      <li class="list-group-item">
-                          <div class="media-left">
-                              <a href="javascript:void(0);" class="avatar-list-img">
-                                <img alt="40x40" data-src="holder.js/40x40" class="img-responsive" src="http://propeller.in/components/list/img/40x40.png" data-holder-rendered="true">
-                              </a>
-                          </div>
-                          <div class="media-body">
-                              <h3 class="list-group-item-heading">Two-line item</h3>
-                              <span class="list-group-item-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>	
-                          </div>
-                      </li>
-                  </ul>
-
+                <div class="chat-body pmd-z-depth">
+                    <h1 class="pmd-display3 hidden">Say Hi :)</h1>
+                    <ul id="msg_container" class="list-group pmd-list pmd-card-list hidden"></ul>
                 </div>
           </div>
 
@@ -191,12 +64,13 @@
                 <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
                   <i class="material-icons pmd-sm">face</i>
                 </button>
-                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+                <button onclick="$(this).parent().find('input[type=file]').click();" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
                   <i class="material-icons pmd-sm">attach_file</i>
                 </button>
                 <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
                   <i class="material-icons pmd-sm">mic</i>
                 </button>
+                <input onchange="alert('your webhook ajax here');" type="file" class="hidden" name="attachment" />
             </div>
           </div>
 
@@ -221,40 +95,3 @@
         </div>
     </body>
 </html>
-
-
-
-
-  <!--<html>
-  <head>
-      <meta charset="UTF-8">
-      <title>VFS Global</title>
-      
-      <script src="lib/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="src/app.js"></script>
-      <link rel="stylesheet" type="text/css" href="style/style.css">
-      <link rel="stylesheet" type="text/css" href="style/carousel.css">
-  </head>
-  <body>
-      <div class="container">
-          <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" >
-            <div class="col-xs-12 col-md-12">
-              <div class="panel panel-default"> 
-                <div id="msg_container" class="panel-body msg_container_base">
-                </div>
-                <div class="panel-footer">
-                  <div class="input-group">
-                    <input id="btn-input" type="text" class="form-control chatinputBox" placeholder="Write your message here..." />
-                  </div>
-                </div>
-              </div> 
-           </div>
-        </div> 
-      </div>
-  </body> 
-  </html>
-  -->
-  
