@@ -92,6 +92,19 @@ function quickRepliesPayload(input){
     alert("I am Triggered");
     quickRepliesPayload
 }
+const remote = require('electron').remote;
+ $(document).on('click','#btnMinimize',function(e){
+ var window = remote.getCurrentWindow();
+    window.minimize();  
+ })
+
+ $(document).on('click','#btnClose',function(e){
+  var window = remote.getCurrentWindow();
+   if (confirm('Are you sure want to exit')) { 
+       window.close(); 
+    }
+ })
+
   
 
 });
