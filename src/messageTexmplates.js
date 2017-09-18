@@ -43,7 +43,6 @@ module.exports.plaintext = (data) => {
 }
 
 module.exports.card = (data) => {
-    debugger;
     let html;
     let cardButtons= "";
     let cardBody;
@@ -85,27 +84,26 @@ module.exports.card = (data) => {
 }
 
 
-// module.exports.quickreplies =(data)=>{
-//     debugger;   
-//     var quickRepliesHtml;
-//     console.log(data);
-//     for(let i in data.payload){
-//         for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
-//          <a class="pmd-chip-action">
-//         <div class="pmd-chip pmd-chip-no-icon">${data.payload[i].payload.facebook.quick_replies[j].title}</div>
-//         </a>
-
-//             //quickRepliesHtml =`<div class="pmd-chip pmd-chip-no-icon">`
-             
-//                 //quickRepliesHtml +=`<p>}</p>
-//                // <a class="pmd-chip-action" href="javascript:void(0);"></a>`
-//            //quickRepliesHtml += `</div>`
-//          }
-//     }
-//     return quickRepliesHtml;
-// }
-
-
+module.exports.quickreplies =(data)=>{
+    var quickRepliesHtml =`<li class="list-group-item">
+    <div class="media-left">
+        <a href="javascript:void(0);" class="avatar-list-img">
+        <img class="img-responsive" src="${data.senderAvatar}">
+        </a>
+    </div>
+    <div class="media-body">
+    <h3 class="list-group-item-heading">${data.senderName}</h3>`;
+    for(let i in data.payload){
+        debugger;
+        quickRepliesHtml +=`<p>${data.payload[0].payload.facebook.text}</p>`
+        for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
+            quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info btnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
+            }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+         }
+        }
+    quickRepliesHtml +=`<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
+    return quickRepliesHtml;
+}
 
 // <!--Chips with text and an icon-->
 // <div class="pmd-chip pmd-chip-contact"> 

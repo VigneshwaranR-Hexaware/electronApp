@@ -34,24 +34,12 @@ module.exports = (config) => {
         }
 
         askBot(userInput, callback){
-
+debugger;
             this.userSays(userInput, callback);
 
             var request = this.app.textRequest(userInput, this.options);
 
             request.on('response', function(response) {
-                console.log(response);
-
-                let cardHTML = cards({
-                    "payload": response.result.fulfillment.speech,
-                    "senderName": config.botTitle,
-                    "senderAvatar": config.botAvatar,
-                    "time": utils.currentTime(),
-                    "className": ''
-                }, "plaintext");
-
-                callback(null, cardHTML);
-
                 let isCardorCarousel = false;
                 let isImage = false;
                 let isQuickReply = false;
@@ -59,8 +47,20 @@ module.exports = (config) => {
                 //To find Card || Carousel
                 let count = 0;
                 let hasbutton;
-
+                console.log(response);
+                if(response.result.fulfillment.messages){
                 for(let i in response.result.fulfillment.messages){
+                    if(response.result.fulfillment.messages[i].type == 0){
+                        let cardHTML = cards({
+                            "payload": response.result.fulfillment.messages[i].speech,
+                            "senderName": config.botTitle,
+                            "senderAvatar": config.botAvatar,
+                            "time": utils.currentTime(),
+                            "className": ''
+                    }, "plaintext");
+                        callback(null, cardHTML);
+                    }
+
                     if(response.result.fulfillment.messages[i].type == 1){
                         count = count + 1;
                         hasbutton=(response.result.fulfillment.messages[i].buttons.length > 0) ? true :false;
@@ -78,7 +78,18 @@ module.exports = (config) => {
                         console.log(isQuickReply);
                     }
                 }
-
+            }
+            else{
+                 let cardHTML = cards({
+                        "payload": response.result.fulfillment.speech,
+                        "senderName": config.botTitle,
+                        "senderAvatar": config.botAvatar,
+                        "time": utils.currentTime(),
+                        "className": ''
+                }, "plaintext");
+                    callback(null, cardHTML);
+                }
+            //Carousel
                 if(isCardorCarousel){
                     if(count == 1){
                         let cardHTML = cards({

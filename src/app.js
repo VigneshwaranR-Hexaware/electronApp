@@ -11,8 +11,8 @@ $(function() {
 
     var config = require("./appConfig")(environment);
     var utils = require("./src/utils");
-
     if(config.developerAccessToken){
+
         var processor = require('./src/apiAIService')(config);
     }
 
@@ -60,7 +60,42 @@ $(function() {
         }
     });
 
+
+ $(document).on('click','.btnPayload',function(e){
+    var payloadInput= $(this).data().quickrepliespayload;
+    processor.askBot(payloadInput, function(error, html){
+                if(error){
+                    Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                }
+                if(html){
+                    msg_container.append(html);
+                    
+                }
+            });
+            e.preventDefault();
+//     alert("hi triggered");
+//     console.log($(this).text());
+//     console.log(config);
+//     debugger;
+//     //quickRepliesPayload();
+//     
+   
+   
+ })
+
+
+
+
+
+function quickRepliesPayload(input){
+    alert(input);
+    alert("I am Triggered");
+    quickRepliesPayload
+}
+  
+
 });
+
 
 
 // $("#btn-input").on("keyup", function (e) {

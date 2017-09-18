@@ -14,12 +14,13 @@ module.exports = function(env){
 
             applicationTitle: "VFS Global",
             userTitle : "Me",
-            botTitle : "Lulu",
+            botTitle : "VFS Assistant",
             botAvatar : __dirname + "/avatar/vfslogo.png",
             userAvatar : __dirname + "/avatar/user.png",
             attachmentUploadURL : "",
             storeChat: false,
-            maxConversationStorage: 50
+            maxConversationStorage: 50,
+            platform : "facebook"
         };
     }
 };
