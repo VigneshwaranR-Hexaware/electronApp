@@ -47,7 +47,7 @@ module.exports = (config) => {
                 console.log(response);
                 if(response.result.fulfillment.messages){
                 for(let i in response.result.fulfillment.messages){
-                    if(response.result.fulfillment.messages[i].type == 0){
+                    if(response.result.fulfillment.messages[i].type == 0 && response.result.fulfillment.messages[i].platform == config.platform){
                         let cardHTML = cards({
                             "payload": response.result.fulfillment.messages[i].speech,
                             "senderName": config.botTitle,
