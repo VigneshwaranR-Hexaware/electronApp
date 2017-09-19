@@ -5,6 +5,7 @@ Copyright (c) 2017-2017 Hexaware Technologies
 This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
+//User Plain Text
 module.exports.userplaintext = (data) => {
 
     let html = `<li class="list-group-item chat-user-dialog">
@@ -23,7 +24,7 @@ module.exports.userplaintext = (data) => {
     return html;
 }
 
-
+//Plain Text Template
 module.exports.plaintext = (data) => {
 
     let html = `<li class="list-group-item">
@@ -41,7 +42,7 @@ module.exports.plaintext = (data) => {
 
     return html;
 }
-
+//Card Template
 module.exports.card = (data) => {
     let html;
     let cardButtons= "";
@@ -83,7 +84,7 @@ module.exports.card = (data) => {
     return html;
 }
 
-
+//Quick Replies Template
 module.exports.quickreplies =(data)=>{
     var quickRepliesHtml =`<li class="list-group-item">
     <div class="media-left">
@@ -94,10 +95,9 @@ module.exports.quickreplies =(data)=>{
     <div class="media-body">
     <h3 class="list-group-item-heading">${data.senderName}</h3>`;
     for(let i in data.payload){
-        debugger;
         quickRepliesHtml +=`<p>${data.payload[0].payload.facebook.text}</p>`
         for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
-            quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info btnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
+            quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
             }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
          }
         }
@@ -105,7 +105,3 @@ module.exports.quickreplies =(data)=>{
     return quickRepliesHtml;
 }
 
-// <!--Chips with text and an icon-->
-// <div class="pmd-chip pmd-chip-contact"> 
-// 	<img src="http://propeller.in/assets/images/avatar-icon-40x40.png" alt="avatar"> Trevor Hensen <a class="pmd-chip-action" href="javascript:void(0);"><i class="material-icons">close</i></a>
-// </div>

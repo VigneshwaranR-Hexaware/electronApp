@@ -34,11 +34,8 @@ module.exports = (config) => {
         }
 
         askBot(userInput, callback){
-debugger;
             this.userSays(userInput, callback);
-
             var request = this.app.textRequest(userInput, this.options);
-
             request.on('response', function(response) {
                 let isCardorCarousel = false;
                 let isImage = false;
@@ -57,20 +54,19 @@ debugger;
                             "senderAvatar": config.botAvatar,
                             "time": utils.currentTime(),
                             "className": ''
-                    }, "plaintext");
+                        }, "plaintext");
                         callback(null, cardHTML);
                     }
-
                     if(response.result.fulfillment.messages[i].type == 1){
                         count = count + 1;
                         hasbutton=(response.result.fulfillment.messages[i].buttons.length > 0) ? true :false;
                         isCardorCarousel = true;           
                     }
-                    if(response.result.fulfillment.messages[i].type == 3){
-                        isImage = true;
-                    }
                     if(response.result.fulfillment.messages[i].type == 2){
                         isQuickReplyFromApiai = true;
+                    }
+                    if(response.result.fulfillment.messages[i].type == 3){
+                        isImage = true;
                     }
                     if(response.result.fulfillment.messages[i].type == 4){
                         console.log(response.result.fulfillment.messages[i])
@@ -86,10 +82,10 @@ debugger;
                         "senderAvatar": config.botAvatar,
                         "time": utils.currentTime(),
                         "className": ''
-                }, "plaintext");
+                    }, "plaintext");
                     callback(null, cardHTML);
                 }
-            //Carousel
+                //Carousel
                 if(isCardorCarousel){
                     if(count == 1){
                         let cardHTML = cards({
@@ -101,17 +97,18 @@ debugger;
                             "className": ''
                         }, "card");
                         callback(null, cardHTML);
-                    } else {
+                    } 
+                    else {
                         let cardHTML = cards(response.result.fulfillment.messages, "carousel");
                         callback(null, cardHTML);
                     }
                 }
-
+                //Image Response
                 if(isImage){
                     let cardHTML = cards(response.result.fulfillment.messages, "image");
                     callback(null, cardHTML);
                 }
-
+                //CustomPayload Quickreplies
                 if(isQuickReply){
                     let cardHTML = cards({
                         "payload": response.result.fulfillment.messages,
@@ -122,7 +119,7 @@ debugger;
                     }, "quickreplies");
                     callback(null, cardHTML);
                 }
-
+                //Apiai Quickreply
                 if(isQuickReplyFromApiai){
                     let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");
                     callback(null, cardHTML);

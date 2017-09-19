@@ -8,7 +8,6 @@ This file is part of the Innovation LAB - Offline Bot.
 $(function() {
 
     var environment = process.env.environment || "developement";
-
     var config = require("./appConfig")(environment);
     var utils = require("./src/utils");
     if(config.developerAccessToken){
@@ -27,41 +26,40 @@ $(function() {
     var msg_container = $("ul#msg_container");
     if(msg_container.find('li').length == 0){
        msg_container.siblings("h1").removeClass('hidden');
-    } else {
+    } 
+    else {
        msg_container.siblings("h1").addClass('hidden');
        msg_container.removeClass('hidden');
     }
-
+    //Chatbox Send message
     $("#btn-input").keypress(function (e) {
         if(e.which == 13) {
             var text = $(this).val();
             if (text !== "") {
                 $(this).val('');
-
+                //Calling ApiaiService call
                 processor.askBot(text, function(error, html){
                     if(error){
                         alert(error); //change into some inline fancy display, show error in chat window.
                     }
-
                     if(html){
                         if(msg_container.hasClass('hidden')){ // can be optimimzed and removed from here
                             msg_container.siblings("h1").addClass('hidden');
                             msg_container.removeClass('hidden');
                         }
-
+                        //Binding response HTML to chat window
                         msg_container.append(html);
                         utils.scrollSmoothToBottom($('div.chat-body'));
                         console.log(html);
                     }
                 });
-
                 e.preventDefault();
             }
         }
     });
 
-
- $(document).on('click','.btnPayload',function(e){
+//Quick Replies payload button Click
+ $(document).on('click','.QuickreplybtnPayload',function(e){
     var payloadInput= $(this).data().quickrepliespayload;
     processor.askBot(payloadInput, function(error, html){
                 if(error){
@@ -73,19 +71,7 @@ $(function() {
                 }
             });
             e.preventDefault();
-//     alert("hi triggered");
-//     console.log($(this).text());
-//     console.log(config);
-//     debugger;
-//     //quickRepliesPayload();
-//     
-   
-   
  })
-
-
-
-
 
 function quickRepliesPayload(input){
     alert(input);
