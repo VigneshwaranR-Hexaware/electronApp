@@ -10,8 +10,8 @@ $(function() {
     var environment = process.env.environment || "developement";
     var config = require("./appConfig")(environment);
     var utils = require("./src/utils");
+    const remote = require('electron').remote;
     if(config.developerAccessToken){
-
         var processor = require('./src/apiAIService')(config);
     }
 
@@ -71,29 +71,23 @@ $(function() {
                 }
             });
             e.preventDefault();
- })
+ });
 
-function quickRepliesPayload(input){
-    alert(input);
-    alert("I am Triggered");
-    quickRepliesPayload
-}
-const remote = require('electron').remote;
+//Chat window minimize
  $(document).on('click','#btnMinimize',function(e){
  var window = remote.getCurrentWindow();
     window.minimize();  
- })
+ });
 
+//Chat window close
  $(document).on('click','#btnClose',function(e){
   var window = remote.getCurrentWindow();
    if (confirm('Are you sure want to exit')) { 
        window.close(); 
     }
- })
+ });
 
-  
-
-});
+});//Document ready ends
 
 
 
