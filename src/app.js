@@ -8,119 +8,141 @@ This file is part of the Innovation LAB - Offline Bot.
 $(function () {
     var chatKeyPressCount = 0;
     var environment = process.env.environment || "developement";
-
     var config = require("./appConfig")(environment);
     var utils = require("./src/utils");
     if (config.developerAccessToken) {
+        const remote = require('electron').remote;
+        if (config.developerAccessToken) {
 
-        var processor = require('./src/apiAIService')(config);
-    }
+            var processor = require('./src/apiAIService')(config);
+        }
 
-    if (config.chatServerURL) {
-        var processor = require('./src/charServerService')(config);
-    }
+        if (config.chatServerURL) {
+            var processor = require('./src/charServerService')(config);
+        }
 
-    if (!processor) {
-        throw new Error("Message processing manager is not defined!");
-    }
+        if (!processor) {
+            throw new Error("Message processing manager is not defined!");
+        }
 
-    var msg_container = $("ul#msg_container");
-    if (msg_container.find('li').length == 0) {
-        msg_container.siblings("h1").removeClass('hidden');
-    } else {
-        msg_container.siblings("h1").addClass('hidden');
-        msg_container.removeClass('hidden');
-    }
+        var msg_container = $("ul#msg_container");
+        if (msg_container.find('li').length == 0) {
+            msg_container.siblings("h1").removeClass('hidden');
+        } else {
+            msg_container.siblings("h1").addClass('hidden');
+            msg_container.removeClass('hidden');
 
-    $("#btn-input").keypress(function (e) {
-        if (e.which == 13) {
-            var text = $(this).val();
-            if (text !== "") {
-                $(this).val('');
+            if (msg_container.find('li').length == 0) {
+                msg_container.siblings("h1").removeClass('hidden');
+            }
+            else {
+                msg_container.siblings("h1").addClass('hidden');
+                msg_container.removeClass('hidden');
 
-                processor.askBot(text, function (error, html) {
-                    if (error) {
-                        alert(error); //change into some inline fancy display, show error in chat window.
+            }
+            //Chatbox Send message
+            $("#btn-input").keypress(function (e) {
+                if (e.which == 13) {
+                    var text = $(this).val();
+                    if (text !== "") {
+                        $(this).val('');
+                        //Calling ApiaiService call
+                        processor.askBot(text, function (error, html) {
+                            if (error) {
+                                alert(error); //change into some inline fancy display, show error in chat window.
+                            }
+                            if (html) {
+                                if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
+
+                                    msg_container.siblings("h1").addClass('hidden');
+                                    msg_container.removeClass('hidden');
+                                }
+                                //Binding response HTML to chat window
+                                msg_container.append(html);
+                                //utils.scrollSmoothToBottom($('div.chat-body'));
+                                // console.log(html);
+                                if (chatKeyPressCount != 0) {
+                                    var wtf = $('div.chat-body');
+                                    var height = wtf[0].scrollHeight;
+                                    wtf.scrollTop(height);
+                                }
+                                else {
+                                    var height = 0;
+                                    height = parseInt($('div.chat-body').height());
+                                    $('div.chat-body').animate({ scrollTop: height });
+                                }
+                                chatKeyPressCount = chatKeyPressCount + 1;
+                            }
+                        });
+                        e.preventDefault();
                     }
+                }
+            });
 
+
+
+            $(document).on('click', '.btnPayload', function (e) {
+                var payloadInput = $(this).data().quickrepliespayload;
+                processor.askBot(payloadInput, function (error, html) {
+                    if (error) {
+                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                    }
                     if (html) {
-                        if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
-                            msg_container.siblings("h1").addClass('hidden');
-                            msg_container.removeClass('hidden');
-                        }
-
                         msg_container.append(html);
-                        //utils.scrollSmoothToBottom($('div.chat-body'));
-                        // console.log(html);
-                        if (chatKeyPressCount != 0) {
-                            var wtf = $('div.chat-body');
-                            var height = wtf[0].scrollHeight;
-                            wtf.scrollTop(height);
-                        }
-                        else {
-                            var height = 0;
-                            height = parseInt($('div.chat-body').height());
-                            $('div.chat-body').animate({ scrollTop: height });
-                        }
-                        chatKeyPressCount = chatKeyPressCount + 1;
+
                     }
                 });
-
                 e.preventDefault();
+                //     alert("hi triggered");
+                //     console.log($(this).text());
+                //     console.log(config);
+                //     debugger;
+                //     //quickRepliesPayload();
+                //     
+
+
+            })
+            function quickRepliesPayload(input) {
+                alert(input);
+                alert("I am Triggered");
+                quickRepliesPayload
             }
-        }
-    });
 
+            const remote = require('electron').remote;
+            $(document).on('click', '#btnMinimize', function (e) {
+                var window = remote.getCurrentWindow();
+                window.minimize();
+            })
 
-    $(document).on('click', '.btnPayload', function (e) {
-        var payloadInput = $(this).data().quickrepliespayload;
-        processor.askBot(payloadInput, function (error, html) {
-            if (error) {
-                Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
-            }
-            if (html) {
-                msg_container.append(html);
-
-            }
-        });
-        e.preventDefault();
-        //     alert("hi triggered");
-        //     console.log($(this).text());
-        //     console.log(config);
-        //     debugger;
-        //     //quickRepliesPayload();
-        //     
-
-
-    })
+            $(document).on('click', '#btnClose', function (e) {
+                var window = remote.getCurrentWindow();
+                if (confirm('Are you sure want to exit')) {
+                    window.close();
+                }
+            })
 
 
 
 
+            //Quick Replies payload button Click
+            $(document).on('click', '.QuickreplybtnPayload', function (e) {
+                var payloadInput = $(this).data().quickrepliespayload;
+                processor.askBot(payloadInput, function (error, html) {
+                    if (error) {
+                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                    }
+                    if (html) {
+                        msg_container.append(html);
 
-    function quickRepliesPayload(input) {
-        alert(input);
-        alert("I am Triggered");
-        quickRepliesPayload
-    }
-
-    const remote = require('electron').remote;
-    $(document).on('click', '#btnMinimize', function (e) {
-        var window = remote.getCurrentWindow();
-        window.minimize();
-    })
-
-    $(document).on('click', '#btnClose', function (e) {
-        var window = remote.getCurrentWindow();
-        if (confirm('Are you sure want to exit')) {
-            window.close();
-        }
-    })
+                    }
+                });
+                e.preventDefault();
+            });
 
 
 
 
-});
+        });//Document ready ends
 
 
 
