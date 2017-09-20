@@ -5,95 +5,145 @@ Copyright (c) 2017-2017 Hexaware Technologies
 This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
-$(function() {
-
+$(function () {
+    var chatKeyPressCount = 0;
     var environment = process.env.environment || "developement";
     var config = require("./appConfig")(environment);
     var utils = require("./src/utils");
-    const remote = require('electron').remote;
-    if(config.developerAccessToken){
-        var processor = require('./src/apiAIService')(config);
-    }
+    if (config.developerAccessToken) {
+        const remote = require('electron').remote;
+        if (config.developerAccessToken) {
 
-    if(config.chatServerURL){
-        var processor = require('./src/charServerService')(config);
-    }
+            var processor = require('./src/apiAIService')(config);
+        }
 
-    if(!processor){
-        throw new Error("Message processing manager is not defined!");
-    }
+        if (config.chatServerURL) {
+            var processor = require('./src/charServerService')(config);
+        }
 
-    var msg_container = $("ul#msg_container");
-    if(msg_container.find('li').length == 0){
-       msg_container.siblings("h1").removeClass('hidden');
-    } 
-    else {
-       msg_container.siblings("h1").addClass('hidden');
-       msg_container.removeClass('hidden');
-    }
-    //Chatbox Send message
-    $("#btn-input").keypress(function (e) {
-        if(e.which == 13) {
-            var text = $(this).val();
-            if (text !== "") {
-                $(this).val('');
-                //Calling ApiaiService call
-                processor.askBot(text, function(error, html){
-                    if(error){
-                        alert(error); //change into some inline fancy display, show error in chat window.
+        if (!processor) {
+            throw new Error("Message processing manager is not defined!");
+        }
+
+        var msg_container = $("ul#msg_container");
+        if (msg_container.find('li').length == 0) {
+            msg_container.siblings("h1").removeClass('hidden');
+        } else {
+            msg_container.siblings("h1").addClass('hidden');
+            msg_container.removeClass('hidden');
+
+            if (msg_container.find('li').length == 0) {
+                msg_container.siblings("h1").removeClass('hidden');
+            }
+            else {
+                msg_container.siblings("h1").addClass('hidden');
+                msg_container.removeClass('hidden');
+
+            }
+            //Chatbox Send message
+            $("#btn-input").keypress(function (e) {
+                if (e.which == 13) {
+                    var text = $(this).val();
+                    if (text !== "") {
+                        $(this).val('');
+                        //Calling ApiaiService call
+                        processor.askBot(text, function (error, html) {
+                            if (error) {
+                                alert(error); //change into some inline fancy display, show error in chat window.
+                            }
+                            if (html) {
+                                if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
+
+                                    msg_container.siblings("h1").addClass('hidden');
+                                    msg_container.removeClass('hidden');
+                                }
+                                //Binding response HTML to chat window
+                                msg_container.append(html);
+                                //utils.scrollSmoothToBottom($('div.chat-body'));
+                                // console.log(html);
+                                if (chatKeyPressCount != 0) {
+                                    var wtf = $('div.chat-body');
+                                    var height = wtf[0].scrollHeight;
+                                    wtf.scrollTop(height);
+                                }
+                                else {
+                                    var height = 0;
+                                    height = parseInt($('div.chat-body').height());
+                                    $('div.chat-body').animate({ scrollTop: height });
+                                }
+                                chatKeyPressCount = chatKeyPressCount + 1;
+                            }
+                        });
+                        e.preventDefault();
                     }
-                    if(html){
-                        if(msg_container.hasClass('hidden')){ // can be optimimzed and removed from here
-                            msg_container.siblings("h1").addClass('hidden');
-                            msg_container.removeClass('hidden');
-                        }
-                        //Binding response HTML to chat window
+                }
+            });
+
+
+
+            $(document).on('click', '.btnPayload', function (e) {
+                var payloadInput = $(this).data().quickrepliespayload;
+                processor.askBot(payloadInput, function (error, html) {
+                    if (error) {
+                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                    }
+                    if (html) {
                         msg_container.append(html);
-                        utils.scrollSmoothToBottom($('div.chat-body'));
-                        console.log(html);
+
                     }
                 });
                 e.preventDefault();
+
+
+            })
+            function quickRepliesPayload(input) {
+                alert(input);
+                alert("I am Triggered");
+                quickRepliesPayload
             }
-        }
-    });
 
-//Quick Replies payload button Click
- $(document).on('click','.QuickreplybtnPayload',function(e){
-    var payloadInput= $(this).data().quickrepliespayload;
-    processor.askBot(payloadInput, function(error, html){
-                if(error){
-                    Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+            const remote = require('electron').remote;
+            $(document).on('click', '#btnMinimize', function (e) {
+                var window = remote.getCurrentWindow();
+                window.minimize();
+            })
+
+            $(document).on('click', '#btnClose', function (e) {
+                var window = remote.getCurrentWindow();
+                if (confirm('Are you sure want to exit')) {
+                    window.close();
                 }
-                if(html){
-                    msg_container.append(html);
-                    
-                }
+            })
+
+
+
+
+            //Quick Replies payload button Click
+            $(document).on('click', '.QuickreplybtnPayload', function (e) {
+                var payloadInput = $(this).data().quickrepliespayload;
+                processor.askBot(payloadInput, function (error, html) {
+                    if (error) {
+                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                    }
+                    if (html) {
+                        msg_container.append(html);
+
+                    }
+                });
+                e.preventDefault();
             });
-            e.preventDefault();
- });
 
-//Chat window minimize
- $(document).on('click','#btnMinimize',function(e){
- var window = remote.getCurrentWindow();
-    window.minimize();  
- });
 
-//Chat window close
- $(document).on('click','#btnClose',function(e){
-  var window = remote.getCurrentWindow();
-   if (confirm('Are you sure want to exit')) { 
-       window.close(); 
-    }
- });
 
  $(document).ready(function() {
     $('#Carousel').carousel({
         interval: 5000
     })
-});
-
 });//Document ready ends
+
+
+
+       
 
 
 
@@ -107,7 +157,7 @@ $(function() {
 //             // var app = new apiClass()
 //             // var resp = app.ApiRequest(text);
 //             //$(".msg_container_base").stop().animate({ scrollTop: $(".msg_container_base")[0].scrollHeight}, 1000);
-            
+
 //         }
 //     }
 // });
@@ -206,7 +256,7 @@ $(function() {
 //                 var app = new apiClass()
 //                 var resp = app.ApiRequest(text);
 //                 //$(".msg_container_base").stop().animate({ scrollTop: $(".msg_container_base")[0].scrollHeight}, 1000);
-                
+
 //             }
 //         }
 //     });
