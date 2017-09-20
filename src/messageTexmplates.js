@@ -110,21 +110,37 @@ module.exports.quickreplies =(data)=>{
     return quickRepliesHtml;
 }
 
-module.exports.carousel =(data)=>{
+module.exports.carousel =(data, uniqueId)=>{
     var carousel =`<li class="list-group-item">
-    <div class="carousel slide" data-ride="false">
+    <div id="${uniqueId}" class="carousel slide" data-ride="false">
     <!-- Carousel items -->
         <div class="carousel-inner">`;
+        var index = 0;
         for(let i in data.payload){
-            carousel +=`<div class="item ${(i == 0) ? 'active': '' }">
-            <div class="row">
-              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-            </div><!--.row-->
-        </div><!--.item-->`;
+           
+            if(data.payload[i].type==1){
+            carousel +=`<div class="item ${(index == 0) ? 'active': '' }">    
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                        </a>
+                        <h3>${data.payload[i].title}<p>
+                        <p>${data.payload[i].subtitle}</p>`
+                          if(data.buttons && data.payload[i].type == 1){
+                           for (var j = 0; j < data.payload[i].buttons.length; j++){
+                            carousel +=`<button type="button" class="btn btn-primary caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                          }
+                        }
+                        carousel += `</div>
+                </div><!--.row-->
+            </div> <!--.item-->`;
+            index = 1;
         }
+    }
         carousel +=` </div><!--.carousel-inner-->
-        <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
-        <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+        <a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
       </div><!--.Carousel--></li>`;
 return carousel;
 }

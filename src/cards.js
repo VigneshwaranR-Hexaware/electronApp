@@ -6,7 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 var messageTpl = require("./messageTexmplates");
-
+const uuidv1 = require('uuid/v1');
 
 class CardDesign {
 
@@ -25,7 +25,7 @@ class CardDesign {
             return messageTpl.card(this.data);
         }
         if(this.responseType == "carousel"){
-            return messageTpl.carousel(this.data);
+            return messageTpl.carousel(this.data, uuidv1());
         }
         if(this.responseType == "quickreplies"){
             return messageTpl.quickreplies(this.data);

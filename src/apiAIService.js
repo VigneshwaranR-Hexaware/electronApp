@@ -58,6 +58,7 @@ module.exports = (config) => {
                         callback(null, cardHTML);
                     }
                     if(response.result.fulfillment.messages[i].type == 1){
+                        debugger;
                         count = count + 1;
                         hasbutton=(response.result.fulfillment.messages[i].buttons.length > 0) ? true :false;
                         isCardorCarousel = true;           
