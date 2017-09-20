@@ -31,6 +31,7 @@ $(function () {
         } else {
             msg_container.siblings("h1").addClass('hidden');
             msg_container.removeClass('hidden');
+        }
 
             if (msg_container.find('li').length == 0) {
                 msg_container.siblings("h1").removeClass('hidden');
@@ -40,6 +41,7 @@ $(function () {
                 msg_container.removeClass('hidden');
 
             }
+        }
             //Chatbox Send message
             $("#btn-input").keypress(function (e) {
                 if (e.which == 13) {
@@ -81,26 +83,21 @@ $(function () {
 
 
 
-            $(document).on('click', '.btnPayload', function (e) {
-                var payloadInput = $(this).data().quickrepliespayload;
-                processor.askBot(payloadInput, function (error, html) {
-                    if (error) {
-                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
-                    }
-                    if (html) {
-                        msg_container.append(html);
+            // $(document).on('click', '.btnPayload', function (e) {
+            //     var payloadInput = $(this).data().quickrepliespayload;
+            //     processor.askBot(payloadInput, function (error, html) {
+            //         if (error) {
+            //             Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+            //         }
+            //         if (html) {
+            //             msg_container.append(html);
 
-                    }
-                });
-                e.preventDefault();
+            //         }
+            //     });
+            //     e.preventDefault();
 
 
-            })
-            function quickRepliesPayload(input) {
-                alert(input);
-                alert("I am Triggered");
-                quickRepliesPayload
-            }
+            // })
 
             const remote = require('electron').remote;
             $(document).on('click', '#btnMinimize', function (e) {
@@ -114,9 +111,6 @@ $(function () {
                     window.close();
                 }
             })
-
-
-
 
             //Quick Replies payload button Click
             $(document).on('click', '.QuickreplybtnPayload', function (e) {
@@ -133,12 +127,29 @@ $(function () {
                 e.preventDefault();
             });
 
+            $(document).on('click', '.cardresponsepayload', function (e) {
+                var payloadInput = $(this).data().cardpayloadbutton;
+                console.log('Button Payload'+ payloadInput);
+                processor.askBot(payloadInput, function (error, html) {
+                    if (error) {
+                        Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                    }
+                    if (html) {
+                        msg_container.append(html);
+
+                    }
+                });
+                e.preventDefault();
+            });
+            
 
 
- $(document).ready(function() {
-    $('#Carousel').carousel({
-        interval: 5000
-    })
+
+//  $(document).ready(function() {
+//     $('.carousel').carousel({
+//         interval: 5000
+//     })
+// });
 });//Document ready ends
 
 

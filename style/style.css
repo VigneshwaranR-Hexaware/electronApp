@@ -24,6 +24,11 @@ This file is part of the Innovation LAB - Offline Bot.
 }
 
 /* Following are carosel css */
+.carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+
 .carousel-control {
 	left: -12px;
     height: 40px;

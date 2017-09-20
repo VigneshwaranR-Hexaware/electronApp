@@ -99,7 +99,6 @@ module.exports = (config) => {
                         callback(null, cardHTML);
                     } 
                     else {
-                        debugger;
                         let carouselHTML = cards({
                             
                                 "payload": response.result.fulfillment.messages,

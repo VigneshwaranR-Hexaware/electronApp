@@ -43,7 +43,6 @@ module.exports.plaintext = (data) => {
 }
 //Card Template
 module.exports.card = (data) => {
-    debugger;
     let html;
     let cardButtons= "";
     let cardBody;
@@ -78,7 +77,7 @@ module.exports.card = (data) => {
                 console.log("Buttons"+data);
                 cardButtons=`<div class="pmd-card-actions">`
                 for(var j=0 ; j < data.payload[i].buttons.length; j++ ){
-                    cardButtons +=` <button class="btn btn-primary" type="button">${data.payload[i].buttons[j].text}</button>`
+                    cardButtons +=` <button type="button" class="btn btn-primary cardresponsepayload" data-cardpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                 }
                 cardButtons+=`</div>`
             }
@@ -112,13 +111,12 @@ module.exports.quickreplies =(data)=>{
 }
 
 module.exports.carousel =(data)=>{
-    debugger;
     var carousel =`<li class="list-group-item">
-    <div id="Carousel" class="carousel slide">
+    <div class="carousel slide" data-ride="false">
     <!-- Carousel items -->
         <div class="carousel-inner">`;
         for(let i in data.payload){
-            carousel +=`<div class="item active">
+            carousel +=`<div class="item ${(i == 0) ? 'active': '' }">
             <div class="row">
               <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
             </div><!--.row-->
