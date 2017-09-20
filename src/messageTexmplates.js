@@ -112,7 +112,7 @@ module.exports.quickreplies =(data)=>{
 
 module.exports.carousel =(data, uniqueId)=>{
     var carousel =`<li class="list-group-item">
-    <div id="${uniqueId}" class="carousel slide" data-ride="false">
+    <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth" data-ride="false">
     <!-- Carousel items -->
         <div class="carousel-inner">`;
         var index = 0;
@@ -129,7 +129,7 @@ module.exports.carousel =(data, uniqueId)=>{
                         <p>${data.payload[i].subtitle}</p>`
                           if(data.buttons && data.payload[i].type == 1){
                            for (var j = 0; j < data.payload[i].buttons.length; j++){
-                            carousel +=`<button type="button" class="btn btn-primary caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                            carousel +=`<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                           }
                         }
                         carousel += `</div>
