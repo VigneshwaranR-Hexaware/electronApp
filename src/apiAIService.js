@@ -47,7 +47,7 @@ module.exports = (config) => {
                 console.log(response);
                 if(response.result.fulfillment.messages){
                 for(let i in response.result.fulfillment.messages){
-                    if(response.result.fulfillment.messages[i].type == 0 && response.result.fulfillment.messages[i].platform == config.platform){
+                    if(response.result.fulfillment.messages[i].type == 0 ){
                         let cardHTML = cards({
                             "payload": response.result.fulfillment.messages[i].speech,
                             "senderName": config.botTitle,
@@ -99,8 +99,18 @@ module.exports = (config) => {
                         callback(null, cardHTML);
                     } 
                     else {
-                        let cardHTML = cards(response.result.fulfillment.messages, "carousel");
-                        callback(null, cardHTML);
+                        debugger;
+                        let carouselHTML = cards({
+                            
+                                "payload": response.result.fulfillment.messages,
+                                "senderName": config.botTitle,
+                                "senderAvatar": config.botAvatar,
+                                "time": utils.currentTime(),
+                                "buttons":hasbutton,
+                                "className": ''
+                            
+                        }, "carousel");
+                        callback(null, carouselHTML);
                     }
                 }
                 //Image Response

@@ -9,7 +9,7 @@ module.exports = function(env){
     if(env == "developement"){
         return {
 
-            developerAccessToken : "a45481357d4f41ffab53fb3b64e33636",
+            developerAccessToken : "e58329c450cb4896a4ca17454ac06737",
             chatServerURL : "",
 
             applicationTitle: "VFS Global",

@@ -87,6 +87,12 @@ $(function() {
     }
  });
 
+ $(document).ready(function() {
+    $('#Carousel').carousel({
+        interval: 5000
+    })
+});
+
 });//Document ready ends
 
 

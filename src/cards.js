@@ -24,6 +24,9 @@ class CardDesign {
             console.log(JSON.stringify(this.data));
             return messageTpl.card(this.data);
         }
+        if(this.responseType == "carousel"){
+            return messageTpl.carousel(this.data);
+        }
         if(this.responseType == "quickreplies"){
             return messageTpl.quickreplies(this.data);
         }

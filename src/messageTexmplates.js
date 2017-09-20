@@ -26,7 +26,6 @@ module.exports.userplaintext = (data) => {
 
 //Plain Text Template
 module.exports.plaintext = (data) => {
-
     let html = `<li class="list-group-item">
         <div class="media-left">
             <a href="javascript:void(0);" class="avatar-list-img">
@@ -44,6 +43,7 @@ module.exports.plaintext = (data) => {
 }
 //Card Template
 module.exports.card = (data) => {
+    debugger;
     let html;
     let cardButtons= "";
     let cardBody;
@@ -60,24 +60,27 @@ module.exports.card = (data) => {
                 <div class="media-body media-middle">
                     <h3 class="pmd-card-title-text">${data.senderName}</h3>
                 </div>
-            </div>
+            </div>`
             
             <!-- Card media -->
-            <div class="pmd-card-media">
+            if(data.payload[i].imageUrl != "" && data.payload[i].imageUrl != undefined){ 
+                cardBody +=` <div class="pmd-card-media">
                 <img src="${data.payload[i].imageUrl}" width="1184" height="666" class="img-responsive">
-            </div>
+                </div>`
+            }
             
             <!-- Card body -->
-            <div class="pmd-card-title">
+            cardBody += `<div class="pmd-card-title">
                 <h2 class="pmd-card-title-text">${data.payload[i].title}</h2>
                 <span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>	
             </div>`
-            if(data.buttons){
-            cardButtons=`<div class="pmd-card-actions">
-                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">share</i></button>
-                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">thumb_up</i></button>
-                <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button"><i class="material-icons pmd-sm">drafts</i></button>
-            </div>`
+            if(data.buttons && data.payload[i].type == 1){
+                console.log("Buttons"+data);
+                cardButtons=`<div class="pmd-card-actions">`
+                for(var j=0 ; j < data.payload[i].buttons.length; j++ ){
+                    cardButtons +=` <button class="btn btn-primary" type="button">${data.payload[i].buttons[j].text}</button>`
+                }
+                cardButtons+=`</div>`
             }
          html=cardBody+cardButtons+`</div></li>`;
     }
@@ -94,14 +97,37 @@ module.exports.quickreplies =(data)=>{
     </div>
     <div class="media-body">
     <h3 class="list-group-item-heading">${data.senderName}</h3>`;
+    
     for(let i in data.payload){
-        quickRepliesHtml +=`<p>${data.payload[0].payload.facebook.text}</p>`
+        if(data.payload[i].platform =="facebook"){
+        quickRepliesHtml +=`<p>${data.payload[i].payload.facebook.text}</p>`
         for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
             quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
             }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
          }
         }
+        }
     quickRepliesHtml +=`<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
     return quickRepliesHtml;
+}
+
+module.exports.carousel =(data)=>{
+    debugger;
+    var carousel =`<li class="list-group-item">
+    <div id="Carousel" class="carousel slide">
+    <!-- Carousel items -->
+        <div class="carousel-inner">`;
+        for(let i in data.payload){
+            carousel +=`<div class="item active">
+            <div class="row">
+              <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+            </div><!--.row-->
+        </div><!--.item-->`;
+        }
+        carousel +=` </div><!--.carousel-inner-->
+        <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
+        <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+      </div><!--.Carousel--></li>`;
+return carousel;
 }
 
