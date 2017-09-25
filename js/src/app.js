@@ -98,7 +98,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function($, config, apiSer
 			var payloadInput = $(this).data().quickrepliespayload;
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
-					Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
 				}
 				if (html) {
 					msg_container.append(html);
@@ -113,7 +113,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function($, config, apiSer
 			console.log('Button Payload'+ payloadInput);
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
-					Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
 				}
 				if (html) {
 					msg_container.append(html);
@@ -128,7 +128,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function($, config, apiSer
 			console.log('Button Payload'+ payloadInput);
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
-					Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
 				}
 				if (html) {
 					msg_container.append(html);
