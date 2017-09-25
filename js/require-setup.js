@@ -8,10 +8,14 @@ This file is part of the Innovation LAB - Offline Bot.
 
 requirejs.config({
     baseUrl: 'js',
-    shim : {
-        bootstrap : { "deps" :['jquery'] },
-        propeller : { "deps" :['jquery', 'bootstrap'] }        
-    },
+        shim : {
+            bootstrap : {
+                deps : ['jquery']
+            },
+            propeller : {
+                deps : ['jquery' , 'bootstrap']
+            }
+        },
     paths: {
         jquery : [
             'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min',
@@ -28,6 +32,6 @@ requirejs.config({
         utils : 'src/utils',
         apiService : 'src/apiService',
         messageTemplates : 'src/messageTemplates',
-        cards : 'src/cards',
+        cards : 'src/cards'
     }
 });

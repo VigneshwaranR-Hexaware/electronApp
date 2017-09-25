@@ -19,11 +19,18 @@
 
     <body>
         <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
+        <script>
+		requirejs(['lib/jquery.min'], function($) {
+			requirejs(['lib/bootstrap.min', 'lib/propeller'], function() {
+				console.log("Loaded :)");
+			});
+		});
+        </script>
 
         <div class="container-fluid main-container">
 
           <div class="row">
-            <div class="pmd-card pmd-z-depth card-custom-view" style="margin-bottom: 10px;">
+            <div class="pmd-card pmd-z-depth card-custom-view" style="margin-bottom: 4px;">
               <div class="pmd-card-body">
                 <div class="table custom-size"> 								
                   <div class="media">

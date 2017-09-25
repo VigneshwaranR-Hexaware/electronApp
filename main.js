@@ -1,10 +1,18 @@
-const electron = require('electron')
-const Positioner = require('electron-positioner')
+'use strict';
+
+/* -------------------------------------------------------------------
+Copyright (c) 2017-2017 Hexaware Technologies
+This file is part of the Innovation LAB - Offline Bot.
+------------------------------------------------------------------- */
+
+const electron = require('electron');
+const Positioner = require('electron-positioner');
+const path = require('path');
+const url = require('url');
+
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const appTray = electron.Tray
-const path = require('path')
-const url = require('url')
 const iconPath = path.join(__dirname, './images/vfs-global.jpg');
 
 

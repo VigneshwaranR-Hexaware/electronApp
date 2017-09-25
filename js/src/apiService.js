@@ -6,7 +6,8 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 
-define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'], function($, config, utils, messageTpl, cards, uuidv1){
+define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
+function($, config, utils, messageTpl, cards, uuidv1){
 
 	class ApiHandler{
 
@@ -64,7 +65,6 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'], fun
 							callback(null, cardHTML);
 						}
 						if(response.result.fulfillment.messages[i].type == 1){
-							debugger;
 							count = count + 1;
 							hasbutton=(response.result.fulfillment.messages[i].buttons.length > 0) ? true :false;
 							isCardorCarousel = true;           
@@ -145,8 +145,6 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'], fun
 					callback("Internal Server Error", null);
 				}
 			});
-
-
 		}
 	}
 

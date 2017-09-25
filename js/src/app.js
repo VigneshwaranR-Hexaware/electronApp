@@ -5,7 +5,6 @@ Copyright (c) 2017-2017 Hexaware Technologies
 This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
-
 define(['jquery', 'settings', 'apiService', 'utils'], function($, config, apiService, utils){
 
     $(function () {

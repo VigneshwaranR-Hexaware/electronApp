@@ -8,7 +8,7 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define({
 
-    accessToken: "abc011e29bd14c44a17806a76248370a",
+    accessToken: "e58329c450cb4896a4ca17454ac06737",
     chatServerURL : "https://api.api.ai/v1/",
 
     applicationTitle: "VFS Global",
