@@ -17,7 +17,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 				lang: "en"
 			};
 		}
-
+        
 		userSays(userInput, callback){
 
 			callback(null, messageTpl.userplaintext({
@@ -33,7 +33,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 			this.userSays(userInput, callback);
 
 			this.options.query = userInput;
-
+            let refr=this;
 			$.ajax({
 				type: "POST",
 				url: config.chatServerURL + "query?v=20150910",
@@ -91,6 +91,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 							"className": ''
 						}, "plaintext");
 						callback(null, cardHTML);
+						
 					}
 					//Carousel
 					if(isCardorCarousel){
@@ -117,12 +118,15 @@ function($, config, utils, messageTpl, cards, uuidv1){
 								
 							}, "carousel");
 							callback(null, carouselHTML);
+						
 						}
+					
 					}
 					//Image Response
 					if(isImage){
 						let cardHTML = cards(response.result.fulfillment.messages, "image");
 						callback(null, cardHTML);
+					
 					}
 					//CustomPayload Quickreplies
 					if(isQuickReply){
@@ -134,11 +138,13 @@ function($, config, utils, messageTpl, cards, uuidv1){
 								"className": ''
 						}, "quickreplies");
 						callback(null, cardHTML);
+						
 					}
 					//Apiai Quickreply
 					if(isQuickReplyFromApiai){
 						let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");
 						callback(null, cardHTML);
+						
 					}
 				},
 				error: function() {
