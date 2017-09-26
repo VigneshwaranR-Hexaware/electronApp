@@ -34,6 +34,14 @@ define(['messageTemplates', 'uuid'], function(messageTpl, uuidv1){
             if(this.responseType == "quickreplies"){
                 return messageTpl.quickreplies(this.data);
             }
+
+            if(this.responseType == "quickreplyfromapiai"){
+                return messageTpl.quickrepliesfromapiai(this.data);
+            }
+
+            if(this.responseType == "image"){
+                return messageTpl.image(this.data);
+            }
         }
     }
 

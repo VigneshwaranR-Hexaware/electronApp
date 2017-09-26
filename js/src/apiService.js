@@ -48,6 +48,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					let isImage = false;
 					let isQuickReply = false;
 					let isQuickReplyFromApiai = false;
+					let imageUrl;
 					//To find Card || Carousel
 					let count = 0;
 					let hasbutton;
@@ -74,6 +75,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 						}
 						if(response.result.fulfillment.messages[i].type == 3){
 							isImage = true;
+							imageUrl=response.result.fulfillment.messages[i].imageUrl;
 						}
 						if(response.result.fulfillment.messages[i].type == 4){
 							console.log(response.result.fulfillment.messages[i])
@@ -121,7 +123,14 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					}
 					//Image Response
 					if(isImage){
-						let cardHTML = cards(response.result.fulfillment.messages, "image");
+							let cardHTML = cards({
+								"payload": response.result.fulfillment.messages,
+									"senderName": config.botTitle,
+									"senderAvatar": config.botAvatar,
+									"time": utils.currentTime(),
+									"imgUrl": imageUrl
+									
+							}, "image");
 						callback(null, cardHTML);
 					}
 					//CustomPayload Quickreplies
@@ -137,7 +146,12 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					}
 					//Apiai Quickreply
 					if(isQuickReplyFromApiai){
-						let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");
+						let cardHTML = cards({
+                            "payload": response.result.fulfillment.messages,
+							"senderName": config.botTitle,
+							"senderAvatar": config.botAvatar,
+							"time": utils.currentTime()							
+							}, "quickreplyfromapiai");
 						callback(null, cardHTML);
 					}
 				},
