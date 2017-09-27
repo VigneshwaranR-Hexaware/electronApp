@@ -48,7 +48,6 @@ define([], function(){
     }
     //Card Template
     methods.card = (data) => {
-        debugger;
         let html;
         let cardButtons= "";
         let cardBody;
@@ -74,10 +73,10 @@ define([], function(){
                 }
                 
                 cardBody += `<div class="pmd-card-title">`
-                if(data.payload[i].title != undefined){
+                if(data.payload[i].title !="" && data.payload[i].title != undefined){
                     cardBody +=`<h2 class="pmd-card-title-text">${data.payload[i].title}</h2>`
                 }
-                if(data.payload[i].subtitle != undefined){
+                if(data.payload[i].subtitle != "" && data.payload[i].subtitle != undefined){
                     cardBody += `<span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span></div>`
                 }
                 if(data.buttons && data.payload[i].type == 1){
@@ -108,8 +107,8 @@ define([], function(){
             if(data.payload[i].platform =="facebook" && data.payload[i].type == "4"){
             quickRepliesHtml +=`<p>${data.payload[i].payload.facebook.text}</p>`
             for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++){
-                quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
-                }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+                quickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline btn-round  pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
+                }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>&nbsp;&nbsp;&nbsp;`
              }
             }
             }
@@ -136,7 +135,7 @@ define([], function(){
                             <p>${data.payload[i].subtitle}</p>`
                               if(data.buttons && data.payload[i].type == 1){
                                for (var j = 0; j < data.payload[i].buttons.length; j++){
-                                carousel +=`<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                                carousel +=`<button type="button" class="btn btn-primary btn-space pmd-btn-outline caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>&nbsp;&nbsp;`
                               }
                             }
                             carousel += `</div>
@@ -156,19 +155,19 @@ define([], function(){
 
     methods.quickrepliesfromapiai =(data)=>{
         console.log(data);
-        var apiquickRepliesHtml =`<li class="list-group-item">
-        <div class="media-left">
-            <a href="javascript:void(0);" class="avatar-list-img">
-            <img class="img-responsive" src="${data.senderAvatar}">
-            </a>
-        </div>
-        <div class="media-body">
-        <h3 class="list-group-item-heading">${data.senderName}</h3>`;
+        var apiquickRepliesHtml =`<li class="list-group-item">`
+        // <div class="media-left">
+        //     <a href="javascript:void(0);" class="avatar-list-img">
+        //     <img class="img-responsive" src="${data.senderAvatar}">
+        //     </a>
+        // </div>
+        // <div class="media-body">
+        // <h3 class="list-group-item-heading">${data.senderName}</h3>`;
         
         for(let i in data.payload){
             if(data.payload[i].platform =="facebook" && data.payload[i].type == "2"){
                 apiquickRepliesHtml +=`<p>${data.payload[i].title}</p>`
-                apiquickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info apiQuickreplybtnPayload" data-apiquickRepliesPayload="${data.payload[5].replies[0]}">${data.payload[5].replies[0]}</button>`
+                apiquickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info .pmd-btn-fab apiQuickreplybtnPayload" data-apiquickRepliesPayload="${data.payload[5].replies[0]}">${data.payload[5].replies[0]}</button>`
             }
         }
         apiquickRepliesHtml +=`<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
@@ -176,9 +175,8 @@ define([], function(){
     }
 
     methods.image = (data) => {
-        debugger;
         console.log(data.imageUrl)
-            let imagehtml = `<li class="list-group-item chat-user-dialog">
+            let imagehtml = `<li class="list-group-item">
                 <div class="media-left pull-right">
                     <a href="javascript:void(0);" class="avatar-list-img">
                     <img class="img-responsive" src="${data.senderAvatar}">

@@ -110,6 +110,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function($, config, apiSer
 
 		$(document).on('click', '.cardresponsepayload', function (e) {
 			var payloadInput = $(this).data().cardpayloadbutton;
+			debugger;
 			console.log('Button Payload'+ payloadInput);
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {

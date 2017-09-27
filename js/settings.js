@@ -11,9 +11,9 @@ define({
     accessToken: "6c7e02249ef94cc68b647881b36f0739",
     chatServerURL : "https://api.api.ai/v1/",
 
-    applicationTitle: "VFS Global",
+    applicationTitle: "RICOH Assistant",
     userTitle : "Me",
-    botTitle : "VFS Assistant",
+    botTitle : "RICOH Assistant",
     botAvatar : "avatar/vfslogo.png",
     userAvatar : "avatar/user.png",
     attachmentUploadURL : "",

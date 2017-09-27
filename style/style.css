@@ -55,3 +55,11 @@ This file is part of the Innovation LAB - Offline Bot.
 .carousel-indicators .active {
 background: #428bca;
 }
+
+.btn-round{
+    border-radius: 17px;
+    }
+    .btn-space {
+        margin-right: 5px;
+    }
+    
