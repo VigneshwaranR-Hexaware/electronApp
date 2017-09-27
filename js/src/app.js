@@ -8,7 +8,24 @@ This file is part of the Innovation LAB - Offline Bot.
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
 
 	$(function () {
+		function adjustPopups() {
+			let msgboxh = $("div.header-popup").next().height();
+			let chath = $("div.header-popup").next().next().height();
+			let typetext = $("div.header-popup").next().next().next().height();
+			let bodyh = $("body").height();
+			let finalcalc = bodyh - (chath + typetext);
+			let finalcss = 'calc(100%-' + finalcalc + 'px)';
+			$("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
 
+		}
+		let popup = window.location.search.substring(1).split("=");
+		if (popup[1] == 1) {
+			$("div.header-popup").addClass("hidden").slideUp("slow");
+			adjustPopups();
+		}
+		else {
+			$("div.header-popup").removeClass("hidden")
+		}
 		function sendMessage(refr, ev) {
 
 			var text = refr.val();
@@ -27,7 +44,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 						}
 						msg_container.append(html);
 						utils.scrollSmoothToBottom($('div.chat-body'));
-						
+
 					}
 				});
 				ev.preventDefault();

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "webhook.js"
   },
   "dependencies": {
     "electron-packager": "^9.0.0",
