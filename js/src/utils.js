@@ -6,7 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 
-define([], function(){
+define([], function () {
 
     var methods = {};
 
@@ -16,13 +16,14 @@ define([], function(){
         var hours = (currentDate.getHours() < 10) ? '0' + currentDate.getHours() : currentDate.getHours();
         var minutes = (currentDate.getMinutes() < 10) ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
         var ampm = hours >= 12 ? 'pm' : 'am';
-    
+
         return `${hours}:${minutes} ${ampm}`;
     };
 
     methods.scrollSmoothToBottom = (element) => {
-        element.stop().animate({
-        scrollTop: element.offset().top
+        setTimeout(() => {
+            var height = element[0].scrollHeight;
+            element.scrollTop(height);
         }, 500);
     };
 
