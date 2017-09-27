@@ -9,7 +9,6 @@ const electron = require('electron');
 const Positioner = require('electron-positioner');
 const path = require('path');
 const url = require('url');
-
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const appTray = electron.Tray
@@ -22,7 +21,9 @@ function createWindow() {
   const trayControl = new appTray(iconPath)
 
   win = new BrowserWindow({
-    width: 400,
+    // width: 400,
+    // height: 650,
+    width: 1024,
     height: 650,
     frame: false,
     webPreferences: {
@@ -43,9 +44,24 @@ function createWindow() {
     slashes: true
   }));
 
+  //Closing Chat Window
+  win.webContents.on('did-finish-load', () => {
+    let code = `const remote = require('electron').remote;var btnClose = document.getElementById("btnClose");
+    var btnMinimize = document.getElementById("btnMinimize");
+            btnClose.addEventListener("click",function(){  var window = remote.getCurrentWindow();
+		    if (confirm('Are you sure want to exit')) {
+		        window.close();
+		    }});
+         btnMinimize.addEventListener("click",function(){  var window = remote.getCurrentWindow();
+		      window.minimize();
+		    });`;
+    win.webContents.executeJavaScript(code);
+  });
+
   // Open the DevTools.
   win.webContents.openDevTools()
   win.on('closed', () => {
+    alert('srini');
     win = null
   });
 
