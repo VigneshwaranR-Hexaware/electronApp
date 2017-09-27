@@ -134,6 +134,28 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 			});
 			e.preventDefault();
-		});
+
+        });
+        
+        $(document).on('click', '.apiQuickreplybtnPayload', function (e) {
+			var payloadInput = $(this).data().apiquickrepliespayload;
+			processor.askBot(payloadInput, function (error, html) {
+				if (error) {
+					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+				}
+				if (html) {
+					msg_container.append(html);
+
+				}
+			});
+			e.preventDefault();
+		});   
 	});
-});
+
+});   
+
+		
+		
+		
+
+    
