@@ -60,33 +60,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			}
 		});
 
-		// $(document).on('click', '.btnPayload', function (e) {
-		//     var payloadInput = $(this).data().quickrepliespayload;
-		//     processor.askBot(payloadInput, function (error, html) {
-		//         if (error) {
-		//             Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
-		//         }
-		//         if (html) {
-		//             msg_container.append(html);
-
-		//         }
-		//     });
-		//     e.preventDefault();
-		// });
-
-		// const remote = require('electron').remote;
-		// $(document).on('click', '#btnMinimize', function (e) {
-		//     var window = remote.getCurrentWindow();
-		//     window.minimize();
-		// })
-
-		// $(document).on('click', '#btnClose', function (e) {
-		//     var window = remote.getCurrentWindow();
-		//     if (confirm('Are you sure want to exit')) {
-		//         window.close();
-		//     }
-		// })        
-
 		//Quick Replies payload button Click
 		$(document).on('click', '.QuickreplybtnPayload', function (e) {
 			var payloadInput = $(this).data().quickrepliespayload;
@@ -105,12 +78,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
 		$(document).on('click', '.cardresponsepayload', function (e) {
 			var payloadInput = $(this).data().cardpayloadbutton;
-<<<<<<< HEAD
-			debugger;
-			console.log('Button Payload'+ payloadInput);
-=======
-			console.log('Button Payload' + payloadInput);
->>>>>>> 06132619b8c9a1c4c585f2b5c82506b17e7b7674
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
 					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
