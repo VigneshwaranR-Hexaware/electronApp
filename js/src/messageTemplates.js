@@ -40,7 +40,7 @@ define([], function(){
             <div class="media-body">
                 <h3 class="list-group-item-heading">${data.senderName}</h3>
                 <span class="list-group-item-text">${data.payload}</span>	
-                <p class="mute"><small>sent at ${data.time}</small></p>
+                <p class="mute"><small>received at ${data.time}</small></p>
             </div>
         </li>`;
     
@@ -91,6 +91,39 @@ define([], function(){
         }
         return html;
     }
+    // List template
+    methods.list = (data) => {
+    
+        let html='';
+
+        let listBody='';
+        for (let i in data.payload) {
+
+           listBody+=`<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
+
+           for(let j=0;j<data.payload[i].payload.facebook.attachment.payload.elements.length;j++){
+     
+         listBody+=`<li class="list-group-item">
+    
+        <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons')?data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload:''}" style="display:block;">
+        <div class="media-body">
+        <div class="col-xs-9">
+            <h3 class="list-group-item-heading">${data.payload[i].payload.facebook.attachment.payload.elements[j].title}</h3>
+            <span class="list-group-item-text">${data.payload[i].payload.facebook.attachment.payload.elements[j].subtitle}</span>	
+            </div>
+            <div class="col-xs-3">
+            <img src="${data.payload[i].payload.facebook.attachment.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
+            </div>
+         </div>
+         </a>
+         
+    </li>`;
+         }
+         html+=`<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
+        }
+        return listBody+html;
+    }
+    // end of list
     
     //Quick Replies Template
     methods.quickreplies =(data)=>{
