@@ -5,9 +5,11 @@ Copyright (c) 2017-2017 Hexaware Technologies
 This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
-define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
+define(['jquery', 'settings', 'apiService', 'utils', 'jq16', 'facemicon'], function ($, config, apiService, utils, jq, facemicon) {
 
 	$(function () {
+
+		/* Web Popup Adjustment */
 		function adjustPopups() {
 			let msgboxh = $("div.header-popup").next().height();
 			let chath = $("div.header-popup").next().next().height();
@@ -16,8 +18,9 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			let finalcalc = bodyh - (chath + typetext);
 			let finalcss = 'calc(100%-' + finalcalc + 'px)';
 			$("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
-
 		}
+
+		/*Query of when Web Popup=1 opens popup  window, hiding web headers*/
 		let popup = window.location.search.substring(1).split("=");
 		if (popup[1] == 1) {
 			$("div.header-popup").addClass("hidden").slideUp("slow");
@@ -26,12 +29,14 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 		else {
 			$("div.header-popup").removeClass("hidden")
 		}
-		function sendMessage(refr, ev) {
 
-			var text = refr.val();
+
+		function sendMessage(refr, ev, textsm) {
+
+			var text = refr.val() || textsm;
 			if (text !== "") {
 				refr.val('');
-
+				refr.text('');
 				//Calling ApiaiService call
 				processor.askBot(text, function (error, html) {
 					if (error) {
@@ -71,7 +76,8 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			sendMessage($("#btn-input"), e);
 		});
 		//Chatbox Send message
-		$("#btn-input").keypress(function (e) {
+		$("textarea#btn-input").keypress(function (e) {
+			console.log('srinivasan');
 			if (e.which == 13) {
 				sendMessage($(this), e);
 			}
@@ -152,5 +158,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			});
 			e.preventDefault();
 		});
+
+
 	});
 });
