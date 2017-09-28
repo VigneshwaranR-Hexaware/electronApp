@@ -34,13 +34,21 @@ define(['messageTemplates', 'uuid'], function(messageTpl, uuidv1){
             if(this.responseType == "quickreplies"){
                 return messageTpl.quickreplies(this.data);
             }
-
-            if(this.responseType == "quickreplyfromapiai"){
-                return messageTpl.quickrepliesfromapiai(this.data);
+            if(this.responseType == "video"){
+                console.log(this.data);
+                return messageTpl.video(this.data);
             }
-
-            if(this.responseType == "image"){
-                return messageTpl.image(this.data);
+            if(this.responseType == "audio"){
+                console.log(this.data);
+                return messageTpl.audio(this.data);
+            }
+            if(this.responseType == "file"){
+                console.log(this.data);
+                return messageTpl.file(this.data);
+            }
+            if(this.responseType == "receipt"){
+                console.log(this.data);
+                return messageTpl.receipt(this.data);
             }
         }
     }
