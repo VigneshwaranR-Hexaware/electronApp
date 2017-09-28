@@ -9,30 +9,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
 	$(function () {
 
-		function sendMessage(refr, ev) {
-
-			var text = refr.val();
-			if (text !== "") {
-				refr.val('');
-
-				//Calling ApiaiService call
-				processor.askBot(text, function (error, html) {
-					if (error) {
-						alert(error); //change into some inline fancy display, show error in chat window.
-					}
-					if (html) {
-						if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
-							msg_container.siblings("h1").addClass('hidden');
-							msg_container.removeClass('hidden');
-						}
-						msg_container.append(html);
-						utils.scrollSmoothToBottom($('div.chat-body'));
-						
-					}
-				});
-				ev.preventDefault();
-			}
-		}
 		var chatKeyPressCount = 0;
 
 		if (config.accessToken && config.chatServerURL) {
@@ -50,15 +26,73 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			msg_container.siblings("h1").addClass('hidden');
 			msg_container.removeClass('hidden');
 		}
-		$("a#btn-send-message").click(function (e) {
-			sendMessage($("#btn-input"), e);
-		});
+
 		//Chatbox Send message
 		$("#btn-input").keypress(function (e) {
 			if (e.which == 13) {
-				sendMessage($(this), e);
+				var text = $(this).val();
+				if (text !== "") {
+					$(this).val('');
+					//Calling ApiaiService call
+					processor.askBot(text, function (error, html) {
+						if (error) {
+							alert(error); //change into some inline fancy display, show error in chat window.
+						}
+						if (html) {
+							if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
+
+								msg_container.siblings("h1").addClass('hidden');
+								msg_container.removeClass('hidden');
+							}
+							//Binding response HTML to chat window
+							msg_container.append(html);
+							//utils.scrollSmoothToBottom($('div.chat-body'));
+							// console.log(html);
+							if (chatKeyPressCount != 0) {
+								var wtf = $('div.chat-body');
+								var height = wtf[0].scrollHeight;
+								wtf.scrollTop(height);
+							} else {
+								var height = 0;
+								height = parseInt($('div.chat-body').height());
+								$('div.chat-body').animate({
+									scrollTop: height
+								});
+							}
+							chatKeyPressCount = chatKeyPressCount + 1;
+						}
+					});
+					e.preventDefault();
+				}
 			}
 		});
+
+		// $(document).on('click', '.btnPayload', function (e) {
+		//     var payloadInput = $(this).data().quickrepliespayload;
+		//     processor.askBot(payloadInput, function (error, html) {
+		//         if (error) {
+		//             Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+		//         }
+		//         if (html) {
+		//             msg_container.append(html);
+
+		//         }
+		//     });
+		//     e.preventDefault();
+		// });
+
+		// const remote = require('electron').remote;
+		// $(document).on('click', '#btnMinimize', function (e) {
+		//     var window = remote.getCurrentWindow();
+		//     window.minimize();
+		// })
+
+		// $(document).on('click', '#btnClose', function (e) {
+		//     var window = remote.getCurrentWindow();
+		//     if (confirm('Are you sure want to exit')) {
+		//         window.close();
+		//     }
+		// })        
 
 		//Quick Replies payload button Click
 		$(document).on('click', '.QuickreplybtnPayload', function (e) {
@@ -69,7 +103,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 				if (html) {
 					msg_container.append(html);
-					utils.scrollSmoothToBottom($('div.chat-body'));
 
 				}
 			});
@@ -78,14 +111,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
 		$(document).on('click', '.cardresponsepayload', function (e) {
 			var payloadInput = $(this).data().cardpayloadbutton;
+			console.log('Button Payload' + payloadInput);
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
 					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
 				}
 				if (html) {
-
 					msg_container.append(html);
-					utils.scrollSmoothToBottom($('div.chat-body'));
 
 				}
 			});
@@ -101,16 +133,17 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 				if (html) {
 					msg_container.append(html);
-					utils.scrollSmoothToBottom($('div.chat-body'));
 
 				}
 			});
 			e.preventDefault();
+		});
 
-        });
-        
-        $(document).on('click', '.apiQuickreplybtnPayload', function (e) {
-			var payloadInput = $(this).data().apiquickrepliespayload;
+		// airling boarding pass
+		$(document).on('click', '.airlineBoardingViewButton', function (e) {
+			//var payloadInput = $(this).data().airlineBoardingButton;
+			var payloadInput = "AirlineBoarding_BarCode";
+			console.log('Button Payload' + payloadInput);
 			processor.askBot(payloadInput, function (error, html) {
 				if (error) {
 					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
@@ -121,13 +154,25 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 			});
 			e.preventDefault();
-		});   
+		});
+		// Airline Checkin
+		$(document).on('click', '.airlineCheckinButton', function (e) {
+			//var payloadInput = $(this).data().airlineBoardingButton;
+			var payloadInput = "Checkin";
+			console.log('Button Payload' + payloadInput);
+			processor.askBot(payloadInput, function (error, html) {
+				if (error) {
+					console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+				}
+				if (html) {
+					msg_container.append(html);
+
+				}
+			});
+			e.preventDefault();
+		});
+		// ----------------------------
+
+
 	});
-
-});   
-
-		
-		
-		
-
-    
+});
