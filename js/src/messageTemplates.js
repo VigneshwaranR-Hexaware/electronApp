@@ -296,8 +296,27 @@ define([], function () {
            <div class="col-xs-9">
           <span class="list-group-item-text">${"$"+data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
             <button type="button"  data-positionY="bottom" class="btn btn-info btn-sm btn-space pull-right" data-toggle="modal" data-target="#Chechkout">${data.payload[i].buttons[j].title}</button> 
+           
           </div>
+
+             <div class="modal fade" id="Chechkout" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Checkout</h4>
+        </div>
+       
+      
+      </div>
+      
+    </div>
+
+  </div>
                 </li>`; 
+                
                  
                      
                      break;
