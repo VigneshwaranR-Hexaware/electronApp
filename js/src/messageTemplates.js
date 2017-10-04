@@ -40,7 +40,7 @@ define([], function () {
             <div class="media-body">
                 <h3 class="list-group-item-heading">${data.senderName}</h3>
                 <span class="list-group-item-text">${data.payload}</span>	
-                <p class="mute"><small>received at ${data.time}</small></p>
+                <p class="mute"><small>sent at ${data.time}</small></p>
             </div>
         </li>`;
 
