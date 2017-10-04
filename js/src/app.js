@@ -75,6 +75,82 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 		$("a#btn-send-message").click(function (e) {
 			sendMessage($("#btn-input"), e);
 		});
+
+		/**
+		 * Mic icon functionality. This will record the speech and transfer the same to text
+		 */
+		$(".speech-text-response").click(function(e){
+			console.log("Click event");
+			switchRecognition();
+		});
+
+		var recognition;
+		function startRecognition() {
+			recognition = new webkitSpeechRecognition();
+	
+			recognition.onstart = function(event) {
+				console.log("Strating...");
+			  updateRec();
+			  //$("#btn-input").focus();
+			};
+			recognition.onresult = function(event) {
+				console.log("Printing result...");
+			  recognition.onend = null;
+	  
+			  var text = "";
+				for (var i = event.resultIndex; i < event.results.length; ++i) {
+				  text += event.results[i][0].transcript;
+				}
+				setInput(text);
+			  stopRecognition();
+			};
+
+			recognition.onerror = function(event) {
+				console.log("Error occured");
+				console.log(event);
+			}
+
+			recognition.onend = function() {
+				console.log("Stopping...");
+			  stopRecognition();
+			};
+			recognition.lang = "en-US";
+			recognition.start();
+		  }
+	  
+		  function stopRecognition() {
+			if (recognition) {
+			  recognition.stop();
+			  recognition = null;
+			}
+			updateRec();
+		  }
+	  
+		  function switchRecognition() {
+			  console.log("recognition is "+recognition);
+			if (recognition) {
+				console.log("Success");
+			  stopRecognition();
+			} else {
+				console.log("Else part");
+			  startRecognition();
+			}
+		  }
+	  
+		  function setInput(text) {
+			console.log("Rec is "+recognition);
+			$("#btn-input").val('I am fine');
+			//send();
+		  }
+	  
+		  function updateRec() {
+			//$recBtn.text(recognition ? "Stop" : "Speak");
+			console.log("Click");
+		  }
+
+		//End of speech to text related functions
+
+
 		//Chatbox Send message
 		$("textarea#btn-input").keypress(function (e) {
 			console.log('srinivasan');
