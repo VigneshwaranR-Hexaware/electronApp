@@ -152,7 +152,14 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					}
 					//Image Response
 					if(isImage){
-						let cardHTML = cards(response.result.fulfillment.messages, "image");
+						let cardHTML = cards({
+ -								"payload": response.result.fulfillment.messages,
+ -									"senderName": config.botTitle,
+ -									"senderAvatar": config.botAvatar,
+ -									"time": utils.currentTime(),
+ -									"imgUrl": imageUrl
+ -									
+ -							}, "image");
 						callback(null, cardHTML);
 					}
 					//CustomPayload Quickreplies
