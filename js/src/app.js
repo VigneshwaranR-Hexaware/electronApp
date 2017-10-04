@@ -9,12 +9,34 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
 	$(function () {
 
-		function sendMessage(refr, ev) {
+		/* Web Popup Adjustment */
+		function adjustPopups() {
+			let msgboxh = $("div.header-popup").next().height();
+			let chath = $("div.header-popup").next().next().height();
+			let typetext = $("div.header-popup").next().next().next().height();
+			let bodyh = $("body").height();
+			let finalcalc = bodyh - (chath + typetext);
+			let finalcss = 'calc(100%-' + finalcalc + 'px)';
+			$("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
+		}
 
-			var text = refr.val();
+		/*Query of when Web Popup=1 opens popup  window, hiding web headers*/
+		let popup = window.location.search.substring(1).split("=");
+		if (popup[1] == 1) {
+			$("div.header-popup").addClass("hidden").slideUp("slow");
+			adjustPopups();
+		}
+		else {
+			$("div.header-popup").removeClass("hidden")
+		}
+
+
+		function sendMessage(refr, ev, textsm) {
+
+			var text = refr.val() || textsm;
 			if (text !== "") {
 				refr.val('');
-
+				refr.text('');
 				//Calling ApiaiService call
 				processor.askBot(text, function (error, html) {
 					if (error) {
@@ -27,7 +49,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 						}
 						msg_container.append(html);
 						utils.scrollSmoothToBottom($('div.chat-body'));
-						
+
 					}
 				});
 				ev.preventDefault();
@@ -54,7 +76,8 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 			sendMessage($("#btn-input"), e);
 		});
 		//Chatbox Send message
-		$("#btn-input").keypress(function (e) {
+		$("textarea#btn-input").keypress(function (e) {
+			console.log('srinivasan');
 			if (e.which == 13) {
 				sendMessage($(this), e);
 			}
@@ -120,9 +143,8 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 			});
 			e.preventDefault();
+		});
 
-        });
-        
         $(document).on('click', '.apiQuickreplybtnPayload', function (e) {
 			var payloadInput = $(this).data().apiquickrepliespayload;
 			processor.askBot(payloadInput, function (error, html) {
@@ -135,10 +157,12 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 				}
 			});
 			e.preventDefault();
-		});   
-	});
+		}); 
 
-});   
+        });
+          
+	});
+  
 
 		
 		
