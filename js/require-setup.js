@@ -32,8 +32,8 @@ requirejs.config({
         utils: 'src/utils',
         apiService: 'src/apiService',
         messageTemplates: 'src/messageTemplates',
-        cards: 'src/cards',
-        jq16: 'lib/jquery1.6.min',
-        facemicon:'lib/faceMocion'
+        cards: 'src/cards'
+        // jq16: 'lib/jquery1.6.min',
+        // facemicon:'lib/faceMocion'
     }
 });
