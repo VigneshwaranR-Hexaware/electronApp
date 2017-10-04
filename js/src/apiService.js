@@ -51,6 +51,10 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					let imageUrl;
 					//To find Card || Carousel
 					let count = 0;
+					let genericTemplate=false;
+					let genericElement =null;
+					let genericBuy=false;
+					let genericCheckout=null;
 					let hasbutton;
 					console.log(response);
 					if(response.result.fulfillment.messages){
@@ -78,9 +82,23 @@ function($, config, utils, messageTpl, cards, uuidv1){
 							imageUrl=response.result.fulfillment.messages[i].imageUrl;
 						}
 						if(response.result.fulfillment.messages[i].type == 4){
+														
+							if(response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message !=undefined && response.result.metadata.intentName !='Buy' ){
+							if(response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type=='generic'){
+						     genericTemplate=true;
+							  genericElement=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.elements;
+							}
+						    }
+						    else if(response.result.metadata.intentName=='Buy'){ 
+							genericCheckout=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.elements
+							genericBuy=true;
+							}
+							
+							else if(response.result.fulfillment.messages[i].payload.facebook.quick_replies!= undefined){
 							console.log(response.result.fulfillment.messages[i])
 							isQuickReply = (response.result.fulfillment.messages[i].payload.facebook.quick_replies.length > 0) ? true : false ;
 							console.log(isQuickReply);
+						}
 						}
 					}
 				}
@@ -159,6 +177,29 @@ function($, config, utils, messageTpl, cards, uuidv1){
 							}, "quickreplyfromapiai");
 						callback(null, cardHTML);
 						
+					}
+					// generic template
+					if(genericTemplate){
+						let cardHTML = cards({
+							"payload": genericElement,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+						}, "generic");
+						callback(null, cardHTML);
+					} 
+					// Buy
+					if(genericBuy){
+						let cardHTML = cards({
+						"payload": genericCheckout,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+						}, "buybutton");
+						callback(null, cardHTML);
+					
 					}
 				},
 				error: function() {

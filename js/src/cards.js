@@ -42,6 +42,13 @@ define(['messageTemplates', 'uuid'], function(messageTpl, uuidv1){
             if(this.responseType == "image"){
                 return messageTpl.image(this.data);
             }
+             if(this.responseType == "generic"){
+                //console.log(JSON.stringify(this.data));
+                return messageTpl.generic(this.data);
+            }
+            if(this.responseType == "buybutton"){
+                return messageTpl.buybutton(this.data);
+            }
         }
     }
 

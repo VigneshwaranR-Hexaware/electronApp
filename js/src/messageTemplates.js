@@ -191,7 +191,131 @@ define([], function () {
             </li>`;
             return imagehtml;
         }
+        // generic reply
+     methods.generic = (data) => {
+        let generichtml;
+        let genericcardButtons= "";
+        let genericcardBody;
+        
+         genericcardBody = `<li class="list-group-item ">
+         
+         <table class="table table-bordered rounded col-md-8 col-md-pull-3 ">
+         <div class="row">
+         <div class="col-lg-1 col-centered">
+            <div class="pmd-card pmd-card-default pmd-z-depth">
+                <!-- Card header -->
+                <div 
+                <div class="pmd-card-title">
+                    <div class="media-left">
+                        <a class="avatar-list-img" href="javascript:void(0);">
+                            <img src="${data.senderAvatar}" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="media-body media-middle">
+                        <h3 class="pmd-card-title-text">${data.senderName}</h3>
+                    </div>
+                </div>`
+             for(let i in data.payload){        
+                if(data.payload[i].image_url != "" && data.payload[i].image_url != undefined){ 
+                    genericcardBody +=` <div class="pmd-card-media float-center">
+                    <img src="${data.payload[i].image_url}" width="180" height=120" class="img-responsive center-block">
+                    </div>`
+                }
+                
+                genericcardBody += `<div class="pmd-card-title">
+                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
+                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+                </div>`
+                if(data.payload[i].buttons){
+                    
+                    genericcardButtons=`<div class="pmd-card-actions centered col-sm-offset-5 col-sm-2 text-center">`
+                        for(var j=0 ; j < data.payload[i].buttons.length; j++){
+                        if(data.payload[i].buttons[j].url!=null && data.payload[i].buttons[j].url != undefined){
+                            console.log(data.payload[i].buttons[j]);
+                          genericcardButtons +=` <button type="button " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].url}" >${data.payload[i].buttons[j].title}</button> <br>`
+                          } 
+                       
+                     else  if(data.payload[i].buttons[j].type!=null && data.payload[i].buttons[j].type !=undefined && data.payload[i].buttons[j].type !='element_share'&& data.payload[i].buttons[j].type !='payment'){
+                         console.log(data.payload[i].buttons[j].type);
+                        genericcardButtons +=` <button type="button " class="btn btn-sm btn-primary genericTemplate" data= "${data.payload[i].buttons[j].type}" >${data.payload[i].buttons[j].title}</button>`
+                        }
+                     
+                       else if(data.payload[i].buttons[j].type=="element_share"){
+                       for(var x in data.payload[i].buttons[j].share_contents.attachment.payload.elements){
+                           console.log("Hello");
+                           let shareElement=data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0];
+                           console.log(data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0]);
+                         genericcardButtons +=` <button type="button  " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].url}" >${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].title}</button> <br>`
+                          }
 
+                    }
+                        
+            }
+                    genericcardButtons+=`</div>`
+                }
+             generichtml=genericcardBody+genericcardButtons+`</div>
+             </div>
+             </div>
+             </<table class="table table-bordered">
+             </li>`;
+        }
+        
+        return generichtml;
+    }
+
+
+    // buy botton view ui 
+    methods.buybutton = (data) => {
+        let buyhtml;
+        let buyBody;
+        
+              
+         buyBody = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
+                   <div class="container rounded">
+                   <div class="row">
+                   </div>`
+             for(let i in data.payload){        
+                if(data.payload[i].image_url != "" && data.payload[i].image_url != undefined){ 
+                    buyBody +=` <div class="pmd-card-media center-block">
+                    <img src="${data.payload[i].image_url}" width="150" height=90" class="img-responsive center-block">
+                    </div>`
+                }
+                
+                buyBody += `<div class="pmd-card-title ">
+                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
+                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+                </div>`
+               
+                if(data.payload[i].buttons){
+                    for(var j=0 ; j < data.payload[i].buttons.length; j++){
+                    console.log(data.payload[i].buttons[j].payment_summary.price_list);
+                    for(var x in data.payload[i].buttons[j].payment_summary.price_list){
+                    
+                                         
+                 buyBody+=`<li class="list-group-item"> 
+           <div class="col-xs-9">
+          <span class="list-group-item-text">${"$"+data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
+            <button type="button"  data-positionY="bottom" class="btn btn-info btn-sm btn-space pull-right" data-toggle="modal" data-target="#Chechkout">${data.payload[i].buttons[j].title}</button> 
+          </div>
+                </li>`; 
+                 
+                     
+                     break;
+
+                        }
+                         
+            }
+                     }
+                    `</div>`
+                
+             buyhtml=buyBody+`</div>
+             </div>
+             
+             </div>`;
+        }
+        
+         return buyhtml;
+    }
 
     return methods;
 });
