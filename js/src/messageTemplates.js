@@ -225,6 +225,83 @@ define([], function () {
             return imagehtml;
         }
 
+        //video template
+    methods.video =(data, uniqueId)=>{
+        let videohtml = `<li class="list-group-item">
+        <div class="media-body">
+
+            <video width="300" height="200" controls> 
+            <source src="${data.payload}" type=video/mp4>
+            </video>
+         
+            <p class="mute"><small>sent at ${data.time}</small></p>
+        </div>
+    </li>`;
+
+    return videohtml;
+    }
+    //audio template
+    methods.audio =(data, uniqueId)=>{
+        let audiohtml = `<li class="list-group-item">
+        <div class="media-body">
+            <audio width="300" height="200" controls> 
+            <source src="${data.payload}" type=audio/mp3>
+            </audio>
+            <p class="mute"><small>sent at ${data.time}</small></p>
+        </div>
+    </li>`;
+
+    return audiohtml;
+    }
+
+    //file template
+    methods.file =(data, uniqueId)=>{
+        let filehtml = `<li class="list-group-item">
+        
+    <div class="media-body">
+    <div class="pmd-chip pmd-chip-contact"> 
+    <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
+    </div>
+    </div>
+    </li>`;
+
+    return filehtml;
+    }
+    //receipt template
+
+    methods.receipt =(data, uniqueId)=>{
+        let receipthtml = '';
+        let receiptBody='';
+        receiptBody +=`<li class="list-group-item"><p><div class="media-left col-md-8 col-md-pull-2">Order Confirmation</div></p>`   
+          //listBody+=`<ul class="list-group pmd-z-depth pmd-list receiptbody">`;
+          for(let j=0;j<data.payload.elements.length;j++){
+            receiptBody+=`<li class="list-group-item">
+                           <div class="media-body">
+                               <div class="col-xs-3">
+                                   <img src="${data.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
+                               </div>
+                               <div class="col-xs-9">
+                                   <h3 class="list-group-item-heading">${data.payload.elements[j].title}</h3>
+                                   <span class="list-group-item-text">${data.payload.elements[j].subtitle}</span>
+                                   <span class="list-group-item-text">Qnty ${data.payload.elements[j].quantity}</span>	
+                               </div>
+                           </div>
+                        </li>`;
+        }
+        receiptBody +=` <span class="list-group-item-text col-md-8 col-md-pull-3">Paid with</span>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.payment_method}</h3>`
+        receiptBody +=`<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
+        receipthtml+=`<li class="list-group-item"> 
+                           <div class="col-xs-9">
+                                   <span class="list-group-item-text">Total</span>
+                                   <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
+                           </div>
+                       </li>`;
+        receipthtml+=`<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></li>`;
+       return receiptBody+receipthtml;
+       }
 
     return methods;
 });

@@ -17,7 +17,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 				lang: "en"
 			};
 		}
-        
+
 		userSays(userInput, callback){
 
 			callback(null, messageTpl.userplaintext({
@@ -33,7 +33,7 @@ function($, config, utils, messageTpl, cards, uuidv1){
 			this.userSays(userInput, callback);
 
 			this.options.query = userInput;
-            let refr=this;
+
 			$.ajax({
 				type: "POST",
 				url: config.chatServerURL + "query?v=20150910",
@@ -48,6 +48,14 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					let isImage = false;
 					let isQuickReply = false;
 					let isQuickReplyFromApiai = false;
+					let isVideo=false;
+					let videoUrl=null;
+					let isAudio=false;
+					let audioUrl=null;
+					let isFile=false;
+					let fileUrl=null;
+					let isReceipt=false;
+					let receiptData=null;
 					let isList = false;
 					let imageUrl;
 					//To find Card || Carousel
@@ -76,8 +84,23 @@ function($, config, utils, messageTpl, cards, uuidv1){
 						}
 						if(response.result.fulfillment.messages[i].type == 3){
 							isImage = true;
-							imageUrl=response.result.fulfillment.messages[i].imageUrl;
 						}
+						if(response.result.fulfillment.messages[i].type == 4){
+							console.log(response.result.fulfillment.messages[i]);
+							//isQuickReply = (response.result.fulfillment.messages[i].payload.facebook.quick_replies.length > 0) ? true : false ;
+							//console.log(isQuickReply);
+							isVideo= (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type=="video" )? true : false ;
+							videoUrl=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+							//console.log(videoUrl);
+							isAudio= (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type=="audio" )? true : false ;
+							audioUrl=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+							//console.log(audioUrl);
+							isFile= (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type=="file" )? true : false ;
+							fileUrl=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+							//console.log(fileUrl);
+							isReceipt= (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type=="receipt" )? true : false ;
+							receiptData=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload;
+							console.log(isReceipt);
 						if(response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.quick_replies){
 							console.log(response.result.fulfillment.messages[i])
 							isQuickReply = (response.result.fulfillment.messages[i].payload.facebook.quick_replies.length > 0) ? true : false ;
@@ -87,7 +110,9 @@ function($, config, utils, messageTpl, cards, uuidv1){
 									isList = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.elements.length > 0) ? true : false;
 						}
 					}
-				}
+                    }
+                }
+				
 				else{
 					 let cardHTML = cards({
 							"payload": response.result.fulfillment.speech,
@@ -97,7 +122,6 @@ function($, config, utils, messageTpl, cards, uuidv1){
 							"className": ''
 						}, "plaintext");
 						callback(null, cardHTML);
-						
 					}
 					//Carousel
 					if(isCardorCarousel){
@@ -124,22 +148,19 @@ function($, config, utils, messageTpl, cards, uuidv1){
 								
 							}, "carousel");
 							callback(null, carouselHTML);
-						
 						}
-					
 					}
 					//Image Response
 					if(isImage){
-							let cardHTML = cards({
-								"payload": response.result.fulfillment.messages,
-									"senderName": config.botTitle,
-									"senderAvatar": config.botAvatar,
-									"time": utils.currentTime(),
-									"imgUrl": imageUrl
-									
-							}, "image");
+						let cardHTML = cards({
+ -								"payload": response.result.fulfillment.messages,
+ -									"senderName": config.botTitle,
+ -									"senderAvatar": config.botAvatar,
+ -									"time": utils.currentTime(),
+ -									"imgUrl": imageUrl
+ -									
+ -							}, "image");
 						callback(null, cardHTML);
-					
 					}
 					//CustomPayload Quickreplies
 					if(isQuickReply){
@@ -151,7 +172,6 @@ function($, config, utils, messageTpl, cards, uuidv1){
 								"className": ''
 						}, "quickreplies");
 						callback(null, cardHTML);
-						
 					}
 					//CustomPayload List
 						if (isList) {
@@ -167,15 +187,51 @@ function($, config, utils, messageTpl, cards, uuidv1){
 
 					//Apiai Quickreply
 					if(isQuickReplyFromApiai){
+						let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");
+						callback(null, cardHTML);
+					}
+					if(isVideo){
 						let cardHTML = cards({
-                            "payload": response.result.fulfillment.messages,
+							"payload": videoUrl,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+						}, "video");
+						callback(null, cardHTML);
+					}
+					if(isAudio){
+						let cardHTML = cards({
+							"payload": audioUrl,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+						}, "audio");
+						callback(null, cardHTML);
+					}
+					if(isFile){
+						let cardHTML = cards({
+							"payload": fileUrl,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+						}, "file");
+						callback(null, cardHTML);
+					}
+					if (isReceipt) {
+						let cardHTML = cards({
+							"payload": receiptData,
 							"senderName": config.botTitle,
 							"senderAvatar": config.botAvatar,
-							"time": utils.currentTime()							
-							}, "quickreplyfromapiai");
+							"time": utils.currentTime(),
+							"className": ''
+						}, "receipt");
 						callback(null, cardHTML);
-						
 					}
+
+					
 				},
 				error: function() {
 					callback("Internal Server Error", null);
