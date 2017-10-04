@@ -18,15 +18,15 @@
   <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 
-<body>
-  <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
-  <script>
-    requirejs(['lib/jquery.min'], function ($) {
-      requirejs(['lib/bootstrap.min', 'lib/propeller'], function () {
-        console.log("Loaded :)");
-      });
-    });
-  </script>
+
+    <body>
+        <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
+        <script>
+		requirejs(['lib/jquery.min'], function($) {
+			requirejs(['lib/bootstrap.min', 'lib/propeller'], function() {
+			});
+		});
+        </script>
 
   <div class="container-fluid main-container">
 

@@ -150,5 +150,48 @@ define([], function () {
         return carousel;
     }
 
+    methods.quickrepliesfromapiai =(data)=>{
+        console.log(data);
+        var apiquickRepliesHtml =`<li class="list-group-item">`
+        // <div class="media-left">
+        //     <a href="javascript:void(0);" class="avatar-list-img">
+        //     <img class="img-responsive" src="${data.senderAvatar}">
+        //     </a>
+        // </div>
+        // <div class="media-body">
+        // <h3 class="list-group-item-heading">${data.senderName}</h3>`;
+        
+        for(let i in data.payload){
+            if(data.payload[i].platform =="facebook" && data.payload[i].type == "2"){
+                apiquickRepliesHtml +=`<p>${data.payload[i].title}</p>`
+                apiquickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info .pmd-btn-fab apiQuickreplybtnPayload" data-apiquickRepliesPayload="${data.payload[5].replies[0]}">${data.payload[5].replies[0]}</button>`
+            }
+        }
+        apiquickRepliesHtml +=`<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
+        return apiquickRepliesHtml;
+    }
+
+    methods.image = (data) => {
+        console.log(data.imageUrl)
+            let imagehtml = `<li class="list-group-item">
+                <div class="media-left pull-right">
+                    <a href="javascript:void(0);" class="avatar-list-img">
+                    <img class="img-responsive" src="${data.senderAvatar}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h3 class="list-group-item-heading">${data.senderName}</h3>
+                    <div class="pmd-card pmd-card-default pmd-z-depth">
+                    <div class="pmd-card-media">
+                        <img width="1184" height="666" class="img-responsive" src="${data.imgUrl}">
+                    </div>
+                    </div>
+                    <p class="mute"><small>sent at ${data.time}</small></p>
+                </div>
+            </li>`;
+            return imagehtml;
+        }
+
+
     return methods;
 });

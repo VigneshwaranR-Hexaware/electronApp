@@ -8,12 +8,12 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define({
 
-    accessToken: "e58329c450cb4896a4ca17454ac06737",
+    accessToken: "6c7e02249ef94cc68b647881b36f0739",
     chatServerURL : "https://api.api.ai/v1/",
 
-    applicationTitle: "VFS Global",
+    applicationTitle: "RICOH Assistant",
     userTitle : "Me",
-    botTitle : "VFS Assistant",
+    botTitle : "RICOH Assistant",
     botAvatar : "avatar/vfslogo.png",
     userAvatar : "avatar/user.png",
     attachmentUploadURL : "",
