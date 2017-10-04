@@ -56,6 +56,8 @@ function($, config, utils, messageTpl, cards, uuidv1){
 					let fileUrl=null;
 					let isReceipt=false;
 					let receiptData=null;
+					let isList = false;
+					let imageUrl;
 					//To find Card || Carousel
 					let count = 0;
 					let hasbutton;
@@ -99,9 +101,18 @@ function($, config, utils, messageTpl, cards, uuidv1){
 							isReceipt= (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type=="receipt" )? true : false ;
 							receiptData=response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload;
 							console.log(isReceipt);
+						if(response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.quick_replies){
+							console.log(response.result.fulfillment.messages[i])
+							isQuickReply = (response.result.fulfillment.messages[i].payload.facebook.quick_replies.length > 0) ? true : false ;
+							console.log(isQuickReply);
+						}
+						if (response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.attachment.hasOwnProperty('payload')) {
+									isList = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.elements.length > 0) ? true : false;
 						}
 					}
-				}
+                    }
+                }
+				
 				else{
 					 let cardHTML = cards({
 							"payload": response.result.fulfillment.speech,
@@ -155,6 +166,18 @@ function($, config, utils, messageTpl, cards, uuidv1){
 						}, "quickreplies");
 						callback(null, cardHTML);
 					}
+					//CustomPayload List
+						if (isList) {
+							let cardHTML = cards({
+								"payload": response.result.fulfillment.messages,
+								"senderName": config.botTitle,
+								"senderAvatar": config.botAvatar,
+								"time": utils.currentTime(),
+								"className": ''
+							}, "list");
+							callback(null, cardHTML);
+						}
+
 					//Apiai Quickreply
 					if(isQuickReplyFromApiai){
 						let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");

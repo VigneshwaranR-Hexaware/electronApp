@@ -50,6 +50,9 @@ define(['messageTemplates', 'uuid'], function(messageTpl, uuidv1){
                 console.log(this.data);
                 return messageTpl.receipt(this.data);
             }
+            if(this.responseType == "list"){
+                return messageTpl.list(this.data);
+            }
         }
     }
 

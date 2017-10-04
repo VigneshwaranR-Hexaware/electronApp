@@ -21,9 +21,7 @@ function createWindow() {
   const trayControl = new appTray(iconPath)
 
   win = new BrowserWindow({
-    // width: 400,
-    // height: 650,
-    width: 1024,
+    width: 400,
     height: 650,
     frame: false,
     webPreferences: {
@@ -44,7 +42,7 @@ function createWindow() {
     slashes: true
   }));
 
-  //Closing Chat Window
+  //Closing Chat Window and Minimize Window
   win.webContents.on('did-finish-load', () => {
     let code = `const remote = require('electron').remote;var btnClose = document.getElementById("btnClose");
     var btnMinimize = document.getElementById("btnMinimize");
