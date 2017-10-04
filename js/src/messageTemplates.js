@@ -6,7 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 
-define([], function () {
+define(["utils"], function (utils) {
 
     var methods = {};
 
@@ -183,47 +183,483 @@ define([], function () {
         return carousel;
     }
 
-    methods.quickrepliesfromapiai =(data)=>{
-        console.log(data);
-        var apiquickRepliesHtml =`<li class="list-group-item">`
-        // <div class="media-left">
-        //     <a href="javascript:void(0);" class="avatar-list-img">
-        //     <img class="img-responsive" src="${data.senderAvatar}">
-        //     </a>
-        // </div>
-        // <div class="media-body">
-        // <h3 class="list-group-item-heading">${data.senderName}</h3>`;
-        
-        for(let i in data.payload){
-            if(data.payload[i].platform =="facebook" && data.payload[i].type == "2"){
-                apiquickRepliesHtml +=`<p>${data.payload[i].title}</p>`
-                apiquickRepliesHtml +=`<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info .pmd-btn-fab apiQuickreplybtnPayload" data-apiquickRepliesPayload="${data.payload[5].replies[0]}">${data.payload[5].replies[0]}</button>`
+    // airline Boarding pass
+    methods.airlineBoarding = (data) => {
+        let html;
+        let cardButtons = "";
+        for (let i in data.payload) {
+            if (data.payload[i].hasOwnProperty("platform")) {
+                for (let j in data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass) {
+                    let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass[j];
+                    let termialLabel = params.auxiliary_fields[0].label;
+                    let termialValue = params.auxiliary_fields[0].value;
+                    let gateLabel = params.secondary_fields[1].label;
+                    let gateValue = params.secondary_fields[1].value;
+                    let passengersName = params.passenger_name;
+                    let passengersSeatLabel = params.secondary_fields[2].label;
+                    let passengersSeatValue = params.secondary_fields[2].value;
+                    let flightNumber = params.flight_info.flight_number;
+                    let boardingValue = params.secondary_fields[0].value;
+                    let departsValue = params.flight_info.flight_schedule.departure_time;
+                    let departCity = params.flight_info.departure_airport.city;
+                    let departCode = params.flight_info.departure_airport.airport_code;
+                    let arrivalCity = params.flight_info.arrival_airport.city;
+                    let arrivalCode = params.flight_info.arrival_airport.airport_code;
+
+                    let arrName = passengersName.replace('/', ' ');
+                    console.log("oassu" + departsValue);
+                    console.log("oassu" + boardingValue);
+                    let departTime = utils.airlineTime(departsValue);
+                    let boardingTime = utils.airlineTimeboarding(boardingValue);
+                    console.log(boardingTime);
+                    console.log(departTime);
+
+
+
+
+                    // 2015-12-26T11:30
+                    html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
+    <!-- Card header -->
+    <div class="container">
+        <div class="row airlinePadding">
+            <div class="col-xs-6">
+                <a href="javascript:void(0);" class="avatar-list-img">
+            <img width="40" height="40" src="https://previews.123rf.com/images/sn333g/sn333g1504/sn333g150400033/39063712-Avi-n-icono-de-vuelo-o-avi-n-logo-despegue-vector-s-mbolo-azul-Foto-de-archivo.jpg">
+        </a>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${termialLabel}</h3>
+                <span class="pmd-card-subtitle-text">${termialValue}</span>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${gateLabel}</h3>
+                <span class="pmd-card-subtitle-text">${gateValue}</span>
+            </div>
+        </div>
+        <hr style="margin:0px">
+        <div class="row airlinePadding">
+            <div class="col-xs-9">
+                <h3 class="pmd-card-title-text">Passenger</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${passengersSeatLabel}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9">
+                <span class="pmd-card-subtitle-text">${arrName}</span>
+            </div>
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${passengersSeatValue}</span>
+            </div>
+        </div>
+        <hr style="margin:0px">
+        <div class="row airlinePadding ">
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Flight</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Boards</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Departs</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${flightNumber}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${boardingTime}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${departTime}</span>
+            </div>
+        </div>
+          <div class="row airlinePadding">
+            <div class="col-xs-9">
+                <h3 class="pmd-card-title-text">${arrivalCity}</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${departCity}</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-5">
+                <h2 class="pmd-display2" style="margin:0">${arrivalCode}</h2>
+            </div>
+            <div class="col-xs-4">
+                <i class="material-icons pmd-lg">flight</i>
+            </div>
+            <div class="col-xs-3">
+                <h2 class="pmd-display2" style="margin:0">${departCode}</h2>
+            </div>
+        </div>
+    </div>
+<div class="pmd-card-actions col-xs-12" style="text-align:center">
+            <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary airlineBoardingViewButton" type="button">View Boarding Pass</button>
+        </div>
+</div>`;
+                }
             }
         }
-        apiquickRepliesHtml +=`<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
-        return apiquickRepliesHtml;
+        return html;
     }
 
-    methods.image = (data) => {
-        console.log(data.imageUrl)
-            let imagehtml = `<li class="list-group-item">
-                <div class="media-left pull-right">
-                    <a href="javascript:void(0);" class="avatar-list-img">
-                    <img class="img-responsive" src="${data.senderAvatar}">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h3 class="list-group-item-heading">${data.senderName}</h3>
-                    <div class="pmd-card pmd-card-default pmd-z-depth">
-                    <div class="pmd-card-media">
-                        <img width="1184" height="666" class="img-responsive" src="${data.imgUrl}">
-                    </div>
-                    </div>
-                    <p class="mute"><small>sent at ${data.time}</small></p>
-                </div>
-            </li>`;
-            return imagehtml;
+    // airline Boarding pass view with bar code
+    methods.ViewBoardingPassBarCode = (data) => {
+        let html;
+        let cardButtons = "";
+        for (let i in data.payload) {
+            if (data.payload[i].hasOwnProperty("platform")) {
+                for (let j in data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass) {
+                    let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass[j];
+                    let termialLabel = params.auxiliary_fields[0].label;
+                    let termialValue = params.auxiliary_fields[0].value;
+                    let gateLabel = params.secondary_fields[1].label;
+                    let gateValue = params.secondary_fields[1].value;
+                    let passengersName = params.passenger_name;
+                    let logoUrl = params.logo_image_url;
+                    let barcodeUrl = params.above_bar_code_image_url;
+                    let passengersSeatLabel = params.secondary_fields[2].label;
+                    let passengersSeatValue = params.secondary_fields[2].value;
+                    let flightNumber = params.flight_info.flight_number;
+                    let boardingValue = params.secondary_fields[0].value;
+                    let departsValue = params.flight_info.flight_schedule.departure_time;
+                    let departCity = params.flight_info.departure_airport.city;
+                    let departCode = params.flight_info.departure_airport.airport_code;
+                    let arrivalCity = params.flight_info.arrival_airport.city;
+                    let arrivalCode = params.flight_info.arrival_airport.airport_code;
+                    let secValue = params.secondary_fields[3].value;
+                    console.log(secValue);
+                    let departTime = utils.airlineTime(departsValue);
+                    let boardingTime = utils.airlineTimeboarding(boardingValue);
+                     let arrName = passengersName.replace('/', ' ');
+
+                    html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
+    <!-- Card header -->
+    <div class="container">
+        <div class="row airlinePadding">
+            <div class="col-xs-9">
+                <a href="javascript:void(0);" class="avatar-list-img">
+            <img width="40" height="40" src="${logoUrl}">
+        </a>
+            </div>
+            <div class="col-xs-3 label-info ">
+               <span>Priority Boarding</span>
+            </div>
+        </div>
+        <div class="row airlinePadding">
+            <div class="col-xs-9">
+                <h3 class="pmd-card-title-text">Passenger</h3>
+            </div>
+             <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Departure</h3>
+                
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col-xs-9">
+                <span class="pmd-card-subtitle-text">${arrName}</span>
+            </div>
+             <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${departTime}</span>
+            </div>
+            
+        </div>
+        <hr style="margin:0px">
+        <div class="row airlinePadding">
+            <div class="col-xs-9">
+                <h3 class="pmd-card-title-text">${arrivalCity}</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${departCity}</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-5">
+                <h2 class="pmd-display2" style="margin:0">${arrivalCode}</h2>
+            </div>
+            <div class="col-xs-4">
+                <i class="material-icons pmd-lg">flight</i>
+            </div>
+            <div class="col-xs-3">
+                <h2 class="pmd-display2" style="margin:0">${departCode}</h2>
+            </div>
+        </div>
+        <div class="row airlinePadding ">
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Flight</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${termialLabel}</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Boarding</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">${gateLabel}</h3>
+            </div>
+
+
+
+        </div>
+        <div class="row  ">
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${flightNumber}</span>
+            </div>
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${termialValue}</span>
+
+            </div>
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${boardingTime}</span>
+            </div>
+            
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${gateValue}</span>
+
+            </div>
+
+        </div>
+        <div class="row airlinePadding ">
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Zone</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Gate Closing</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Seat</h3>
+            </div>
+            <div class="col-xs-3">
+                <h3 class="pmd-card-title-text">Sec</h3>
+            </div>
+
+
+
+        </div>
+        <div class="row  ">
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">2</span>
+            </div>
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${boardingTime}</span>
+            </div>
+          <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${passengersSeatValue}</span>
+            </div>
+            <div class="col-xs-3">
+                <span class="pmd-card-subtitle-text">${secValue}</span>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="pmd-card-actions col-xs-offset-4">
+                <button class="btn  btn-sm pmd-btn-flat button-info " type="button">Gold Status</button>
+            </div>
+            <div class="pmd-card-media col-xs-offset-4 pmd-card-media airlinePadding">
+                <img width="152" height="152"  src=${barcodeUrl}>
+            </div>
+        </div>
+
+
+    </div>
+    <hr style="margin:0px">
+    <div class="pmd-card-actions col-xs-12 " style="text-align:center">
+        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary type=" button ">Share</button>
+        <hr style="margin:0px ">
+            <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary type="button">Message Airline</button>
+        <hr style="margin:0px">
+        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary type=" button ">Add to Passbook</button>
+        </div>
+</div>`;
+                }
+            }
         }
+        return html;
+    }
+
+    // airline Checkin
+
+    methods.airlineCheckin = (data) => {
+        let html;
+        let cardButtons = "";
+        for (let i in data.payload) {
+            if (data.payload[i].hasOwnProperty("platform")) {
+                let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload;
+                let flightNumber = params.flight_info[0].flight_number;
+                let boardingValue = params.flight_info[0].flight_schedule.boarding_time;
+                let arrivalValue = params.flight_info[0].flight_schedule.arrival_time;
+                let departCity = params.flight_info[0].departure_airport.city;
+                let departCode = params.flight_info[0].departure_airport.airport_code;
+                let arrivalCity = params.flight_info[0].arrival_airport.city;
+                let arrivalCode = params.flight_info[0].arrival_airport.airport_code;
+                let pnrNumber = params.pnr_number;
+
+                let arrivalTime = utils.airlineTime(arrivalValue);
+                let boardingTime = utils.airlineTimeboarding(boardingValue);
+
+
+                html = `<div class="pmd-card  pmd-z-depth airlinePadding">
+    <!-- Card header -->
+    <div class="container panel-heading">
+        <div class="row pmd-card-inverseblue airlinePadding">
+            <div class="col-xs-7">
+                <a href="javascript:void(0);" class="avatar-list-img">
+            <img width="40" height="40" src="https://previews.123rf.com/images/sn333g/sn333g1504/sn333g150400033/39063712-Avi-n-icono-de-vuelo-o-avi-n-logo-despegue-vector-s-mbolo-azul-Foto-de-archivo.jpg">
+        </a>
+            </div>
+            
+            <div class="col-xs-5">
+                <h3 class="pmd-card-title-text">PNR Number</h3>
+                <span class="pmd-card-subtitle-text">${pnrNumber}</span>
+            </div>
+        </div>
+        <hr style="margin:0px">
+        <div class="row airlinePadding ">
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Flight</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Boards</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Arrives</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${flightNumber}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${boardingTime}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${arrivalTime}</span>
+            </div>
+        </div>
+          <div class="row airlinePadding">
+            <div class="col-xs-8">
+                <h3 class="pmd-card-title-text">${departCity}</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">${arrivalCity}</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-5">
+                <h2 class="pmd-display2" style="margin:0">${departCode}</h2>
+            </div>
+            <div class="col-xs-3">
+                <i class="material-icons pmd-lg">flight_takeoff</i>
+            </div>
+            <div class="col-xs-4">
+                <h2 class="pmd-display2" style="margin:0">${arrivalCode}</h2>
+            </div>
+        </div>
+    </div>
+<div class="pmd-card-actions col-xs-12" style="text-align:center">
+            <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Checkin</button>
+        </div>
+</div>`;
+            }
+        }
+        return html;
+
+    }
+    // -------------------------------------------------------------------------------
+    // Airline flight update
+    methods.airlineFlightUpdate = (data) => {
+        let html;
+        let cardButtons = "";
+        for (let i in data.payload) {
+            console.log('this is flight update first for loop');
+            if (data.payload[i].hasOwnProperty("platform")) {
+                let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload;
+                let flightStatus = params.update_type;
+                let flightNumber = params.update_flight_info.flight_number;
+                let departValue = params.update_flight_info.flight_schedule.departure_time;
+                let arrivalValue = params.update_flight_info.flight_schedule.arrival_time;
+                let departCity = params.update_flight_info.departure_airport.city;
+                let departCode = params.update_flight_info.departure_airport.airport_code;
+                let arrivalCity = params.update_flight_info.arrival_airport.city;
+                let arrivalCode = params.update_flight_info.arrival_airport.airport_code;
+
+                let arrivalTime = utils.airlineTime(arrivalValue);
+                let departTime = utils.airlineTime(departValue);
+                // let boardingTime = airlineTimeboarding(boardingValue);
+
+                console.log(data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.update_flight_info);
+                html = `<div class="pmd-card  pmd-z-depth airlinePadding">
+    <!-- Card header -->
+    <div class="container panel-heading">
+        <div class="row pmd-card-inverseblue airlinePadding">
+            <div class="col-xs-7">
+                <a href="javascript:void(0);" class="avatar-list-img">
+            <img width="40" height="40" src="https://previews.123rf.com/images/sn333g/sn333g1504/sn333g150400033/39063712-Avi-n-icono-de-vuelo-o-avi-n-logo-despegue-vector-s-mbolo-azul-Foto-de-archivo.jpg">
+        </a>
+            </div>
+            
+            <div class="col-xs-5">
+                <h3 class="pmd-card-title-text">Flight Status</h3>
+                <span class="pmd-card-subtitle-text text-color-red">${flightStatus}</span>
+            </div>
+        </div>
+        <hr style="margin:0px">
+        <div class="row airlinePadding ">
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Flight</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Departs</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">Arrives</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text">${flightNumber}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text text-color-red">${departTime}</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="pmd-card-subtitle-text text-color-red">${arrivalTime}</span>
+            </div>
+        </div>
+          <div class="row airlinePadding">
+            <div class="col-xs-8">
+                <h3 class="pmd-card-title-text">${departCity}</h3>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="pmd-card-title-text">${arrivalCity}</h3>
+            </div>
+        </div>
+        <div class="row  ">
+            <div class="col-xs-5">
+                <h2 class="pmd-display2" style="margin:0">${departCode}</h2>
+            </div>
+            <div class="col-xs-3">
+                <i class="material-icons pmd-lg">flight_takeoff</i>
+            </div>
+            <div class="col-xs-4">
+                <h2 class="pmd-display2" style="margin:0">${arrivalCode}</h2>
+            </div>
+        </div>
+    </div>
+</div>`;
+            }
+        }
+        return html;
+
+    }
+    // -------------------------------------------------------------------------------
+
 
         //video template
     methods.video =(data, uniqueId)=>{
