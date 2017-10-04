@@ -42,6 +42,9 @@ define(['messageTemplates', 'uuid'], function(messageTpl, uuidv1){
             if(this.responseType == "image"){
                 return messageTpl.image(this.data);
             }
+            if(this.responseType == "list"){
+                return messageTpl.list(this.data);
+            }
         }
     }
 
