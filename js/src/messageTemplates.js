@@ -6,38 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 
-define([], function () {
-
-
-    function airlineTime(x) {
-
-        console.log(x);
-        var timechange = new Date(x);
-        console.log(timechange);
-        var hours = (timechange.getHours() < 10) ? '0' + timechange.getHours() : timechange.getHours();
-        var minutes = (timechange.getMinutes() < 10) ? '0' + timechange.getMinutes() : timechange.getMinutes();
-        console.log(minutes);
-        var ampm = hours >= 12 ? 'pm' : 'am';
-        var hoursnew = +hours % 12 || 12;
-        return `${hoursnew}:${minutes} ${ampm}`;
-    }
-
-    function airlineTimeboarding(x) {
-
-        console.log(x);
-        var timechange = new Date(x);
-        //console.log(timechange);
-        var hours = (timechange.getHours() < 10) ? '0' + timechange.getHours() : timechange.getHours();
-        var min = x.split(':');
-
-        //var minutes = (timechange.getMinutes() < 10) ? '0' + timechange.getMinutes() : timechange.getMinutes();
-        console.log(min[0]);
-        var ampm = min[0] >= 12 ? 'pm' : 'am';
-        var hoursnew = +hours % 12 || 12;
-        return `${hoursnew}:${min[1]} ${ampm}`;
-    }
-
-
+define(["utils"], function (utils) {
 
     var methods = {};
 
@@ -119,7 +88,40 @@ define([], function () {
         }
         return html;
     }
+    // List template
+    methods.list = (data) => {
+    
+        let html='';
 
+        let listBody='';
+        for (let i in data.payload) {
+
+           listBody+=`<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
+
+           for(let j=0;j<data.payload[i].payload.facebook.attachment.payload.elements.length;j++){
+     
+         listBody+=`<li class="list-group-item">
+    
+        <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons')?data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload:''}" style="display:block;">
+        <div class="media-body">
+        <div class="col-xs-9">
+            <h3 class="list-group-item-heading">${data.payload[i].payload.facebook.attachment.payload.elements[j].title}</h3>
+            <span class="list-group-item-text">${data.payload[i].payload.facebook.attachment.payload.elements[j].subtitle}</span>	
+            </div>
+            <div class="col-xs-3">
+            <img src="${data.payload[i].payload.facebook.attachment.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
+            </div>
+         </div>
+         </a>
+         
+    </li>`;
+         }
+         html+=`<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
+        }
+        return listBody+html;
+    }
+    // end of list
+    
     //Quick Replies Template
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item">
@@ -136,7 +138,7 @@ define([], function () {
                 quickRepliesHtml += `<p>${data.payload[i].payload.facebook.text}</p>`
                 for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
                     quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
-                }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+                        }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                 }
             }
         }
@@ -153,7 +155,7 @@ define([], function () {
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
-                carousel += `<div class="item ${(index == 0) ? 'active': '' }">    
+                carousel += `<div class="item ${(index == 0) ? 'active' : ''}">    
                     <div class="row">
                         <div class="col-md-3">
                             <a href="#" class="thumbnail">
@@ -207,8 +209,8 @@ define([], function () {
                     let arrName = passengersName.replace('/', ' ');
                     console.log("oassu" + departsValue);
                     console.log("oassu" + boardingValue);
-                    let departTime = airlineTime(departsValue);
-                    let boardingTime = airlineTimeboarding(boardingValue);
+                    let departTime = utils.airlineTime(departsValue);
+                    let boardingTime = utils.airlineTimeboarding(boardingValue);
                     console.log(boardingTime);
                     console.log(departTime);
 
@@ -330,8 +332,8 @@ define([], function () {
                     let arrivalCode = params.flight_info.arrival_airport.airport_code;
                     let secValue = params.secondary_fields[3].value;
                     console.log(secValue);
-                    let departTime = airlineTime(departsValue);
-                    let boardingTime = airlineTimeboarding(boardingValue);
+                    let departTime = utils.airlineTime(departsValue);
+                    let boardingTime = utils.airlineTimeboarding(boardingValue);
                      let arrName = passengersName.replace('/', ' ');
 
                     html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
@@ -498,8 +500,8 @@ define([], function () {
                 let arrivalCode = params.flight_info[0].arrival_airport.airport_code;
                 let pnrNumber = params.pnr_number;
 
-                let arrivalTime = airlineTime(arrivalValue);
-                let boardingTime = airlineTimeboarding(boardingValue);
+                let arrivalTime = utils.airlineTime(arrivalValue);
+                let boardingTime = utils.airlineTimeboarding(boardingValue);
 
 
                 html = `<div class="pmd-card  pmd-z-depth airlinePadding">
@@ -587,8 +589,8 @@ define([], function () {
                 let arrivalCity = params.update_flight_info.arrival_airport.city;
                 let arrivalCode = params.update_flight_info.arrival_airport.airport_code;
 
-                let arrivalTime = airlineTime(arrivalValue);
-                let departTime = airlineTime(departValue);
+                let arrivalTime = utils.airlineTime(arrivalValue);
+                let departTime = utils.airlineTime(departValue);
                 // let boardingTime = airlineTimeboarding(boardingValue);
 
                 console.log(data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.update_flight_info);
@@ -659,6 +661,83 @@ define([], function () {
     // -------------------------------------------------------------------------------
 
 
+        //video template
+    methods.video =(data, uniqueId)=>{
+        let videohtml = `<li class="list-group-item">
+        <div class="media-body">
+
+            <video width="300" height="200" controls> 
+            <source src="${data.payload}" type=video/mp4>
+            </video>
+         
+            <p class="mute"><small>sent at ${data.time}</small></p>
+        </div>
+    </li>`;
+
+    return videohtml;
+    }
+    //audio template
+    methods.audio =(data, uniqueId)=>{
+        let audiohtml = `<li class="list-group-item">
+        <div class="media-body">
+            <audio width="300" height="200" controls> 
+            <source src="${data.payload}" type=audio/mp3>
+            </audio>
+            <p class="mute"><small>sent at ${data.time}</small></p>
+        </div>
+    </li>`;
+
+    return audiohtml;
+    }
+
+    //file template
+    methods.file =(data, uniqueId)=>{
+        let filehtml = `<li class="list-group-item">
+        
+    <div class="media-body">
+    <div class="pmd-chip pmd-chip-contact"> 
+    <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
+    </div>
+    </div>
+    </li>`;
+
+    return filehtml;
+    }
+    //receipt template
+
+    methods.receipt =(data, uniqueId)=>{
+        let receipthtml = '';
+        let receiptBody='';
+        receiptBody +=`<li class="list-group-item"><p><div class="media-left col-md-8 col-md-pull-2">Order Confirmation</div></p>`   
+          //listBody+=`<ul class="list-group pmd-z-depth pmd-list receiptbody">`;
+          for(let j=0;j<data.payload.elements.length;j++){
+            receiptBody+=`<li class="list-group-item">
+                           <div class="media-body">
+                               <div class="col-xs-3">
+                                   <img src="${data.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
+                               </div>
+                               <div class="col-xs-9">
+                                   <h3 class="list-group-item-heading">${data.payload.elements[j].title}</h3>
+                                   <span class="list-group-item-text">${data.payload.elements[j].subtitle}</span>
+                                   <span class="list-group-item-text">Qnty ${data.payload.elements[j].quantity}</span>	
+                               </div>
+                           </div>
+                        </li>`;
+        }
+        receiptBody +=` <span class="list-group-item-text col-md-8 col-md-pull-3">Paid with</span>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.payment_method}</h3>`
+        receiptBody +=`<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
+        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
+        receipthtml+=`<li class="list-group-item"> 
+                           <div class="col-xs-9">
+                                   <span class="list-group-item-text">Total</span>
+                                   <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
+                           </div>
+                       </li>`;
+        receipthtml+=`<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></li>`;
+       return receiptBody+receipthtml;
+       }
 
     return methods;
 });
