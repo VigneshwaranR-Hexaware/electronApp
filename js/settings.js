@@ -8,7 +8,7 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define({
 
-    accessToken: "d719bc689c834aa1b0efaa10be734f51",
+    accessToken: "6c7e02249ef94cc68b647881b36f0739",
     chatServerURL : "https://api.api.ai/v1/",
 
     applicationTitle: "RICOH Assistant",
