@@ -876,10 +876,10 @@ define(["utils"], function (utils) {
                                    <span class="list-group-item-text">Total</span>
                                    <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
                            </div>
-                       </li>`;
-        receipthtml += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></li>`;
-        return receiptBody + receipthtml;
-    }
+                       `;
+        receipthtml+=`<p class="mute pull-left" style="margin: .1px 13px;"><small>sent at ${data.time}</small></p></li>`;
+       return receiptBody+receipthtml;
+       }
 
     return methods;
 });
