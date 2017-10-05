@@ -29,8 +29,23 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         else {
             $("div.header-popup").removeClass("hidden")
         }
-
-
+//Check if text contains emoji
+ function checkEmoji(emo) {
+            let emojientity = ['😄', '😉', '😋', '😍', '😢', '😠'];
+            var strip_text = '';
+            for (var emoj in emojientity) {
+                console.log(emo+"=>"+emojientity[emoj]);
+                if (emo.indexOf(emojientity[emoj]) !== -1 && emoj == 0) {
+                    strip_text = emo.replace(emojientity[emoj], '');
+                    console.log(strip_text);
+                }
+                else if (strip_text.indexOf(emojientity[emoj]) !== -1) {
+                    strip_text = strip_text.replace(emojientity[emoj], '');
+                    console.log(strip_text);
+                }
+            }
+            return strip_text;
+        }
         function sendMessage(refr, ev, textsm) {
 
             var text = refr.val() || textsm;
@@ -38,7 +53,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 refr.val('');
                 refr.text('');
                 //Calling ApiaiService call
-                processor.askBot(text, function (error, html) {
+                processor.askBot(checkEmoji(text) ? checkEmoji(text) : text,text, function (error, html) {
                     if (error) {
                         alert(error); //change into some inline fancy display, show error in chat window.
                     }
