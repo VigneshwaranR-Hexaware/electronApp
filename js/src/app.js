@@ -29,19 +29,19 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         else {
             $("div.header-popup").removeClass("hidden")
         }
-//Check if text contains emoji
- function checkEmoji(emo) {
+        //Check if text contains emoji
+        function checkEmoji(emo) {
             let emojientity = ['😄', '😉', '😋', '😍', '😢', '😠'];
             var strip_text = '';
             for (var emoj in emojientity) {
-               
+
                 if (emo.indexOf(emojientity[emoj]) !== -1 && emoj == 0) {
                     strip_text = emo.replace(emojientity[emoj], '');
-                 
+
                 }
                 else if (strip_text.indexOf(emojientity[emoj]) !== -1) {
                     strip_text = strip_text.replace(emojientity[emoj], '');
-                
+
                 }
             }
             return strip_text;
@@ -53,7 +53,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 refr.val('');
                 refr.text('');
                 //Calling ApiaiService call
-                processor.askBot(checkEmoji(text) ? checkEmoji(text) : text,text, function (error, html) {
+                processor.askBot(checkEmoji(text) ? checkEmoji(text) : text, text, function (error, html) {
                     if (error) {
                         alert(error); //change into some inline fancy display, show error in chat window.
                     }
@@ -91,11 +91,11 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             sendMessage($("#btn-input"), e);
         });
         //Chatbox Send message
-       $("textarea#btn-input").keypress(function (e) {
-			if (e.which == 13) {
-				sendMessage($(this), e);
-			}
-		});
+        $("textarea#btn-input").keypress(function (e) {
+            if (e.which == 13) {
+                sendMessage($(this), e);
+            }
+        });
 
         // $(document).on('click', '.btnPayload', function (e) {
         //     var payloadInput = $(this).data().quickrepliespayload;
@@ -187,6 +187,43 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.airlineBoardingViewButton', function (e) {
             //var payloadInput = $(this).data().airlineBoardingButton;
             var payloadInput = "AirlineBoarding_BarCode";
+            processor.askBot(payloadInput, function (error, html) {
+                if (error) {
+                    console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                }
+                if (html) {
+                    msg_container.append(html);
+
+                }
+            });
+            e.preventDefault();
+        });
+
+        // generic Template
+        $(document).on('click', '.genericTemplateClick', function (e) {
+            var payloadInput = $(this).attr("data");
+            console.log('Button Payload' + payloadInput);
+            window.open(payloadInput, "__blank", 'width=1024,height=700,resizable=no');
+
+            e.preventDefault();
+        });
+        $(document).on('click', '.genericTemplate', function (e) {
+            var payloadInput = $(this).attr("data");;
+            console.log('Button Payload' + payloadInput);
+            processor.askBot(payloadInput, function (error, html) {
+                if (error) {
+                    console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
+                }
+                if (html) {
+                    msg_container.append(html);
+
+                }
+            });
+            e.preventDefault();
+        });
+        $(document).on('click', '.buyClick', function (e) {
+            var payloadInput = $(this).attr("data");;
+            console.log('Button Payload' + payloadInput);
             processor.askBot(payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.

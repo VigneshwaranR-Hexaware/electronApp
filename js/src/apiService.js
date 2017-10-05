@@ -28,7 +28,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                     "className": 'pull-right'
                 }));
             }
-              askBot(userInput,userText, callback) {
+            askBot(userInput, userText, callback) {
                 this.userSays(userText, callback);
 
                 this.options.query = userInput;
@@ -63,7 +63,11 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                         let isViewBoardingPassBarCode = false;
                         let isAirlineCheckin = false;
                         let isAirlingFlightUpdate = false;
-
+                        //Generic Template 
+                        let genericTemplate = false;
+                        let genericElement = null;
+                        let genericBuy = false;
+                        let genericCheckout = null;
                         //To find Card || Carousel
                         let count = 0;
                         let hasbutton;
@@ -137,6 +141,17 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                         // isAirlingFlightUpdate = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.update_flight_info;
                                         isAirlingFlightUpdate = true;
                                         console.log(isAirlingFlightUpdate);
+                                    }
+                                    //Generic template
+                                    if (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message != undefined && response.result.metadata.intentName != 'Buy') {
+                                        if (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type == 'generic') {
+                                            genericTemplate = true;
+                                            genericElement = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.elements;
+                                        }
+                                    }
+                                    else if (response.result.metadata.intentName == 'Buy') {
+                                        genericCheckout = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.elements
+                                        genericBuy = true;
                                     }
 
                                 }
@@ -295,6 +310,31 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                             }, "airlineFlightUpdate");
                             callback(null, CheckinHTML);
                         }
+
+                        // generic template
+                        if (genericTemplate) {
+                            let cardHTML = cards({
+                                "payload": genericElement,
+                                "senderName": config.botTitle,
+                                "senderAvatar": config.botAvatar,
+                                "time": utils.currentTime(),
+                                "className": ''
+                            }, "generic");
+                            callback(null, cardHTML);
+                        }
+                        // Buy
+                        if (genericBuy) {
+                            let cardHTML = cards({
+                                "payload": genericCheckout,
+                                "senderName": config.botTitle,
+                                "senderAvatar": config.botAvatar,
+                                "time": utils.currentTime(),
+                                "className": ''
+                            }, "buybutton");
+                            callback(null, cardHTML);
+
+                        }
+
                     },
                     error: function () {
                         callback("Internal Server Error", null);

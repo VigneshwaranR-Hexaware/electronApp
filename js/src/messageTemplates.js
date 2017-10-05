@@ -90,19 +90,19 @@ define(["utils"], function (utils) {
     }
     // List template
     methods.list = (data) => {
-    
-        let html='';
 
-        let listBody='';
+        let html = '';
+
+        let listBody = '';
         for (let i in data.payload) {
 
-           listBody+=`<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
+            listBody += `<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
 
-           for(let j=0;j<data.payload[i].payload.facebook.attachment.payload.elements.length;j++){
-     
-         listBody+=`<li class="list-group-item">
+            for (let j = 0; j < data.payload[i].payload.facebook.attachment.payload.elements.length; j++) {
+
+                listBody += `<li class="list-group-item">
     
-        <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons')?data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload:''}" style="display:block;">
+        <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons') ? data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload : ''}" style="display:block;">
         <div class="media-body">
         <div class="col-xs-9">
             <h3 class="list-group-item-heading">${data.payload[i].payload.facebook.attachment.payload.elements[j].title}</h3>
@@ -115,13 +115,13 @@ define(["utils"], function (utils) {
          </a>
          
     </li>`;
-         }
-         html+=`<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
+            }
+            html += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
         }
-        return listBody+html;
+        return listBody + html;
     }
     // end of list
-    
+
     //Quick Replies Template
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item">
@@ -334,7 +334,7 @@ define(["utils"], function (utils) {
                     console.log(secValue);
                     let departTime = utils.airlineTime(departsValue);
                     let boardingTime = utils.airlineTimeboarding(boardingValue);
-                     let arrName = passengersName.replace('/', ' ');
+                    let arrName = passengersName.replace('/', ' ');
 
                     html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
     <!-- Card header -->
@@ -659,10 +659,152 @@ define(["utils"], function (utils) {
 
     }
     // -------------------------------------------------------------------------------
+    methods.generic = (data) => {
+        let generichtml;
+        let genericcardButtons = "";
+        let genericcardBody;
+
+        genericcardBody = `<li class="list-group-item ">
+         
+         <table class="table table-bordered rounded col-md-8 col-md-pull-3 ">
+         <div class="row">
+         <div class="col-lg-1 col-centered">
+            <div class="pmd-card pmd-card-default pmd-z-depth">
+                <!-- Card header -->
+                <div 
+                <div class="pmd-card-title">
+                    <div class="media-left">
+                        <a class="avatar-list-img" href="javascript:void(0);">
+                            <img src="${data.senderAvatar}" class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="media-body media-middle">
+                        <h3 class="pmd-card-title-text">${data.senderName}</h3>
+                    </div>
+                </div>`
+        for (let i in data.payload) {
+            if (data.payload[i].image_url != "" && data.payload[i].image_url != undefined) {
+                genericcardBody += ` <div class="pmd-card-media float-center">
+                    <img src="${data.payload[i].image_url}" width="180" height=120" class="img-responsive center-block">
+                    </div>`
+            }
+
+            genericcardBody += `<div class="pmd-card-title">
+                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
+                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+                </div>`
+            if (data.payload[i].buttons) {
+
+                genericcardButtons = `<div class="pmd-card-actions centered col-sm-offset-5 col-sm-2 text-center">`
+                for (var j = 0; j < data.payload[i].buttons.length; j++) {
+                    if (data.payload[i].buttons[j].url != null && data.payload[i].buttons[j].url != undefined) {
+                        console.log(data.payload[i].buttons[j]);
+                        genericcardButtons += ` <button type="button " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].url}" >${data.payload[i].buttons[j].title}</button> <br>`
+                    }
+
+                    else if (data.payload[i].buttons[j].type != null && data.payload[i].buttons[j].type != undefined && data.payload[i].buttons[j].type != 'element_share' && data.payload[i].buttons[j].type != 'payment') {
+                        console.log(data.payload[i].buttons[j].type);
+                        genericcardButtons += ` <button type="button " class="btn btn-sm btn-primary genericTemplate" data= "${data.payload[i].buttons[j].type}" >${data.payload[i].buttons[j].title}</button>`
+                    }
+
+                    else if (data.payload[i].buttons[j].type == "element_share") {
+                        for (var x in data.payload[i].buttons[j].share_contents.attachment.payload.elements) {
+                            console.log("Hello");
+                            let shareElement = data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0];
+                            console.log(data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0]);
+                            genericcardButtons += ` <button type="button  " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].url}" >${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].title}</button> <br>`
+                        }
+
+                    }
+
+                }
+                genericcardButtons += `</div>`
+            }
+            generichtml = genericcardBody + genericcardButtons + `</div>
+             </div>
+             </div>
+             </<table class="table table-bordered">
+             </li>`;
+        }
+
+        return generichtml;
+    }
 
 
-        //video template
-    methods.video =(data, uniqueId)=>{
+    // buy botton view ui 
+    methods.buybutton = (data) => {
+        let buyhtml;
+        let buyBody;
+
+
+        buyBody = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
+                   <div class="container rounded">
+                   <div class="row">
+                   </div>`
+        for (let i in data.payload) {
+            if (data.payload[i].image_url != "" && data.payload[i].image_url != undefined) {
+                buyBody += ` <div class="pmd-card-media center-block">
+                    <img src="${data.payload[i].image_url}" width="150" height=90" class="img-responsive center-block">
+                    </div>`
+            }
+
+            buyBody += `<div class="pmd-card-title ">
+                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
+                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+                </div>`
+
+            if (data.payload[i].buttons) {
+                for (var j = 0; j < data.payload[i].buttons.length; j++) {
+                    console.log(data.payload[i].buttons[j].payment_summary.price_list);
+                    for (var x in data.payload[i].buttons[j].payment_summary.price_list) {
+
+
+                        buyBody += `<li class="list-group-item"> 
+           <div class="col-xs-9">
+          <span class="list-group-item-text">${"$" + data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
+            <button type="button"  data-positionY="bottom" class="btn btn-info btn-sm btn-space pull-right" data-toggle="modal" data-target="#Chechkout">${data.payload[i].buttons[j].title}</button> 
+           
+          </div>
+
+             <div class="modal fade" id="Chechkout" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Checkout</h4>
+        </div>
+       
+      
+      </div>
+      
+    </div>
+
+  </div>
+                </li>`;
+
+
+
+                        break;
+
+                    }
+
+                }
+            }
+            `</div>`
+
+            buyhtml = buyBody + `</div>
+             </div>
+             
+             </div>`;
+        }
+
+        return buyhtml;
+    }
+
+    //video template
+    methods.video = (data, uniqueId) => {
         let videohtml = `<li class="list-group-item">
         <div class="media-body">
 
@@ -674,10 +816,10 @@ define(["utils"], function (utils) {
         </div>
     </li>`;
 
-    return videohtml;
+        return videohtml;
     }
     //audio template
-    methods.audio =(data, uniqueId)=>{
+    methods.audio = (data, uniqueId) => {
         let audiohtml = `<li class="list-group-item">
         <div class="media-body">
             <audio width="300" height="200" controls> 
@@ -687,11 +829,11 @@ define(["utils"], function (utils) {
         </div>
     </li>`;
 
-    return audiohtml;
+        return audiohtml;
     }
 
     //file template
-    methods.file =(data, uniqueId)=>{
+    methods.file = (data, uniqueId) => {
         let filehtml = `<li class="list-group-item">
         
     <div class="media-body">
@@ -701,17 +843,17 @@ define(["utils"], function (utils) {
     </div>
     </li>`;
 
-    return filehtml;
+        return filehtml;
     }
     //receipt template
 
-    methods.receipt =(data, uniqueId)=>{
+    methods.receipt = (data, uniqueId) => {
         let receipthtml = '';
-        let receiptBody='';
-        receiptBody +=`<li class="list-group-item"><p><div class="media-left col-md-8 col-md-pull-2">Order Confirmation</div></p>`   
-          //listBody+=`<ul class="list-group pmd-z-depth pmd-list receiptbody">`;
-          for(let j=0;j<data.payload.elements.length;j++){
-            receiptBody+=`<li class="list-group-item">
+        let receiptBody = '';
+        receiptBody += `<li class="list-group-item"><p><div class="media-left col-md-8 col-md-pull-2">Order Confirmation</div></p>`
+        //listBody+=`<ul class="list-group pmd-z-depth pmd-list receiptbody">`;
+        for (let j = 0; j < data.payload.elements.length; j++) {
+            receiptBody += `<li class="list-group-item">
                            <div class="media-body">
                                <div class="col-xs-3">
                                    <img src="${data.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
@@ -724,12 +866,12 @@ define(["utils"], function (utils) {
                            </div>
                         </li>`;
         }
-        receiptBody +=` <span class="list-group-item-text col-md-8 col-md-pull-3">Paid with</span>`
-        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.payment_method}</h3>`
-        receiptBody +=`<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
-        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
-        receiptBody +=`<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
-        receipthtml+=`<li class="list-group-item"> 
+        receiptBody += ` <span class="list-group-item-text col-md-8 col-md-pull-3">Paid with</span>`
+        receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.payment_method}</h3>`
+        receiptBody += `<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
+        receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
+        receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
+        receipthtml += `<li class="list-group-item"> 
                            <div class="col-xs-9">
                                    <span class="list-group-item-text">Total</span>
                                    <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
