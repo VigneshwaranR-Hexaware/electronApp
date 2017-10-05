@@ -28,8 +28,8 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                     "className": 'pull-right'
                 }));
             }
-            askBot(userInput, callback) {
-                this.userSays(userInput, callback);
+              askBot(userInput,userText, callback) {
+                this.userSays(userText, callback);
 
                 this.options.query = userInput;
 
