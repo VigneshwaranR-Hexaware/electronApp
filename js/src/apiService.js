@@ -93,21 +93,26 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                     isImage = true;
                                 }
                                 if (response.result.fulfillment.messages[i].type == 4) {
+                                    //video attachment
                                     isVideo = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type == "video") ? true : false;
                                     videoUrl = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+                                    //audio attachment
                                     isAudio = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type == "audio") ? true : false;
                                     audioUrl = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+                                   //file attachment
                                     isFile = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.type == "file") ? true : false;
                                     fileUrl = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.url;
+                                    //receipt template
                                     isReceipt = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type == "receipt") ? true : false;
                                     receiptData = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload;
                                     //Quick Replies
                                     if (response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.quick_replies) {
                                         isQuickReply = (response.result.fulfillment.messages[i].payload.facebook.quick_replies.length > 0) ? true : false;
                                     }
-                                    if (response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.attachment.hasOwnProperty('payload')) {
-                                        isList = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.elements.length > 0) ? true : false;
-                                    }
+                                    //list template
+                                     if (response.result.fulfillment.messages[i].type == 4 && response.result.fulfillment.messages[i].payload.facebook.attachment.hasOwnProperty('payload')) {
+                                         isList = (response.result.fulfillment.messages[i].payload.facebook.attachment.payload.elements.length > 0) ? true : false;
+                                     }
                                     //Airline Boarding Pass
                                     if ((response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type === 'airline_boardingpass' && response.result.metadata.intentName === 'AirlineIntent')) {
                                         //console.log(response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.template_type);
