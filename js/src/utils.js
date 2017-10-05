@@ -22,6 +22,22 @@ define([], function () {
 
         return `${hours}:${minutes} ${ampm}`;
     };
+methods.airlineTime = (x) => {
+        var timechange = new Date(x);
+        var hours = (timechange.getHours() < 10) ? '0' + timechange.getHours() : timechange.getHours();
+        var minutes = (timechange.getMinutes() < 10) ? '0' + timechange.getMinutes() : timechange.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        var hoursnew = +hours % 12 || 12;
+        return `${hoursnew}:${minutes} ${ampm}`;
+    };
+    methods.airlineTimeboarding = (x) => {
+        var timechange = new Date(x);
+        var hours = (timechange.getHours() < 10) ? '0' + timechange.getHours() : timechange.getHours();
+        var min = x.split(':');
+        var ampm = min[0] >= 12 ? 'pm' : 'am';
+        var hoursnew = +hours % 12 || 12;
+        return `${hoursnew}:${min[1]} ${ampm}`;
+    };
 
     methods.scrollSmoothToBottom = (element) => {
         setTimeout(() => {
