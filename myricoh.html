@@ -5,9 +5,44 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>My Ricoh Website</title>
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+
+	<!--Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Propeller css -->
+	<link href="style/propeller.min.css" rel="stylesheet">
+	<style type="text/css">
+		.popover {
+			max-width: 420px !important;
+		}
+	</style>
 </head>
 
 <body>
-    <a onclick="window.open('http://127.0.0.1:3000?popup=1','chat70994705','width=400,height=650,resizable=yes');return false;">Click to chat</a>
+
+	<a href="#" onclick="window.open('http://127.0.0.1:3000?popup=1','chat70994705','width=400,height=650,resizable=yes');return false;">Click to chat</a>
+	<footer>
+		<div class="menu pmd-floating-action" role="navigation">
+			<a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect  btn-primary" data-trigger="click" data-toggle="popover" data-placement="top"
+			 data-content="<iframe  src='http://localhost:3000/?popup=1' height='510' width='400' style='border:none'></iframe>" data-html="true"
+			 href="javascript:void(0);"> 
+            <span class="pmd-floating-hidden">Primary</span>
+            <i class="material-icons md-light pmd-sm">chat</i>
+        </a>
+		</div>
+
+	</footer>
+	<script data-main="js/require-setup" src="require.js"></script>
+	<script>
+		require(['lib/jquery.min'], function ($) {
+			require(['lib/bootstrap.min'], function () {
+				require(['lib/propeller'], function () {
+					console.log("Loaded :)");
+				});
+			});
+		});
+	</script>
 </body>
+
 </html>
