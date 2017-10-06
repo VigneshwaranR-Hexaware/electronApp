@@ -127,12 +127,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
             var payloadInput = $(this).data().quickrepliespayload;
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -142,12 +143,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.cardresponsepayload', function (e) {
             var payloadInput = $(this).data().cardpayloadbutton;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -156,12 +158,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //List Response Postback button
         $(document).on('click', '.listresponsepayload', function (e) {
             var payloadInput = $(this).attr('data');
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput,function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -171,12 +174,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.caroselresponsepayload', function (e) {
             var payloadInput = $(this).data().carouselpayloadbutton;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput,function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -187,12 +191,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.airlineBoardingViewButton', function (e) {
             //var payloadInput = $(this).data().airlineBoardingButton;
             var payloadInput = "AirlineBoarding_BarCode";
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -210,12 +215,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.genericTemplate', function (e) {
             var payloadInput = $(this).attr("data");;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -224,12 +230,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.buyClick', function (e) {
             var payloadInput = $(this).attr("data");;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -238,12 +245,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         // Quick Reply Postback button
         $(document).on('click', '.apiQuickreplybtnPayload', function (e) {
             var payloadInput = $(this).data().apiquickrepliespayload;
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput,function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });
@@ -254,12 +262,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             //var payloadInput = $(this).data().airlineBoardingButton;
             var payloadInput = "Checkin";
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, function (error, html) {
+            processor.askBot(payloadInput,payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
                 if (html) {
                     msg_container.append(html);
+                    utils.scrollSmoothToBottom($('div.chat-body'));
 
                 }
             });

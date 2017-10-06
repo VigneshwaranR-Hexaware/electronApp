@@ -95,12 +95,12 @@ define(["utils"], function (utils) {
 
         let listBody = '';
         for (let i in data.payload) {
+            if (data.payload[i].hasOwnProperty("platform") && data.payload[i].platform == "facebook" && data.payload[i].payload.facebook.hasOwnProperty("attachment") && data.payload[i].payload.facebook.attachment.payload.template_type == "list") {
+                listBody += `<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
 
-            listBody += `<ul class="list-group pmd-z-depth pmd-list pmd-card-list">`;
+                for (let j = 0; j < data.payload[i].payload.facebook.attachment.payload.elements.length; j++) {
 
-            for (let j = 0; j < data.payload[i].payload.facebook.attachment.payload.elements.length; j++) {
-
-                listBody += `<li class="list-group-item">
+                    listBody += `<li class="list-group-item">
     
         <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons') ? data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload : ''}" style="display:block;">
         <div class="media-body">
@@ -115,8 +115,9 @@ define(["utils"], function (utils) {
          </a>
          
     </li>`;
+                }
+                html += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
             }
-            html += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
         }
         return listBody + html;
     }
@@ -134,11 +135,15 @@ define(["utils"], function (utils) {
         <h3 class="list-group-item-heading">${data.senderName}</h3>`;
 
         for (let i in data.payload) {
+
+
             if (data.payload[i].platform == "facebook") {
-                quickRepliesHtml += `<p>${data.payload[i].payload.facebook.text}</p>`
-                for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
-                    quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
-                        }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+                if (data.payload[i].payload.facebook.hasOwnProperty('quick_replies')) {
+                    quickRepliesHtml += `<p>${data.payload[i].payload.facebook.text}</p>`;
+                    for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
+                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
+                            }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+                    }
                 }
             }
         }
@@ -188,9 +193,9 @@ define(["utils"], function (utils) {
         let html;
         let cardButtons = "";
         for (let i in data.payload) {
-            if (data.payload[i].hasOwnProperty("platform")) {
-                for (let j in data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass) {
-                    let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass[j];
+            if (data.payload[i].hasOwnProperty("platform") && data.payload[i].platform == "facebook" && data.payload[i].payload.facebook.hasOwnProperty("attachment") && data.payload[i].payload.facebook.attachment.payload.template_type == "airline_boardingpass") {
+                for (let j in data.payload[i].payload.facebook.attachment.payload.boarding_pass) {
+                    let params = data.payload[i].payload.facebook.attachment.payload.boarding_pass[j];
                     let termialLabel = params.auxiliary_fields[0].label;
                     let termialValue = params.auxiliary_fields[0].value;
                     let gateLabel = params.secondary_fields[1].label;
@@ -207,12 +212,9 @@ define(["utils"], function (utils) {
                     let arrivalCode = params.flight_info.arrival_airport.airport_code;
 
                     let arrName = passengersName.replace('/', ' ');
-                    console.log("oassu" + departsValue);
-                    console.log("oassu" + boardingValue);
                     let departTime = utils.airlineTime(departsValue);
                     let boardingTime = utils.airlineTimeboarding(boardingValue);
-                    console.log(boardingTime);
-                    console.log(departTime);
+
 
 
 
@@ -311,9 +313,9 @@ define(["utils"], function (utils) {
         let html;
         let cardButtons = "";
         for (let i in data.payload) {
-            if (data.payload[i].hasOwnProperty("platform")) {
-                for (let j in data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass) {
-                    let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.boarding_pass[j];
+            if (data.payload[i].hasOwnProperty("platform") && data.payload[i].platform == "facebook" && data.payload[i].payload.facebook.hasOwnProperty("attachment") && data.payload[i].payload.facebook.attachment.payload.template_type == "airline_boardingpass") {
+                for (let j in data.payload[i].payload.facebook.attachment.payload.boarding_pass) {
+                    let params = data.payload[i].payload.facebook.attachment.payload.boarding_pass[j];
                     let termialLabel = params.auxiliary_fields[0].label;
                     let termialValue = params.auxiliary_fields[0].value;
                     let gateLabel = params.secondary_fields[1].label;
@@ -345,8 +347,8 @@ define(["utils"], function (utils) {
             <img width="40" height="40" src="${logoUrl}">
         </a>
             </div>
-            <div class="col-xs-3 label-info ">
-               <span>Priority Boarding</span>
+            <div class="col-xs-3">
+               <span class="label label-info">Priority <br/> Boarding</span>
             </div>
         </div>
         <div class="row airlinePadding">
@@ -489,8 +491,8 @@ define(["utils"], function (utils) {
         let html;
         let cardButtons = "";
         for (let i in data.payload) {
-            if (data.payload[i].hasOwnProperty("platform")) {
-                let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload;
+            if (data.payload[i].hasOwnProperty("platform") && data.payload[i].platform == "facebook" && data.payload[i].payload.facebook.hasOwnProperty("attachment") && data.payload[i].payload.facebook.attachment.payload.template_type == "airline_checkin") {
+                let params = data.payload[i].payload.facebook.attachment.payload;
                 let flightNumber = params.flight_info[0].flight_number;
                 let boardingValue = params.flight_info[0].flight_schedule.boarding_time;
                 let arrivalValue = params.flight_info[0].flight_schedule.arrival_time;
@@ -577,9 +579,8 @@ define(["utils"], function (utils) {
         let html;
         let cardButtons = "";
         for (let i in data.payload) {
-            console.log('this is flight update first for loop');
-            if (data.payload[i].hasOwnProperty("platform")) {
-                let params = data.payload[i].payload.facebook.attachment.payload.message.attachment.payload;
+            if (data.payload[i].hasOwnProperty("platform") && data.payload[i].platform == "facebook" && data.payload[i].payload.facebook.hasOwnProperty("attachment") && data.payload[i].payload.facebook.attachment.payload.template_type == "airline_update") {
+                let params = data.payload[i].payload.facebook.attachment.payload;
                 let flightStatus = params.update_type;
                 let flightNumber = params.update_flight_info.flight_number;
                 let departValue = params.update_flight_info.flight_schedule.departure_time;
@@ -588,12 +589,8 @@ define(["utils"], function (utils) {
                 let departCode = params.update_flight_info.departure_airport.airport_code;
                 let arrivalCity = params.update_flight_info.arrival_airport.city;
                 let arrivalCode = params.update_flight_info.arrival_airport.airport_code;
-
                 let arrivalTime = utils.airlineTime(arrivalValue);
                 let departTime = utils.airlineTime(departValue);
-                // let boardingTime = airlineTimeboarding(boardingValue);
-
-                console.log(data.payload[i].payload.facebook.attachment.payload.message.attachment.payload.update_flight_info);
                 html = `<div class="pmd-card  pmd-z-depth airlinePadding">
     <!-- Card header -->
     <div class="container panel-heading">
@@ -689,9 +686,9 @@ define(["utils"], function (utils) {
                     </div>`
             }
 
-            genericcardBody += `<div class="pmd-card-title">
-                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
-                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+            genericcardBody += `<div class="pmd-card-title" style="padding:0px;">
+                    <h3 style="text-align:center;">${data.payload[i].title}</h3>
+                    <h6  style="text-align:center;">${data.payload[i].subtitle}</h6>	
                 </div>`
             if (data.payload[i].buttons) {
 
@@ -699,7 +696,7 @@ define(["utils"], function (utils) {
                 for (var j = 0; j < data.payload[i].buttons.length; j++) {
                     if (data.payload[i].buttons[j].url != null && data.payload[i].buttons[j].url != undefined) {
                         console.log(data.payload[i].buttons[j]);
-                        genericcardButtons += ` <button type="button " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].url}" >${data.payload[i].buttons[j].title}</button> <br>`
+                        genericcardButtons += ` <button type="button " style="margin-left:0px;" class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].url}" >&nbsp;&nbsp;&nbsp;${data.payload[i].buttons[j].title}&nbsp;&nbsp;&nbsp;</button> <br>`
                     }
 
                     else if (data.payload[i].buttons[j].type != null && data.payload[i].buttons[j].type != undefined && data.payload[i].buttons[j].type != 'element_share' && data.payload[i].buttons[j].type != 'payment') {
@@ -709,9 +706,7 @@ define(["utils"], function (utils) {
 
                     else if (data.payload[i].buttons[j].type == "element_share") {
                         for (var x in data.payload[i].buttons[j].share_contents.attachment.payload.elements) {
-                            console.log("Hello");
                             let shareElement = data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0];
-                            console.log(data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0]);
                             genericcardButtons += ` <button type="button  " class="btn btn-sm btn-primary genericTemplateClick" data= "${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].url}" >${data.payload[i].buttons[j].share_contents.attachment.payload.elements[x].buttons[0].title}</button> <br>`
                         }
 
@@ -737,7 +732,7 @@ define(["utils"], function (utils) {
         let buyBody;
 
 
-        buyBody = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
+        buyBody = `<div class="pmd-card  pmd-z-depth">
                    <div class="container rounded">
                    <div class="row">
                    </div>`
@@ -749,8 +744,8 @@ define(["utils"], function (utils) {
             }
 
             buyBody += `<div class="pmd-card-title ">
-                    <h8 class="list-group-item-heading text-center">${data.payload[i].title}</h8>
-                    <h12 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h12>	
+                    <h4 class="list-group-item-heading text-center">${data.payload[i].title}</h4>
+                    <h6 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h6>	
                 </div>`
 
             if (data.payload[i].buttons) {
@@ -759,12 +754,11 @@ define(["utils"], function (utils) {
                     for (var x in data.payload[i].buttons[j].payment_summary.price_list) {
 
 
-                        buyBody += `<li class="list-group-item"> 
-           <div class="col-xs-9">
-          <span class="list-group-item-text">${"$" + data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
-            <button type="button"  data-positionY="bottom" class="btn btn-info btn-sm btn-space pull-right" data-toggle="modal" data-target="#Chechkout">${data.payload[i].buttons[j].title}</button> 
-           
+                        buyBody += `<div class="row" style="padding:5px 0px"> 
+           <div class="col-xs-offset-2 col-xs-5">
+          <span>${"$" + data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
           </div>
+          <div class="col-xs-3"><button type="button"  data-positionY="bottom" class="btn btn-info btn-sm btn-space pull-right" data-toggle="modal" data-target="#Chechkout">${data.payload[i].buttons[j].title}</button> </div>
 
              <div class="modal fade" id="Chechkout" role="dialog">
     <div class="modal-dialog">
@@ -782,7 +776,7 @@ define(["utils"], function (utils) {
     </div>
 
   </div>
-                </li>`;
+                </div>`;
 
 
 
@@ -871,15 +865,15 @@ define(["utils"], function (utils) {
         receiptBody += `<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
         receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
         receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
-        receipthtml += `<li class="list-group-item"> 
-                           <div class="col-xs-9">
+        receipthtml += `<li class="list-group-item" style="padding:10px 0px"> 
+                           <div class="col-xs-12">
                                    <span class="list-group-item-text">Total</span>
                                    <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
                            </div>
                        `;
-        receipthtml+=`<p class="mute pull-left" style="margin: .1px 13px;"><small>sent at ${data.time}</small></p></li>`;
-       return receiptBody+receipthtml;
-       }
+        receipthtml += `<p style="padding-left:15px;"><small>sent at ${data.time}</small></p></li>`;
+        return receiptBody + receipthtml;
+    }
 
     return methods;
 });
