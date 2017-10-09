@@ -7,12 +7,9 @@ This file is part of the Innovation LAB - Offline Bot.
 
 
 define(["utils"], function (utils) {
-
     var methods = {};
-
     //User Plain Text
     methods.userplaintext = (data) => {
-
         let html = `<li class="list-group-item chat-user-dialog">
             <div class="media-left pull-right">
                 <a href="javascript:void(0);" class="avatar-list-img">
@@ -51,10 +48,8 @@ define(["utils"], function (utils) {
         let html;
         let cardButtons = "";
         let cardBody;
-        for (let i in data.payload) {
-            cardBody = `<li class="list-group-item">
-            <div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">
-                <!-- Card header -->
+        html =`<li class="list-group-item">
+        <!-- Card header -->
                 <div class="pmd-card-title">
                     <div class="media-left">
                         <a class="avatar-list-img" href="javascript:void(0);">
@@ -65,17 +60,19 @@ define(["utils"], function (utils) {
                         <h3 class="pmd-card-title-text">${data.senderName}</h3>
                     </div>
                 </div>`
+        for (let i in data.payload) {
+            cardBody = `<div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">`
+                
 
             if (data.payload[i].imageUrl != "" && data.payload[i].imageUrl != undefined) {
                 cardBody += ` <div class="pmd-card-media">
                     <img src="${data.payload[i].imageUrl}" width="1184" height="666" class="img-responsive">
                     </div>`
             }
-
-            cardBody += `<div class="pmd-card-title">
-                    <h2 class="pmd-card-title-text">${data.payload[i].title}</h2>
-                    <span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>
-                </div>`
+            cardBody += `<div class="pmd-card-title">`
+            cardBody += (data.payload[i].title !=undefined)? `<h2 class="pmd-card-title-text">${data.payload[i].title}</h2>`:'';
+            cardBody +=(data.payload[i].subtitle !=undefined)?`<span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>`:'';
+            cardBody +=`</div>`
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
@@ -84,7 +81,7 @@ define(["utils"], function (utils) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></li>`;
+            html += cardBody + cardButtons + `</div></li>`;
         }
         return html;
     }
@@ -152,22 +149,21 @@ define(["utils"], function (utils) {
     }
 
     methods.carousel = (data, uniqueId) => {
-        var carousel = `<li class="list-group-item">
-        <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false">
-        <!-- Carousel items -->
-            <div class="carousel-inner">`;
+    var carousel = `<li class="list-group-item">
+    <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false" data-interval="false">
+       <!-- Carousel items -->
+       <div class="carousel-inner">`;
         var index = 0;
         for (let i in data.payload) {
-
             if (data.payload[i].type == 1) {
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
                         <div class="col-md-3">
                             <a href="#" class="thumbnail custom-image-wrap">
                                 <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
-                            </a>
-                            <h3><p class="carousel-title">${data.payload[i].title}</p>
-                            <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
+                            </a>`
+                carousel +=(data.payload[i].title !=undefined) ? `<h3><p class="carousel-title">${data.payload[i].title}</p><h3>`:"";
+                carousel += (data.payload[i].subtitle !=undefined)?`<p class="carousel-subtitle">${data.payload[i].subtitle}</p>`:"";
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
                         carousel += `<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
@@ -180,12 +176,11 @@ define(["utils"], function (utils) {
             }
         }
 
-        carousel += ` </div><!--.carousel-inner-->
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
-		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></li>`;
-
-        return carousel;
+    carousel += ` </div><!--.carousel-inner-->
+	<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
+	<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
+	</div><!--.Carousel--></li>`;
+    return carousel;
     }
 
     // airline Boarding pass
