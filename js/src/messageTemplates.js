@@ -21,7 +21,7 @@ define(["utils"], function (utils) {
             </div>
             <div class="media-body">
                 <h3 class="list-group-item-heading">${data.senderName}</h3>
-                <span class="list-group-item-text">${data.payload}</span>	
+                <span class="list-group-item-text">${data.payload}</span>
                 <p class="mute"><small>sent at ${data.time}</small></p>
             </div>
         </li>`;
@@ -39,7 +39,7 @@ define(["utils"], function (utils) {
             </div>
             <div class="media-body">
                 <h3 class="list-group-item-heading">${data.senderName}</h3>
-                <span class="list-group-item-text">${data.payload}</span>	
+                <span class="list-group-item-text">${data.payload}</span>
                 <p class="mute"><small>sent at ${data.time}</small></p>
             </div>
         </li>`;
@@ -53,7 +53,7 @@ define(["utils"], function (utils) {
         let cardBody;
         for (let i in data.payload) {
             cardBody = `<li class="list-group-item">
-            <div class="pmd-card pmd-card-default pmd-z-depth">
+            <div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">
                 <!-- Card header -->
                 <div class="pmd-card-title">
                     <div class="media-left">
@@ -74,7 +74,7 @@ define(["utils"], function (utils) {
 
             cardBody += `<div class="pmd-card-title">
                     <h2 class="pmd-card-title-text">${data.payload[i].title}</h2>
-                    <span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>	
+                    <span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>
                 </div>`
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
@@ -101,19 +101,19 @@ define(["utils"], function (utils) {
                 for (let j = 0; j < data.payload[i].payload.facebook.attachment.payload.elements.length; j++) {
 
                     listBody += `<li class="list-group-item">
-    
+
         <a href="#"  class="listresponsepayload"  data = "${data.payload[i].payload.facebook.attachment.payload.elements[j].hasOwnProperty('buttons') ? data.payload[i].payload.facebook.attachment.payload.elements[j].buttons[0].payload : ''}" style="display:block;">
         <div class="media-body">
         <div class="col-xs-9">
             <h3 class="list-group-item-heading">${data.payload[i].payload.facebook.attachment.payload.elements[j].title}</h3>
-            <span class="list-group-item-text">${data.payload[i].payload.facebook.attachment.payload.elements[j].subtitle}</span>	
+            <span class="list-group-item-text">${data.payload[i].payload.facebook.attachment.payload.elements[j].subtitle}</span>
             </div>
             <div class="col-xs-3">
             <img src="${data.payload[i].payload.facebook.attachment.payload.elements[j].image_url}" width="100" height="100" class="img-responsive">
             </div>
          </div>
          </a>
-         
+
     </li>`;
                 }
                 html += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
@@ -153,24 +153,24 @@ define(["utils"], function (utils) {
 
     methods.carousel = (data, uniqueId) => {
         var carousel = `<li class="list-group-item">
-        <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth" data-ride="false">
+        <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false">
         <!-- Carousel items -->
             <div class="carousel-inner">`;
         var index = 0;
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
-                carousel += `<div class="item ${(index == 0) ? 'active' : ''}">    
+                carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="#" class="thumbnail">
-                                <img src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                            <a href="#" class="thumbnail custom-image-wrap">
+                                <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
-                            <h3>${data.payload[i].title}<p>
-                            <p>${data.payload[i].subtitle}</p>`
+                            <h3><p class="carousel-title">${data.payload[i].title}</p>
+                            <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                        carousel += `<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                        carousel += `<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                     }
                 }
                 carousel += `</div>
@@ -357,9 +357,9 @@ define(["utils"], function (utils) {
             </div>
              <div class="col-xs-3">
                 <h3 class="pmd-card-title-text">Departure</h3>
-                
+
             </div>
-           
+
         </div>
         <div class="row">
             <div class="col-xs-9">
@@ -368,7 +368,7 @@ define(["utils"], function (utils) {
              <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${departTime}</span>
             </div>
-            
+
         </div>
         <hr style="margin:0px">
         <div class="row airlinePadding">
@@ -418,7 +418,7 @@ define(["utils"], function (utils) {
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${boardingTime}</span>
             </div>
-            
+
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${gateValue}</span>
 
@@ -515,7 +515,7 @@ define(["utils"], function (utils) {
             <img width="40" height="40" src="https://previews.123rf.com/images/sn333g/sn333g1504/sn333g150400033/39063712-Avi-n-icono-de-vuelo-o-avi-n-logo-despegue-vector-s-mbolo-azul-Foto-de-archivo.jpg">
         </a>
             </div>
-            
+
             <div class="col-xs-5">
                 <h3 class="pmd-card-title-text">PNR Number</h3>
                 <span class="pmd-card-subtitle-text">${pnrNumber}</span>
@@ -600,7 +600,7 @@ define(["utils"], function (utils) {
             <img width="40" height="40" src="https://previews.123rf.com/images/sn333g/sn333g1504/sn333g150400033/39063712-Avi-n-icono-de-vuelo-o-avi-n-logo-despegue-vector-s-mbolo-azul-Foto-de-archivo.jpg">
         </a>
             </div>
-            
+
             <div class="col-xs-5">
                 <h3 class="pmd-card-title-text">Flight Status</h3>
                 <span class="pmd-card-subtitle-text text-color-red">${flightStatus}</span>
@@ -662,13 +662,13 @@ define(["utils"], function (utils) {
         let genericcardBody;
 
         genericcardBody = `<li class="list-group-item ">
-         
+
          <table class="table table-bordered rounded col-md-8 col-md-pull-3 ">
          <div class="row">
          <div class="col-lg-1 col-centered">
             <div class="pmd-card pmd-card-default pmd-z-depth">
                 <!-- Card header -->
-                <div 
+                <div
                 <div class="pmd-card-title">
                     <div class="media-left">
                         <a class="avatar-list-img" href="javascript:void(0);">
@@ -688,7 +688,7 @@ define(["utils"], function (utils) {
 
             genericcardBody += `<div class="pmd-card-title" style="padding:0px;">
                     <h3 style="text-align:center;">${data.payload[i].title}</h3>
-                    <h6  style="text-align:center;">${data.payload[i].subtitle}</h6>	
+                    <h6  style="text-align:center;">${data.payload[i].subtitle}</h6>
                 </div>`
             if (data.payload[i].buttons) {
 
@@ -726,7 +726,7 @@ define(["utils"], function (utils) {
     }
 
 
-    // buy botton view ui 
+    // buy botton view ui
     methods.buybutton = (data) => {
         let buyhtml;
         let buyBody;
@@ -745,7 +745,7 @@ define(["utils"], function (utils) {
 
             buyBody += `<div class="pmd-card-title ">
                     <h4 class="list-group-item-heading text-center">${data.payload[i].title}</h4>
-                    <h6 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h6>	
+                    <h6 class="list-group-item-heading text-center">${data.payload[i].subtitle}</h6>
                 </div>`
 
             if (data.payload[i].buttons) {
@@ -762,17 +762,17 @@ define(["utils"], function (utils) {
 
              <div class="modal fade" id="Chechkout" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Checkout</h4>
         </div>
-       
-      
+
+
       </div>
-      
+
     </div>
 
   </div>
@@ -790,7 +790,7 @@ define(["utils"], function (utils) {
 
             buyhtml = buyBody + `</div>
              </div>
-             
+
              </div>`;
         }
 
@@ -802,10 +802,10 @@ define(["utils"], function (utils) {
         let videohtml = `<li class="list-group-item">
         <div class="media-body">
 
-            <video width="300" height="200" controls> 
+            <video width="300" height="200" controls>
             <source src="${data.payload}" type=video/mp4>
             </video>
-         
+
             <p class="mute"><small>sent at ${data.time}</small></p>
         </div>
     </li>`;
@@ -816,7 +816,7 @@ define(["utils"], function (utils) {
     methods.audio = (data, uniqueId) => {
         let audiohtml = `<li class="list-group-item">
         <div class="media-body">
-            <audio width="300" height="200" controls> 
+            <audio width="300" height="200" controls>
             <source src="${data.payload}" type=audio/mp3>
             </audio>
             <p class="mute"><small>sent at ${data.time}</small></p>
@@ -829,9 +829,9 @@ define(["utils"], function (utils) {
     //file template
     methods.file = (data, uniqueId) => {
         let filehtml = `<li class="list-group-item">
-        
+
     <div class="media-body">
-    <div class="pmd-chip pmd-chip-contact"> 
+    <div class="pmd-chip pmd-chip-contact">
     <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
     </div>
     </div>
@@ -855,7 +855,7 @@ define(["utils"], function (utils) {
                                <div class="col-xs-9">
                                    <h3 class="list-group-item-heading">${data.payload.elements[j].title}</h3>
                                    <span class="list-group-item-text">${data.payload.elements[j].subtitle}</span>
-                                   <span class="list-group-item-text">Qnty ${data.payload.elements[j].quantity}</span>	
+                                   <span class="list-group-item-text">Qnty ${data.payload.elements[j].quantity}</span>
                                </div>
                            </div>
                         </li>`;
@@ -865,10 +865,10 @@ define(["utils"], function (utils) {
         receiptBody += `<span class="list-group-item-text col-md-8 col-md-pull-3">Ship to</span>`
         receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.street_1}</h3>`
         receiptBody += `<h3 class="list-group-item-heading col-md-8 col-md-pull-3"> ${data.payload.address.city},${data.payload.address.state}${data.payload.address.postal_code}</h3>`
-        receipthtml += `<li class="list-group-item" style="padding:10px 0px"> 
+        receipthtml += `<li class="list-group-item" style="padding:10px 0px">
                            <div class="col-xs-12">
                                    <span class="list-group-item-text">Total</span>
-                                   <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>  
+                                   <h3 class="list-group-item-heading pull-right">$ ${data.payload.summary.total_cost}</h3>
                            </div>
                        `;
         receipthtml += `<p style="padding-left:15px;"><small>sent at ${data.time}</small></p></li>`;

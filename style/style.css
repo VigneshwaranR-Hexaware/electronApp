@@ -9,7 +9,7 @@ html,body{
 .main-container{
     background-color: #fff;
      height:100%;
-     overflow-y: hidden; 
+     overflow-y: hidden;
 }
 
 .chat-body {
@@ -23,8 +23,11 @@ html,body{
 }
 
 .chat-user-dialog {
-    background-color: gold;
-    border-radius: 10px;
+    background-color: #e8ebef;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
     margin: 27px 10px;
 }
 
@@ -77,8 +80,66 @@ html,body{
 
 .pmd-card-inverseblue {
     background-color: #1E90FF;
-    color: #eceeef
+    color: #eceeef;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    padding: 11px 41px 13px 13px;
+    margin: 23px;
 }
 .text-color-red{
     color: #DC143C;
+}
+
+.card-custom{
+  border-radius: 15px;
+  margin-bottom: 30px;
+  padding: 11px 41px 13px 13px;
+  margin: 23px;
+  background-color: #fff;
+}
+
+.carousel-custom {
+  border-radius: 15px;
+  background-color: #fff;
+  padding: 0% 0% 0% 0%;
+  margin: 5%
+}
+
+.custom-image-wrap {
+  display: block;
+    padding: 4px;
+    margin-bottom: -5%;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px 15px 0px 0px;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+.img-circle {
+  border-radius: 15px 15px 0px 0px;
+}
+
+.carousel-title {
+  font-size: 105%;
+  font-weight: bold;
+  margin: 2% 2% 0% 2%
+}
+
+.carousel-subtitle {
+  font-size: 85%;
+  font-weight: 0%;
+  margin: 2% 2% 3% 2%;
+}
+.btn {
+  min-width: 96%;
+  padding: 2% 3%;
+  margin: 3% 0% -2% 2%;
+  border-radius: 25px;
+}
+.custom-infocard {
+  border-radius: 15px;
+    padding: 0% 0% 0% 0%;
+    margin: 5%;
 }
