@@ -18,12 +18,12 @@ define(["utils"], function (utils) {
     //User Plain Text
     methods.userplaintext = (data) => {
 
-        let html = `<li class="list-group-item chat-user-dialog">
+        let html = `<li class="list-group-item background-color-custom">
             <div class="media-left pull-right">
 
-            <div class="media-body">
+            <div class="media-body user-txt-space">
 
-                <span class="list-group-item-text-user">${data.payload}</span>
+                <div class="list-group-item-text-user"><p>${data.payload}</p></div>
 
             </div>
         </li>
@@ -37,12 +37,14 @@ define(["utils"], function (utils) {
     //     <img class="img-responsive" src="${data.senderAvatar}">
     //     </a>
     // </div>
+
     //Plain Text Template
     methods.plaintext = (data) => {
-        let html = `<li class="list-group-item background-color-custom bot-txt-reply">
+        let html = `<li class="list-group-item background-color-custom">
 
-            <div class="media-body">
-                <span class="list-group-item-text">${data.payload}</span>
+            <div class="media-body bot-txt-space">
+
+                <div class="list-group-item-text-bot"><p>${data.payload}</p></div>
 
             </div>
         </li>
@@ -148,7 +150,7 @@ define(["utils"], function (utils) {
 
             if (data.payload[i].platform == "facebook") {
                 if (data.payload[i].payload.facebook.hasOwnProperty('quick_replies')) {
-                    quickRepliesHtml += `<p class="custom-quick-reply-background">${data.payload[i].payload.facebook.text}</p>`;
+                    quickRepliesHtml += `<p class="custom-quick-reply-background">${data.payload[i].payload.facebook.text}</p><div class="quick-replies-buttons">`;
                     for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
                             }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
@@ -156,7 +158,7 @@ define(["utils"], function (utils) {
                 }
             }
         }
-        quickRepliesHtml += `<p class="bot-timestamp"><small>sent at ${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>sent at ${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
@@ -179,7 +181,7 @@ define(["utils"], function (utils) {
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                        carousel += `<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                        carousel += `<button type="button" class="btn-carousel btn-primary pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                     }
                 }
                 carousel += `</div>
