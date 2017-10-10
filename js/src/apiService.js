@@ -75,7 +75,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                         if (response.result.fulfillment.messages) {
                             // console.log("for airline service"+ response);
                             for (let i in response.result.fulfillment.messages) {
-                                if (response.result.fulfillment.messages[i].type == 0) {
+                                if (response.result.fulfillment.messages[i].type == 0 && response.result.fulfillment.messages[i].speech !="") {
                                     let cardHTML = cards({
                                         "payload": response.result.fulfillment.messages[i].speech,
                                         "senderName": config.botTitle,
@@ -205,7 +205,6 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                         }
                         //CustomPayload Quickreplies
                         if (isQuickReply) {
-
                             let cardHTML = cards({
                                 "payload": response.result.fulfillment.messages,
                                 "senderName": config.botTitle,

@@ -7,18 +7,10 @@ This file is part of the Innovation LAB - Offline Bot.
 
 
 define(["utils"], function (utils) {
-
     var methods = {};
-
-//     <a href="javascript:void(0);" class="avatar-list-img">
-//     <img class="img-responsive" src="${data.senderAvatar}">
-//     </a>
-// </div>
-
     //User Plain Text
     methods.userplaintext = (data) => {
-
-        let html = `<li class="list-group-item background-color-custom">
+        let html = `<li class="list-group-item chat-user-dialog">
             <div class="media-left pull-right">
 
             <div class="media-body user-txt-space">
@@ -75,17 +67,20 @@ define(["utils"], function (utils) {
 
 
                 </div>`
+        for (let i in data.payload) {
+            cardBody = `<div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">`
+                
 
             if (data.payload[i].imageUrl != "" && data.payload[i].imageUrl != undefined) {
                 cardBody += ` <div class="pmd-card-media">
                     <img src="${data.payload[i].imageUrl}" width="1184" height="666" class="img-responsive">
                     </div>`
             }
+            cardBody += `<div class="pmd-card-title">`
+            cardBody += (data.payload[i].title !=undefined)? `<h3 class="card-body"><p class="card-title">${data.payload[i].title}</p>`:'';
+            cardBody +=(data.payload[i].subtitle !=undefined)?`<p class="card-subtitle">${data.payload[i].subtitle}</p>`:'';
+            cardBody +=`</h3></div>`
 
-            cardBody += `<div class="pmd-card-title">
-                <h3 class="card-body"><p class="card-title">${data.payload[i].title}</p>
-                <p class="card-subtitle">${data.payload[i].subtitle}</p>
-                </div>`
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
@@ -94,7 +89,7 @@ define(["utils"], function (utils) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></li>`;
+            html += cardBody + cardButtons + `</div></li>`;
         }
         return html;
     }
@@ -162,23 +157,23 @@ define(["utils"], function (utils) {
         return quickRepliesHtml;
     }
 
+    
     methods.carousel = (data, uniqueId) => {
-        var carousel = `<li class="list-group-item background-color-custom">
-        <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false">
-        <!-- Carousel items -->
-            <div class="carousel-inner">`;
+    var carousel = `<li class="list-group-item">
+    <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false" data-interval="false">
+       <!-- Carousel items -->
+       <div class="carousel-inner">`;
         var index = 0;
         for (let i in data.payload) {
-
             if (data.payload[i].type == 1) {
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
                         <div class="col-md-3">
                             <a href="#" class="thumbnail custom-image-wrap">
                                 <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
-                            </a>
-                            <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
-                            <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
+                            </a>`
+                carousel +=(data.payload[i].title !=undefined) ? `<h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>`:"";
+                carousel += (data.payload[i].subtitle !=undefined)?`<p class="carousel-subtitle">${data.payload[i].subtitle}</p>`:"";
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
                         carousel += `<button type="button" class="btn-carousel btn-primary pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
@@ -191,12 +186,11 @@ define(["utils"], function (utils) {
             }
         }
 
-        carousel += ` </div><!--.carousel-inner-->
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
-		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></li>`;
-
-        return carousel;
+    carousel += ` </div><!--.carousel-inner-->
+	<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
+	<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
+	</div><!--.Carousel--></li>`;
+    return carousel;
     }
 
     // airline Boarding pass
@@ -221,15 +215,9 @@ define(["utils"], function (utils) {
                     let departCode = params.flight_info.departure_airport.airport_code;
                     let arrivalCity = params.flight_info.arrival_airport.city;
                     let arrivalCode = params.flight_info.arrival_airport.airport_code;
-
                     let arrName = passengersName.replace('/', ' ');
                     let departTime = utils.airlineTime(departsValue);
                     let boardingTime = utils.airlineTimeboarding(boardingValue);
-
-
-
-
-
                     // 2015-12-26T11:30
                     html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
     <!-- Card header -->
@@ -414,9 +402,6 @@ define(["utils"], function (utils) {
             <div class="col-xs-3">
                 <h3 class="pmd-card-title-text">${gateLabel}</h3>
             </div>
-
-
-
         </div>
         <div class="row  ">
             <div class="col-xs-3">
@@ -424,17 +409,13 @@ define(["utils"], function (utils) {
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${termialValue}</span>
-
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${boardingTime}</span>
             </div>
-
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${gateValue}</span>
-
             </div>
-
         </div>
         <div class="row airlinePadding ">
             <div class="col-xs-3">
@@ -449,9 +430,6 @@ define(["utils"], function (utils) {
             <div class="col-xs-3">
                 <h3 class="pmd-card-title-text">Sec</h3>
             </div>
-
-
-
         </div>
         <div class="row  ">
             <div class="col-xs-3">
@@ -465,11 +443,8 @@ define(["utils"], function (utils) {
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${secValue}</span>
-
             </div>
-
         </div>
-
         <div class="row">
             <div class="pmd-card-actions col-xs-offset-4">
                 <button class="btn  btn-sm pmd-btn-flat button-info " type="button">Gold Status</button>
@@ -478,8 +453,6 @@ define(["utils"], function (utils) {
                 <img width="152" height="152"  src=${barcodeUrl}>
             </div>
         </div>
-
-
     </div>
     <hr style="margin:0px">
     <div class="pmd-card-actions col-xs-12 " style="text-align:center">
@@ -512,11 +485,8 @@ define(["utils"], function (utils) {
                 let arrivalCity = params.flight_info[0].arrival_airport.city;
                 let arrivalCode = params.flight_info[0].arrival_airport.airport_code;
                 let pnrNumber = params.pnr_number;
-
                 let arrivalTime = utils.airlineTime(arrivalValue);
                 let boardingTime = utils.airlineTimeboarding(boardingValue);
-
-
                 html = `<div class="pmd-card  pmd-z-depth airlinePadding">
     <!-- Card header -->
     <div class="container panel-heading">
@@ -741,8 +711,6 @@ define(["utils"], function (utils) {
     methods.buybutton = (data) => {
         let buyhtml;
         let buyBody;
-
-
         buyBody = `<div class="pmd-card  pmd-z-depth">
                    <div class="container rounded">
                    <div class="row">
@@ -763,8 +731,6 @@ define(["utils"], function (utils) {
                 for (var j = 0; j < data.payload[i].buttons.length; j++) {
                     console.log(data.payload[i].buttons[j].payment_summary.price_list);
                     for (var x in data.payload[i].buttons[j].payment_summary.price_list) {
-
-
                         buyBody += `<div class="row" style="padding:5px 0px"> 
            <div class="col-xs-offset-2 col-xs-5">
           <span>${"$" + data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
@@ -783,28 +749,16 @@ define(["utils"], function (utils) {
 
 
       </div>
-
     </div>
-
   </div>
-                </div>`;
-
-
-
-                        break;
-
-                    }
-
-                }
-            }
-            `</div>`
-
-            buyhtml = buyBody + `</div>
-             </div>
-
-             </div>`;
+</div>`;
+break;
+ }
+ }
+ }
+ `</div>`
+            buyhtml = buyBody + `</div></div></div>`;
         }
-
         return buyhtml;
     }
 
@@ -820,7 +774,6 @@ define(["utils"], function (utils) {
             <p class="bot-timestamp"><small>sent at ${data.time}</small></p>
         </div>
     </li>`;
-
         return videohtml;
     }
     //audio template
@@ -833,21 +786,18 @@ define(["utils"], function (utils) {
             <p class="bot-timestamp"><small>sent at ${data.time}</small></p>
         </div>
     </li>`;
-
         return audiohtml;
     }
 
     //file template
     methods.file = (data, uniqueId) => {
         let filehtml = `<li class="list-group-item">
-
-    <div class="media-body">
-    <div class="pmd-chip pmd-chip-contact">
-    <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
-    </div>
-    </div>
-    </li>`;
-
+            <div class="media-body">
+                <div class="pmd-chip pmd-chip-contact">
+                <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
+                </div>
+            </div>
+        </li>`;
         return filehtml;
     }
     //receipt template
@@ -885,6 +835,6 @@ define(["utils"], function (utils) {
         receipthtml += `<p style="padding-left:15px;"><small>sent at ${data.time}</small></p></li>`;
         return receiptBody + receipthtml;
     }
-
+}
     return methods;
 });
