@@ -12,7 +12,6 @@ function showmesgtext(msg) {
 define([], function () {
 
     var methods = {};
-
     methods.currentTime = () => {
 
         var currentDate = new Date();

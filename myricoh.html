@@ -21,10 +21,10 @@
 
 <body>
 
-	<a href="#" onclick="window.open('/','chat70994705','width=400,height=650,resizable=yes');return false;">Click to chat</a>
+	<a href="#" onclick="createWindow('/',400,650)">Click to chat</a>
 	<footer>
 		<div class="menu pmd-floating-action" role="navigation">
-			<a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect  btn-primary" data-trigger="click" data-toggle="popover" data-placement="top"
+			<a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect  btn-primary" id="webChat" data-trigger="click" data-toggle="popover" data-placement="top"
 			 data-content="<iframe  src='http://localhost:3000/?popup=1' height='510' width='400' style='border:none'></iframe>" data-html="true"
 			 href="javascript:void(0);"> 
             <span class="pmd-floating-hidden">Primary</span>
@@ -35,6 +35,7 @@
 	</footer>
 	<script data-main="js/require-setup" src="require.js"></script>
 	<script>
+		// Loading Libary
 		require(['lib/jquery.min'], function ($) {
 			require(['lib/bootstrap.min'], function () {
 				require(['lib/propeller'], function () {
@@ -42,6 +43,16 @@
 				});
 			});
 		});
+
+		//Stop Window Resize
+		function createWindow(src, width, height){
+			console.log($('.showheader').hide());
+			$('.showheader').hide();
+			var win = window.open(src, "_new", "width="+width+",height="+height);
+			win.addEventListener("resize", function(){
+			win.resizeTo(width, height);
+			});
+		}
 	</script>
 </body>
 

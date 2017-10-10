@@ -8,7 +8,6 @@ This file is part of the Innovation LAB - Offline Bot.
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
 
     $(function () {
-       
 
         /* Web Popup Adjustment header hiding */
         function adjustPopups() {
@@ -72,11 +71,21 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             }
         }
         var chatKeyPressCount = 0;
+        //Checking Source
+        var isWeb=$('#webchat').context.URL;
+        
+        //Removing Header and Right Click Functionality for Web
+        if(isWeb !=null || isWeb != undefined){
+            $('.showheader').hide();
+            $(".chat-body ").on("contextmenu",function(e){
+                return false;
+            }); 
+        }
 
         if (config.accessToken && config.chatServerURL) {
             var processor = apiService();
         }
-
+        
         if (!processor) {
             throw new Error("Message processing manager is not defined!");
         }
