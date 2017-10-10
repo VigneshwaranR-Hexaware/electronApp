@@ -37,7 +37,7 @@ define(["utils"], function (utils) {
     //     <img class="img-responsive" src="${data.senderAvatar}">
     //     </a>
     // </div>
-
+    //
     //Plain Text Template
     methods.plaintext = (data) => {
         let html = `<li class="list-group-item background-color-custom">
