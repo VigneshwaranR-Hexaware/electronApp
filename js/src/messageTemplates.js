@@ -141,6 +141,7 @@ define(["utils"], function (utils) {
     //     </a>
     // </div>
     //Quick Replies Template
+    //
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item background-color-custom">
 
