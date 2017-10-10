@@ -19,7 +19,7 @@ define(["utils"], function (utils) {
 
             </div>
         </li>
-          <p class="user-timestamp"><small>sent at ${data.time}</small></p>`;
+          <p class="user-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -40,7 +40,7 @@ define(["utils"], function (utils) {
 
             </div>
         </li>
-        <p class="bot-res-timestamp"><small>sent at ${data.time}</small></p>`;
+        <p class="bot-res-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -80,6 +80,9 @@ define(["utils"], function (utils) {
             cardBody += (data.payload[i].title !=undefined)? `<h3 class="card-body"><p class="card-title">${data.payload[i].title}</p>`:'';
             cardBody +=(data.payload[i].subtitle !=undefined)?`<p class="card-subtitle">${data.payload[i].subtitle}</p>`:'';
             cardBody +=`</h3></div>`
+
+
+
 
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
