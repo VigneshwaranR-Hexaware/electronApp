@@ -12,53 +12,60 @@ define(["utils"], function (utils) {
     methods.userplaintext = (data) => {
         let html = `<li class="list-group-item chat-user-dialog">
             <div class="media-left pull-right">
-                <a href="javascript:void(0);" class="avatar-list-img">
-                <img class="img-responsive" src="${data.senderAvatar}">
-                </a>
+
+            <div class="media-body user-txt-space">
+
+                <div class="list-group-item-text-user"><p>${data.payload}</p></div>
+
             </div>
-            <div class="media-body">
-                <h3 class="list-group-item-heading">${data.senderName}</h3>
-                <span class="list-group-item-text">${data.payload}</span>
-                <p class="mute"><small>sent at ${data.time}</small></p>
-            </div>
-        </li>`;
+        </li>
+          <p class="user-timestamp"><small>sent at ${data.time}</small></p>`;
 
         return html;
     }
 
+    // <div class="media-left">
+    //     <a href="javascript:void(0);" class="avatar-list-img">
+    //     <img class="img-responsive" src="${data.senderAvatar}">
+    //     </a>
+    // </div>
+
     //Plain Text Template
     methods.plaintext = (data) => {
-        let html = `<li class="list-group-item">
-            <div class="media-left">
-                <a href="javascript:void(0);" class="avatar-list-img">
-                <img class="img-responsive" src="${data.senderAvatar}">
-                </a>
+        let html = `<li class="list-group-item background-color-custom">
+
+            <div class="media-body bot-txt-space">
+
+                <div class="list-group-item-text-bot"><p>${data.payload}</p></div>
+
             </div>
-            <div class="media-body">
-                <h3 class="list-group-item-heading">${data.senderName}</h3>
-                <span class="list-group-item-text">${data.payload}</span>
-                <p class="mute"><small>sent at ${data.time}</small></p>
-            </div>
-        </li>`;
+        </li>
+        <p class="bot-res-timestamp"><small>sent at ${data.time}</small></p>`;
 
         return html;
     }
     //Card Template
+    //
+    // <div class="media-left">
+    //     <a class="avatar-list-img" href="javascript:void(0);">
+    //         <img src="${data.senderAvatar}" class="img-responsive">
+    //     </a>
+    // </div>
+
+    // <div class="media-body media-middle">
+    //     <h3 class="pmd-card-title-text">${data.senderName}</h3>
+    // </div>
     methods.card = (data) => {
         let html;
         let cardButtons = "";
         let cardBody;
-        html =`<li class="list-group-item">
-        <!-- Card header -->
+        for (let i in data.payload) {
+            cardBody = `<li class="list-group-item background-color-custom">
+            <div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">
+                <!-- Card header -->
                 <div class="pmd-card-title">
-                    <div class="media-left">
-                        <a class="avatar-list-img" href="javascript:void(0);">
-                            <img src="${data.senderAvatar}" class="img-responsive">
-                        </a>
-                    </div>
-                    <div class="media-body media-middle">
-                        <h3 class="pmd-card-title-text">${data.senderName}</h3>
-                    </div>
+
+
                 </div>`
         for (let i in data.payload) {
             cardBody = `<div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">`
@@ -70,9 +77,10 @@ define(["utils"], function (utils) {
                     </div>`
             }
             cardBody += `<div class="pmd-card-title">`
-            cardBody += (data.payload[i].title !=undefined)? `<h2 class="pmd-card-title-text">${data.payload[i].title}</h2>`:'';
-            cardBody +=(data.payload[i].subtitle !=undefined)?`<span class="pmd-card-subtitle-text">${data.payload[i].subtitle}</span>`:'';
-            cardBody +=`</div>`
+            cardBody += (data.payload[i].title !=undefined)? `<h3 class="card-body"><p class="card-title">${data.payload[i].title}</p>`:'';
+            cardBody +=(data.payload[i].subtitle !=undefined)?`<p class="card-subtitle">${data.payload[i].subtitle}</p>`:'';
+            cardBody +=`</h3></div>`
+
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
@@ -113,30 +121,31 @@ define(["utils"], function (utils) {
 
     </li>`;
                 }
-                html += `<p class="mute pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
+                html += `<p class="bot-timestamp pull-left" style="padding:10px 5px;"><small>sent at ${data.time}</small></p></ul>`;
             }
         }
         return listBody + html;
     }
     // end of list
 
+
+    // <div class="media-left">
+    //     <a href="javascript:void(0);" class="avatar-list-img">
+    //     <img class="img-responsive" src="${data.senderAvatar}">
+    //     </a>
+    // </div>
     //Quick Replies Template
     methods.quickreplies = (data) => {
-        var quickRepliesHtml = `<li class="list-group-item">
-        <div class="media-left">
-            <a href="javascript:void(0);" class="avatar-list-img">
-            <img class="img-responsive" src="${data.senderAvatar}">
-            </a>
-        </div>
-        <div class="media-body">
-        <h3 class="list-group-item-heading">${data.senderName}</h3>`;
+        var quickRepliesHtml = `<li class="list-group-item background-color-custom">
+
+        <div class="media-body">`;
 
         for (let i in data.payload) {
 
 
             if (data.payload[i].platform == "facebook") {
                 if (data.payload[i].payload.facebook.hasOwnProperty('quick_replies')) {
-                    quickRepliesHtml += `<p>${data.payload[i].payload.facebook.text}</p>`;
+                    quickRepliesHtml += `<p class="custom-quick-reply-background">${data.payload[i].payload.facebook.text}</p><div class="quick-replies-buttons">`;
                     for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
                             }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
@@ -144,10 +153,11 @@ define(["utils"], function (utils) {
                 }
             }
         }
-        quickRepliesHtml += `<p class="mute"><small>sent at ${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>sent at ${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
+    
     methods.carousel = (data, uniqueId) => {
     var carousel = `<li class="list-group-item">
     <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false" data-interval="false">
@@ -162,11 +172,11 @@ define(["utils"], function (utils) {
                             <a href="#" class="thumbnail custom-image-wrap">
                                 <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>`
-                carousel +=(data.payload[i].title !=undefined) ? `<h3><p class="carousel-title">${data.payload[i].title}</p><h3>`:"";
+                carousel +=(data.payload[i].title !=undefined) ? `<h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>`:"";
                 carousel += (data.payload[i].subtitle !=undefined)?`<p class="carousel-subtitle">${data.payload[i].subtitle}</p>`:"";
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                        carousel += `<button type="button" class="btn btn-primary btn pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                        carousel += `<button type="button" class="btn-carousel btn-primary pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                     }
                 }
                 carousel += `</div>
@@ -205,15 +215,9 @@ define(["utils"], function (utils) {
                     let departCode = params.flight_info.departure_airport.airport_code;
                     let arrivalCity = params.flight_info.arrival_airport.city;
                     let arrivalCode = params.flight_info.arrival_airport.airport_code;
-
                     let arrName = passengersName.replace('/', ' ');
                     let departTime = utils.airlineTime(departsValue);
                     let boardingTime = utils.airlineTimeboarding(boardingValue);
-
-
-
-
-
                     // 2015-12-26T11:30
                     html = `<div class="pmd-card pmd-card-inverseblue pmd-z-depth">
     <!-- Card header -->
@@ -398,9 +402,6 @@ define(["utils"], function (utils) {
             <div class="col-xs-3">
                 <h3 class="pmd-card-title-text">${gateLabel}</h3>
             </div>
-
-
-
         </div>
         <div class="row  ">
             <div class="col-xs-3">
@@ -408,17 +409,13 @@ define(["utils"], function (utils) {
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${termialValue}</span>
-
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${boardingTime}</span>
             </div>
-
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${gateValue}</span>
-
             </div>
-
         </div>
         <div class="row airlinePadding ">
             <div class="col-xs-3">
@@ -433,9 +430,6 @@ define(["utils"], function (utils) {
             <div class="col-xs-3">
                 <h3 class="pmd-card-title-text">Sec</h3>
             </div>
-
-
-
         </div>
         <div class="row  ">
             <div class="col-xs-3">
@@ -449,11 +443,8 @@ define(["utils"], function (utils) {
             </div>
             <div class="col-xs-3">
                 <span class="pmd-card-subtitle-text">${secValue}</span>
-
             </div>
-
         </div>
-
         <div class="row">
             <div class="pmd-card-actions col-xs-offset-4">
                 <button class="btn  btn-sm pmd-btn-flat button-info " type="button">Gold Status</button>
@@ -462,8 +453,6 @@ define(["utils"], function (utils) {
                 <img width="152" height="152"  src=${barcodeUrl}>
             </div>
         </div>
-
-
     </div>
     <hr style="margin:0px">
     <div class="pmd-card-actions col-xs-12 " style="text-align:center">
@@ -496,11 +485,8 @@ define(["utils"], function (utils) {
                 let arrivalCity = params.flight_info[0].arrival_airport.city;
                 let arrivalCode = params.flight_info[0].arrival_airport.airport_code;
                 let pnrNumber = params.pnr_number;
-
                 let arrivalTime = utils.airlineTime(arrivalValue);
                 let boardingTime = utils.airlineTimeboarding(boardingValue);
-
-
                 html = `<div class="pmd-card  pmd-z-depth airlinePadding">
     <!-- Card header -->
     <div class="container panel-heading">
@@ -725,8 +711,6 @@ define(["utils"], function (utils) {
     methods.buybutton = (data) => {
         let buyhtml;
         let buyBody;
-
-
         buyBody = `<div class="pmd-card  pmd-z-depth">
                    <div class="container rounded">
                    <div class="row">
@@ -747,8 +731,6 @@ define(["utils"], function (utils) {
                 for (var j = 0; j < data.payload[i].buttons.length; j++) {
                     console.log(data.payload[i].buttons[j].payment_summary.price_list);
                     for (var x in data.payload[i].buttons[j].payment_summary.price_list) {
-
-
                         buyBody += `<div class="row" style="padding:5px 0px"> 
            <div class="col-xs-offset-2 col-xs-5">
           <span>${"$" + data.payload[i].buttons[j].payment_summary.price_list[x].amount}</span>
@@ -767,28 +749,16 @@ define(["utils"], function (utils) {
 
 
       </div>
-
     </div>
-
   </div>
-                </div>`;
-
-
-
-                        break;
-
-                    }
-
-                }
-            }
-            `</div>`
-
-            buyhtml = buyBody + `</div>
-             </div>
-
-             </div>`;
+</div>`;
+break;
+ }
+ }
+ }
+ `</div>`
+            buyhtml = buyBody + `</div></div></div>`;
         }
-
         return buyhtml;
     }
 
@@ -801,10 +771,9 @@ define(["utils"], function (utils) {
             <source src="${data.payload}" type=video/mp4>
             </video>
 
-            <p class="mute"><small>sent at ${data.time}</small></p>
+            <p class="bot-timestamp"><small>sent at ${data.time}</small></p>
         </div>
     </li>`;
-
         return videohtml;
     }
     //audio template
@@ -814,24 +783,21 @@ define(["utils"], function (utils) {
             <audio width="300" height="200" controls>
             <source src="${data.payload}" type=audio/mp3>
             </audio>
-            <p class="mute"><small>sent at ${data.time}</small></p>
+            <p class="bot-timestamp"><small>sent at ${data.time}</small></p>
         </div>
     </li>`;
-
         return audiohtml;
     }
 
     //file template
     methods.file = (data, uniqueId) => {
         let filehtml = `<li class="list-group-item">
-
-    <div class="media-body">
-    <div class="pmd-chip pmd-chip-contact">
-    <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
-    </div>
-    </div>
-    </li>`;
-
+            <div class="media-body">
+                <div class="pmd-chip pmd-chip-contact">
+                <i style="font-size:24px" class="fa">&#xf016;</i>  <a href="${data.payload}" target="_blank">Receipt.pdf </a>
+                </div>
+            </div>
+        </li>`;
         return filehtml;
     }
     //receipt template
@@ -869,6 +835,6 @@ define(["utils"], function (utils) {
         receipthtml += `<p style="padding-left:15px;"><small>sent at ${data.time}</small></p></li>`;
         return receiptBody + receipthtml;
     }
-
+}
     return methods;
 });
