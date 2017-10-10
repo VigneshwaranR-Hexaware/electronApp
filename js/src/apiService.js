@@ -63,7 +63,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                         let isViewBoardingPassBarCode = false;
                         let isAirlineCheckin = false;
                         let isAirlingFlightUpdate = false;
-                        //Generic Template 
+                        //Generic Template
                         let genericTemplate = false;
                         let genericElement = null;
                         let genericBuy = false;
@@ -76,6 +76,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                             // console.log("for airline service"+ response);
                             for (let i in response.result.fulfillment.messages) {
                                 if (response.result.fulfillment.messages[i].type == 0 && response.result.fulfillment.messages[i].speech !="") {
+
                                     let cardHTML = cards({
                                         "payload": response.result.fulfillment.messages[i].speech,
                                         "senderName": config.botTitle,

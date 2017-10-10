@@ -27,7 +27,7 @@ define(["utils"], function (utils) {
 
             </div>
         </li>
-          <p class="user-timestamp"><small>sent at ${data.time}</small></p>`;
+          <p class="user-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -48,7 +48,7 @@ define(["utils"], function (utils) {
 
             </div>
         </li>
-        <p class="bot-res-timestamp"><small>sent at ${data.time}</small></p>`;
+        <p class="bot-res-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -86,6 +86,7 @@ define(["utils"], function (utils) {
                 <h3 class="card-body"><p class="card-title">${data.payload[i].title}</p>
                 <p class="card-subtitle">${data.payload[i].subtitle}</p>
                 </div>`
+
             if (data.buttons && data.payload[i].type == 1) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
