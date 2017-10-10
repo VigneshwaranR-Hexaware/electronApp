@@ -8,6 +8,7 @@ This file is part of the Innovation LAB - Offline Bot.
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
 
     $(function () {
+       
 
         /* Web Popup Adjustment header hiding */
         function adjustPopups() {
@@ -97,37 +98,12 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             }
         });
 
-        // $(document).on('click', '.btnPayload', function (e) {
-        //     var payloadInput = $(this).data().quickrepliespayload;
-        //     processor.askBot(payloadInput, function (error, html) {
-        //         if (error) {
-        //             Console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
-        //         }
-        //         if (html) {
-        //             msg_container.append(html);
-
-        //         }
-        //     });
-        //     e.preventDefault();
-        // });
-
-        // const remote = require('electron').remote;
-        // $(document).on('click', '#btnMinimize', function (e) {
-        //     var window = remote.getCurrentWindow();
-        //     window.minimize();
-        // })
-
-        // $(document).on('click', '#btnClose', function (e) {
-        //     var window = remote.getCurrentWindow();
-        //     if (confirm('Are you sure want to exit')) {
-        //         window.close();
-        //     }
-        // })        
-
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
+            debugger;
+           var textInput=$(this).text();
             var payloadInput = $(this).data().quickrepliespayload;
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput,textInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
