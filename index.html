@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RICOH Assistant</title>
-
+  <link rel="shortcut icon" href="./avatar/favicon.ico" />
   <link rel="stylesheet" href="style/bootstrap.min.css">
 
   <!--Google Icon Font-->
@@ -19,20 +19,20 @@
 </head>
 
 
-    <body>
-        <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
-        <script>
-		requirejs(['lib/jquery.min'], function($) {
-			requirejs(['lib/bootstrap.min', 'lib/propeller'], function() {
-			});
-		});
-        </script>
+<body>
+  <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
+  <script>
+    requirejs(['lib/jquery.min'], function ($) {
+      requirejs(['lib/bootstrap.min', 'lib/propeller'], function () {
+      });
+    });
+  </script>
 
   <div class="container-fluid main-container">
 
     <div class="row header-popup">
       <div class="pmd-card pmd-z-depth card-custom-view showheader" style="margin-bottom: 4px;">
-        <div class="pmd-card-body"  style="margin:0px;">
+        <div class="pmd-card-body" style="margin:0px;">
           <div class="table custom-size" style="margin:0px;">
             <!-- <div class="media">
               <div class="media-body">
@@ -56,8 +56,10 @@
 
     <div class="row">
       <div class="chat-body pmd-z-depth">
-        <div class="chat-text-para col-xs-offset-4 col-xs-4"><img class="img-responsive" style="border-radius:50%;border:5px solid white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);margin-top:10%;" src="./avatar/bot-logo-image.jpg"/></div>
-        <h1 class="pmd-display3 hidden col-xs-12 welcome-message">Hello there! I am <b>{Bot Name}</b>. I can help you with queries regarding <b>{use case examples}</b>. You can begin a conversation by typing your query and I will try to answer them <b>:)</b></h1>
+        <div class="chat-text-para col-xs-offset-4 col-xs-4"><img class="img-responsive" style="border-radius:50%;border:5px solid white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);margin-top:10%;"
+            src="./avatar/bot-logo-image.jpg" /></div>
+        <h1 class="pmd-display3 hidden col-xs-12 welcome-message">Hello there! I am <b>{Bot Name}</b>. I can help you with queries regarding <b>{use case examples}</b>. You can begin
+          a conversation by typing your query and I will try to answer them <b>:)</b></h1>
         <ul id="msg_container" class="list-group pmd-list pmd-card-list hidden background-color-custom"></ul>
       </div>
     </div>
@@ -83,12 +85,12 @@
       <div class="col-xs-10">
         <div class="form-group pmd-textfield pmd-textfield-floating-label">
           <label class="control-label">Write your message here...</label>
-          <textarea id="btn-input" required class="form-control"></textarea>
+          <textarea style="height:auto;resize: none;" rows="2" id="btn-input" required class="form-control"></textarea>
         </div>
       </div>
 
       <div class="col-xs-2">
-        <div class="menu pmd-floating-action" role="navigation">
+        <div class="menu" role="navigation">
           <a id="btn-send-message" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary"
             href="javascript:void(0);">
                     <span class="pmd-floating-hidden">Primary</span>
@@ -97,8 +99,11 @@
         </div>
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-xs-12"><small style="color:#ccc">Copyrights</small></div>
+    </div>
   </div>
+
 </body>
 
 </html>
