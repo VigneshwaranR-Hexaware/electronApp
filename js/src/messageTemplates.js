@@ -48,7 +48,7 @@ define(["utils"], function (utils) {
 
             </div>
         </li>
-        <p class="bot-res-timestamp"><small>${data.time}</small></p>`;
+       <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='./avatar/bot-logo-image.jpg'/>${data.time}</small></p>`;
 
         return html;
     }
@@ -95,7 +95,7 @@ define(["utils"], function (utils) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
+            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='./avatar/bot-logo-image.jpg'/>${data.time}</small></p></div></li>`;
         }
         return html;
     }
@@ -160,7 +160,7 @@ define(["utils"], function (utils) {
                 }
             }
         }
-        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='./avatar/bot-logo-image.jpg'/>${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
@@ -196,7 +196,7 @@ define(["utils"], function (utils) {
         carousel += ` </div><!--.carousel-inner-->
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
+	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='./avatar/bot-logo-image.jpg'/>${data.time}</small></p></div></li>`;
 
         return carousel;
     }

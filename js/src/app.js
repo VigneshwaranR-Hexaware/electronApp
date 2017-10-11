@@ -58,6 +58,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                     if (html) {
                         if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
                             msg_container.siblings("h1").addClass('hidden');
+                            msg_container.siblings("div.chat-text-para").addClass('hidden');
                             msg_container.removeClass('hidden');
                         }
                         msg_container.append(html);
@@ -70,14 +71,14 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         }
         var chatKeyPressCount = 0;
         //Checking Source
-        var isWeb=$('#webchat').context.URL;
-        
-        
+        var isWeb = $('#webchat').context.URL;
+
+
 
         if (config.accessToken && config.chatServerURL) {
             var processor = apiService();
         }
-        
+
         if (!processor) {
             throw new Error("Message processing manager is not defined!");
         }
@@ -85,9 +86,11 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         var msg_container = $("ul#msg_container");
         if (msg_container.find('li').length == 0) {
             msg_container.siblings("h1").removeClass('hidden');
+            msg_container.siblings("div.chat-text-para").removeClass('hidden');
         } else {
             msg_container.siblings("h1").addClass('hidden');
-            msg_container.removeClass('hidden');
+            msg_container.siblings(".chat-text-para").addClass('hidden');
+
         }
         $("a#btn-send-message").click(function (e) {
             sendMessage($("#btn-input"), e);
@@ -102,9 +105,9 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
             // debugger;
-           var textInput=$(this).text();
+            var textInput = $(this).text();
             var payloadInput = $(this).data().quickrepliespayload;
-            processor.askBot(payloadInput,textInput, function (error, html) {
+            processor.askBot(payloadInput, textInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -120,7 +123,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.cardresponsepayload', function (e) {
             var payloadInput = $(this).data().cardpayloadbutton;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -135,7 +138,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //List Response Postback button
         $(document).on('click', '.listresponsepayload', function (e) {
             var payloadInput = $(this).attr('data');
-            processor.askBot(payloadInput, payloadInput,function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -151,7 +154,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.caroselresponsepayload', function (e) {
             var payloadInput = $(this).data().carouselpayloadbutton;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput,payloadInput,function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -168,7 +171,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.airlineBoardingViewButton', function (e) {
             //var payloadInput = $(this).data().airlineBoardingButton;
             var payloadInput = "AirlineBoarding_BarCode";
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -192,7 +195,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.genericTemplate', function (e) {
             var payloadInput = $(this).attr("data");;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -207,7 +210,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $(document).on('click', '.buyClick', function (e) {
             var payloadInput = $(this).attr("data");;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -222,7 +225,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         // Quick Reply Postback button
         $(document).on('click', '.apiQuickreplybtnPayload', function (e) {
             var payloadInput = $(this).data().apiquickrepliespayload;
-            processor.askBot(payloadInput, payloadInput,function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -239,7 +242,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             //var payloadInput = $(this).data().airlineBoardingButton;
             var payloadInput = "Checkin";
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput,payloadInput, function (error, html) {
+            processor.askBot(payloadInput, payloadInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -253,22 +256,22 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         });
 
         //Disabling Header,Right Click and Developer windows Functionality for Web
-        if(isWeb !=null || isWeb != undefined){
+        if (isWeb != null || isWeb != undefined) {
             $('.showheader').hide();
-            $(".chat-body ").on("contextmenu",function(e){
+            $(".chat-body ").on("contextmenu", function (e) {
                 return false;
-            }); 
+            });
 
-            $(document).keydown(function(event){
-                if(event.keyCode==123){
+            $(document).keydown(function (event) {
+                if (event.keyCode == 123) {
                     return false;
                 }
-                else if(event.ctrlKey && event.shiftKey && event.keyCode==73){        
-                  return false;  //Prevent from ctrl+shift+i
+                else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+                    return false;  //Prevent from ctrl+shift+i
                 }
             });
         }
-        
+
 
 
     });
