@@ -16,11 +16,12 @@ html,body{
     height: 436px;
     overflow-y: scroll;
     background-color: #f5f5f5;
+     padding-top: 22%;
 }
 
 .chat-body h1 {
     text-align: center;
-    padding-top: 30%;
+  
 }
 
 
@@ -295,8 +296,6 @@ html,body{
     font-size: larger;
     color: #5e5e5e;
     position: relative;
-    top: 15%;
-    margin: 10%
 }
 
 .carousel-body {
