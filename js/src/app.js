@@ -74,13 +74,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //Checking Source
         var isWeb=$('#webchat').context.URL;
         
-        //Removing Header and Right Click Functionality for Web
-        if(isWeb !=null || isWeb != undefined){
-            $('.showheader').hide();
-            $(".chat-body ").on("contextmenu",function(e){
-                return false;
-            }); 
-        }
+        
 
         if (config.accessToken && config.chatServerURL) {
             var processor = apiService();
@@ -259,7 +253,24 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             });
             e.preventDefault();
         });
-        // ----------------------------
+
+        //Disabling Header,Right Click and Developer windows Functionality for Web
+        if(isWeb !=null || isWeb != undefined){
+            $('.showheader').hide();
+            $(".chat-body ").on("contextmenu",function(e){
+                return false;
+            }); 
+
+            $(document).keydown(function(event){
+                if(event.keyCode==123){
+                    return false;
+                }
+                else if(event.ctrlKey && event.shiftKey && event.keyCode==73){        
+                  return false;  //Prevent from ctrl+shift+i
+                }
+            });
+        }
+        
 
 
     });
