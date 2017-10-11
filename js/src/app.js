@@ -6,9 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
-
     $(function () {
-
         /* Web Popup Adjustment header hiding */
         function adjustPopups() {
             let msgboxh = $("div.header-popup").next().height();
@@ -103,7 +101,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
-            debugger;
+            // debugger;
            var textInput=$(this).text();
             var payloadInput = $(this).data().quickrepliespayload;
             processor.askBot(payloadInput,textInput, function (error, html) {
