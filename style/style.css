@@ -23,6 +23,7 @@ html,body{
     padding-top: 30%;
 }
 
+
 .chat-user-dialog {
   background-color: #00aced;
   margin-top: 0%;
@@ -121,7 +122,8 @@ html,body{
   border-radius: 15px;
   background-color: #f5f5f5;
   padding: 0% 0% 0% 0%;
-  margin: 5%
+  margin: 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);
 }
 
 .custom-image-wrap {
@@ -186,6 +188,18 @@ html,body{
     margin: -1% 5% 5% 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);
 }
+
+.bot-res-timestamp-card{
+  text-align: left;
+  margin: 0% 0% 0% 9%;
+  font-size: 77%;
+  color: #ada497;
+  display: inline-block;
+  bottom: 19px;
+  position: relative;
+  left: -4%;
+}
+
 .background-color-custom {
   background-color: #f5f5f5;
 }
@@ -203,17 +217,26 @@ html,body{
 }
 
 .user-timestamp {
-    text-align: right;
-    margin: 0% 5% 0% 0%;
+    /*text-align: right;*/
+    /*margin: 0% 5% 0% 0%;*/
     font-size: 77%;
     color: #ada497;
+    display: inline-block;
+    height: 0%;
+    /* text-align: right; */
+    left: 86%;
+    position: relative;
+    bottom: 16px;
 }
 
 .bot-res-timestamp {
-    text-align: left;
-    margin: 0% 5% 0% 10%;
-    font-size: 77%;
-    color: #ada497;
+  text-align: left;
+  margin: 0% 0% 0% 9%;
+  font-size: 77%;
+  color: #ada497;
+  display: inline-block;
+  bottom: 26px;
+  position: relative;
 }
 
 .list-group-item-text-user {
@@ -237,7 +260,7 @@ html,body{
 }
 
 .list-group-item-text-bot {
-    margin-bottom: 4%;
+    margin: 0% 0% 4% 2%;
     line-height: 1.4;
     color: #777777;
     font-size: .875rem;
@@ -304,10 +327,11 @@ html,body{
   border-radius: 15px;
   color: #777777;
   font-size: .875rem;
-  padding: 4% 3% 4% 3%;
+  padding: 4% 4% 4% 3%;
   margin-bottom: 4%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);
   overflow-wrap: break-word;
   position: relative;
   line-height: 1.4;
+  margin: 0% 5% 0% 5%;
 }

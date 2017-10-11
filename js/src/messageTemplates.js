@@ -14,7 +14,7 @@ define(["utils"], function (utils) {
 //     <img class="img-responsive" src="${data.senderAvatar}">
 //     </a>
 // </div>
-
+//
     //User Plain Text
     methods.userplaintext = (data) => {
 
@@ -95,7 +95,7 @@ define(["utils"], function (utils) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></li>`;
+            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
         }
         return html;
     }
@@ -160,7 +160,7 @@ define(["utils"], function (utils) {
                 }
             }
         }
-        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>sent at ${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
@@ -196,7 +196,7 @@ define(["utils"], function (utils) {
         carousel += ` </div><!--.carousel-inner-->
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></li>`;
+	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
 
         return carousel;
     }

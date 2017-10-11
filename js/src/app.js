@@ -7,8 +7,12 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
 
-    $(function () {
-
+        // $(function () {
+        //     $(document).ready(function () {
+        //         $("body").on("contextmenu",function(e){
+        //             return false;
+        //    });
+        // });//Disables Right Click
 
         /* Web Popup Adjustment header hiding */
         function adjustPopups() {
@@ -254,4 +258,3 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
 
 
     });
-});
