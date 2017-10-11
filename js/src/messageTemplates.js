@@ -14,7 +14,7 @@ define(["utils"], function (utils) {
 //     <img class="img-responsive" src="${data.senderAvatar}">
 //     </a>
 // </div>
-
+//
     //User Plain Text
     methods.userplaintext = (data) => {
 
@@ -37,7 +37,7 @@ define(["utils"], function (utils) {
     //     <img class="img-responsive" src="${data.senderAvatar}">
     //     </a>
     // </div>
-    //
+
     //Plain Text Template
     methods.plaintext = (data) => {
         let html = `<li class="list-group-item background-color-custom">
@@ -95,7 +95,7 @@ define(["utils"], function (utils) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></li>`;
+            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
         }
         return html;
     }
@@ -141,6 +141,7 @@ define(["utils"], function (utils) {
     //     </a>
     // </div>
     //Quick Replies Template
+    //
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item background-color-custom">
 
@@ -151,7 +152,7 @@ define(["utils"], function (utils) {
 
             if (data.payload[i].platform == "facebook") {
                 if (data.payload[i].payload.facebook.hasOwnProperty('quick_replies')) {
-                    quickRepliesHtml += `<p class="custom-quick-reply-background">${data.payload[i].payload.facebook.text}</p><div class="quick-replies-buttons">`;
+                    quickRepliesHtml += `<p class="list-group-item-quick-reply-space">${data.payload[i].payload.facebook.text}</p><div class="quick-replies-buttons">`;
                     for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
                             }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
@@ -159,7 +160,7 @@ define(["utils"], function (utils) {
                 }
             }
         }
-        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>sent at ${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
@@ -195,7 +196,7 @@ define(["utils"], function (utils) {
         carousel += ` </div><!--.carousel-inner-->
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></li>`;
+	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
 
         return carousel;
     }

@@ -14,7 +14,7 @@ define({
     applicationTitle: "RICOH Assistant",
     userTitle : "Me",
     botTitle : "RICOH Assistant",
-    botAvatar : "avatar/vfslogo.png",
+    botAvatar : "avatar/bot-logo-image.png",
     userAvatar : "avatar/user.png",
     attachmentUploadURL : "",
     platform : "facebook",
