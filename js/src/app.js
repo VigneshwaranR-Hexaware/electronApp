@@ -101,7 +101,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 sendMessage($(this), e);
             }
         });
-
+//
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
             // debugger;
