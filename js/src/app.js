@@ -6,14 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
-
-        // $(function () {
-        //     $(document).ready(function () {
-        //         $("body").on("contextmenu",function(e){
-        //             return false;
-        //    });
-        // });//Disables Right Click
-
+    $(function () {
         /* Web Popup Adjustment header hiding */
         function adjustPopups() {
             let msgboxh = $("div.header-popup").next().height();
@@ -76,11 +69,15 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             }
         }
         var chatKeyPressCount = 0;
+        //Checking Source
+        var isWeb=$('#webchat').context.URL;
+        
+        
 
         if (config.accessToken && config.chatServerURL) {
             var processor = apiService();
         }
-
+        
         if (!processor) {
             throw new Error("Message processing manager is not defined!");
         }
@@ -254,7 +251,25 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             });
             e.preventDefault();
         });
-        // ----------------------------
+
+        //Disabling Header,Right Click and Developer windows Functionality for Web
+        if(isWeb !=null || isWeb != undefined){
+            $('.showheader').hide();
+            $(".chat-body ").on("contextmenu",function(e){
+                return false;
+            }); 
+
+            $(document).keydown(function(event){
+                if(event.keyCode==123){
+                    return false;
+                }
+                else if(event.ctrlKey && event.shiftKey && event.keyCode==73){        
+                  return false;  //Prevent from ctrl+shift+i
+                }
+            });
+        }
+        
 
 
     });
+});
