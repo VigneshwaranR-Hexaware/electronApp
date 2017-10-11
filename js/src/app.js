@@ -107,12 +107,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             // debugger;
             var textInput = $(this).text();
             var payloadInput = $(this).data().quickrepliespayload;
-<<<<<<< HEAD
             processor.askBot(payloadInput, textInput, function (error, html) {
-=======
-            $(".quick-replies-buttons").hide();
-            processor.askBot(payloadInput,textInput, function (error, html) {
->>>>>>> 817617656a95d01e0061c25827dbb863949f9310
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
