@@ -196,7 +196,8 @@ define(["utils"], function (utils) {
         carousel += ` </div><!--.carousel-inner-->
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
+	  </div><!--.Carousel-->
+    </div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
 
         return carousel;
     }
