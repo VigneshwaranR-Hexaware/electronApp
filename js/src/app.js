@@ -5,7 +5,7 @@ Copyright (c) 2017-2017 Hexaware Technologies
 This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
-define(['jquery', 'settings', 'apiService', 'utils'], function ($,  config, apiService, utils) {
+define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiService, utils) {
     $(function () {
         /*Upload File*/
 
@@ -19,16 +19,46 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($,  config, apiS
             let finalcss = 'calc(100%-' + finalcalc + 'px)';
             $("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
         }
+        var fileuploadeddat;
+        $('input#imagename').change(function (event) {
+            fileuploadeddat = this.files;
+            $('form.uploadImage').submit();
+            event.preventDefault();
+        })
         $('form.uploadImage').submit(function (event) {
             event.preventDefault();
-            $(this).ajaxSubmit({
-                contentType: 'application/json',
-                success: function (response) {
-                    window.location.reload();
-                }
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                xhr: function () { // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+                        //myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
+                //Ajax events
+                beforeSend: function () {
+                    if (!fileuploadeddat) {
+                        alert("No file");
+                        return false;
+                    }
+                },
+                success: function (e) {
+                    console.log("Successful File Uploading");
+                },
+                error: function (e) {
+                    console.log("Error uploading file");
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
             });
 
-            return false;
         });
         /*Query of when Web Popup=1 opens popup  window, hiding web headers*/
         let popup = window.location.search.substring(1).split("=");
@@ -84,9 +114,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($,  config, apiS
         var chatKeyPressCount = 0;
         //Checking Source
         var isWeb = $('#webchat').context.URL;
-
-
-
         if (config.accessToken && config.chatServerURL) {
             var processor = apiService();
         }

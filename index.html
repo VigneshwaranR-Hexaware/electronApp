@@ -75,8 +75,8 @@
         <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
                   <i class="material-icons pmd-sm">mic</i>
                 </button>
-        <form class="uploadImage" enctype="multipart/form-data" action="/upload" method="POST">
-          <input type="file" class="hidden" onchange="submituploadform()" name="imagename" id="imagename" />
+        <form class="uploadImage" enctype="multipart/form-data"  method="POST">
+          <input type="file" class="hidden" name="imagename" id="imagename" />
         </form>
       </div>
     </div>
@@ -102,11 +102,6 @@
 
   </div>
 </body>
-<script>
-  function submituploadform() {
-    $('.uploadImage').submit();
-  }
 
-</script>
 
 </html>
