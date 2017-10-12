@@ -334,3 +334,8 @@ html,body{
   line-height: 1.4;
   margin: 0% 5% 0% 5%;
 }
+
+
+.main-container {
+  max-width: 420px;
+}

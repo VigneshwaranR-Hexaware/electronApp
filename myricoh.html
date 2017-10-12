@@ -14,7 +14,7 @@
 	<link href="style/propeller.min.css" rel="stylesheet">
 	<style type="text/css">
 		.popover {
-			max-width: 420px !important;
+			max-width: 420px;
 		}
 	</style>
 </head>
@@ -49,7 +49,7 @@
 			console.log($('.showheader').hide());
 			$('.showheader').hide();
 			var win = window.open(src, "_new", "width=" + width + ",height=" + height);
-			win.addEventListener("resize", function () {
+			/*win.addEventListener("resize", function () {
 				win.resizeTo(width, height);
 				let msgboxh = $("div.header-popup").next().height();
 				let chath = $("div.header-popup").next().next().height();
@@ -60,7 +60,7 @@
 				let finalcalc = bodyh - (chath + typetext);
 				let finalcss = 'calc(100%-' + finalcalc + 'px)';
 				$("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
-			});
+			});*/
 		}
 	</script>
 </body>
