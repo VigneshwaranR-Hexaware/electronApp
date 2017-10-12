@@ -26,8 +26,8 @@ define(["utils","settings"], function (utils,settings) {
                 <div class="list-group-item-text-user"><p>${data.payload}</p></div>
 
             </div>
-        </li>
-          <p class="user-timestamp"><small>${data.time}</small></p>`;
+            <p class="user-timestamp"><small>${data.time}</small></p>
+        </li>`;
 
         return html;
     }
@@ -47,8 +47,9 @@ define(["utils","settings"], function (utils,settings) {
                 <div class="list-group-item-text-bot"><p>${data.payload}</p></div>
 
             </div>
-        </li>
-       <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>`;
+
+            <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>
+        </li>`;
 
         return html;
     }
