@@ -191,7 +191,7 @@ define(["utils","settings"], function (utils,settings) {
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                        carousel += `<button type="button" class="btn-carousel btn-primary pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                        carousel += `<button type="button" class="btn-carousel btn-info pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                     }
                 }
                 carousel += `</div>
@@ -204,7 +204,7 @@ define(["utils","settings"], function (utils,settings) {
         carousel += ` </div><!--.carousel-inner-->
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
+	  </div><!--.Carousel--></div><p style="bottom: 10px;" class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
 
         return carousel;
     }

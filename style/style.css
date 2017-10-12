@@ -362,3 +362,14 @@ html,body{
   background-color: #4F92AB;
   border: solid 1px #4F92AB;
 }
+
+
+.carousel-control {
+    /*background-image: -webkit-linear-gradient(left,rgba(79,146,171,.95) 0,rgba(79,146,171,.0001) 100%);
+    background-image: -o-linear-gradient(left,rgba(79,146,171,.95) 0,rgba(79,146,171,.0001) 100%);
+    background-image: -webkit-gradient(linear,left top,right top,from(rgba(79,146,171,.95)),to(rgba(79,146,171,.0001)));
+    background-image: linear-gradient(to right,rgba(79,146,171,.95) 0,rgba(79,146,171,.0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+    background-repeat: repeat-x;*/
+    background-color: rgb(79,146,171);
+}
