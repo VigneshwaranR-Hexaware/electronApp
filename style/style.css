@@ -202,7 +202,7 @@ html,body{
 }
 
 .bot-res-timestamp-card{
-  
+
 
   font-size: 77%;
   color: #ada497;
@@ -276,7 +276,7 @@ html,body{
 }
 
 .list-group-item-text-bot {
-    
+
      line-height: 1.4;
      color: #000000;
      font-size: .875rem;
@@ -322,7 +322,7 @@ html,body{
 }
 
 .quick-replies-buttons {
-  /* text-align: center; */
+  text-align: center;
   margin-bottom: 11px;
 }
 
@@ -350,4 +350,15 @@ html,body{
 
 .main-container {
   max-width: 420px;
+}
+
+.pmd-btn-outline.btn-info {
+  color: #4F92AB;
+  background-color: transparent;
+  border: solid 1px #4F92AB;
+}
+.pmd-btn-outline.btn-info:hover, .pmd-btn-outline.btn-info:focus {
+  color: #fff;
+  background-color: #4F92AB;
+  border: solid 1px #4F92AB;
 }

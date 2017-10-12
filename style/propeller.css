@@ -1024,7 +1024,7 @@ h2.pmd-card-title-text {
 
 /* -- Button Info outline --*/
 .pmd-btn-outline.btn-info {
-  color: #4F92AB !important;
+  color: #4F92AB;
   background-color: transparent;
   border: solid 1px #4F92AB;
 }
