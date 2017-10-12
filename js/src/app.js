@@ -13,7 +13,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             let chath = $("div.header-popup").next().next().height();
             let typetext = $("div.header-popup").next().next().next().height();
             let bodyh = $("body").height();
-          
+
             let finalcalc = bodyh - (chath + typetext);
             let finalcss = 'calc(100%-' + finalcalc + 'px)';
             $("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
@@ -24,7 +24,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         if (popup[1] == 1) {
             $("div.header-popup").addClass("hidden").slideUp("slow");
             adjustPopups();
-           
+
         }
         else {
             $("div.header-popup").removeClass("hidden")
@@ -264,14 +264,14 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 return false;
             });
 
-            $(document).keydown(function (event) {
-                if (event.keyCode == 123) {
-                    return false;
-                }
-                else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-                    return false;  //Prevent from ctrl+shift+i
-                }
-            });
+            // $(document).keydown(function (event) {
+            //     if (event.keyCode == 123) {
+            //         return false;
+            //     }
+            //     else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+            //         return false;  //Prevent from ctrl+shift+i
+            //     }
+            // });
         }
 
 
