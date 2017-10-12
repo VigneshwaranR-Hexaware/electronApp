@@ -183,7 +183,7 @@ define(["utils","settings"], function (utils,settings) {
             if (data.payload[i].type == 1) {
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-12">
                             <a href="#" class="thumbnail custom-image-wrap">
                                 <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
