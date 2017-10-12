@@ -23,10 +23,11 @@ define(["utils","settings"], function (utils,settings) {
 
             <div class="media-body user-txt-space">
 
-                <div class="list-group-item-text-user"><p>${data.payload}</p></div>
+                <p class="list-group-item-text-user">${data.payload}</p>
+                <p class="user-timestamp"><small>${data.time}</small></p>
 
             </div>
-            <p class="user-timestamp"><small>${data.time}</small></p>
+            
         </li>`;
 
         return html;
@@ -44,11 +45,12 @@ define(["utils","settings"], function (utils,settings) {
 
             <div class="media-body bot-txt-space">
 
-                <div class="list-group-item-text-bot"><p>${data.payload}</p></div>
+                <p class="list-group-item-text-bot">${data.payload}</p>
+                <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>
 
             </div>
 
-            <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>
+            
         </li>`;
 
         return html;
