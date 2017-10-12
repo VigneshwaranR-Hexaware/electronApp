@@ -21,12 +21,12 @@
 
 <body>
 
-	<a href="#" onclick="createWindow('/',400,650)">Click to chat</a>
+	<a href="#" onclick="createWindow('http://localhost:3000/?popup=1',400,650)">Click to chat</a>
 	<footer>
 		<div class="menu pmd-floating-action" role="navigation">
-			<a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect  btn-primary" id="webChat" data-trigger="click" data-toggle="popover" data-placement="top"
-			 data-content="<iframe  src='http://localhost:3000/?popup=1' height='510' width='400' style='border:none'></iframe>" data-html="true"
-			 href="javascript:void(0);"> 
+			<a class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect  btn-primary" id="webChat" data-trigger="click" data-toggle="popover"
+			 data-placement="top" data-content="<iframe  src='http://localhost:3000/?popup=1' height='510' width='400' style='border:none'></iframe>"
+			 data-html="true" href="javascript:void(0);"> 
             <span class="pmd-floating-hidden">Primary</span>
             <i class="material-icons md-light pmd-sm">chat</i>
         </a>
@@ -45,12 +45,21 @@
 		});
 
 		//Stop Window Resize
-		function createWindow(src, width, height){
+		function createWindow(src, width, height) {
 			console.log($('.showheader').hide());
 			$('.showheader').hide();
-			var win = window.open(src, "_new", "width="+width+",height="+height);
-			win.addEventListener("resize", function(){
-			win.resizeTo(width, height);
+			var win = window.open(src, "_new", "width=" + width + ",height=" + height);
+			win.addEventListener("resize", function () {
+				win.resizeTo(width, height);
+				let msgboxh = $("div.header-popup").next().height();
+				let chath = $("div.header-popup").next().next().height();
+				let typetext = $("div.header-popup").next().next().next().height();
+				let footer = $("div.header-popup").next().next().next().next().height();
+				let bodyh = $("body").height();
+
+				let finalcalc = bodyh - (chath + typetext);
+				let finalcss = 'calc(100%-' + finalcalc + 'px)';
+				$("div.chat-body").css('height', 'calc(' + finalcalc + 'px)');
 			});
 		}
 	</script>

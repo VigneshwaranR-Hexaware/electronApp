@@ -22,10 +22,13 @@
 <body>
   <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
   <script>
-    requirejs(['lib/jquery.min'], function ($) {
-      requirejs(['lib/bootstrap.min', 'lib/propeller'], function () {
-      });
-    });
+   require(['lib/jquery.min'], function ($) {
+			require(['lib/bootstrap.min'], function () {
+				require(['lib/propeller'], function () {
+					console.log("Loaded :)");
+				});
+			});
+		});
   </script>
 
   <div class="container-fluid main-container">
@@ -98,10 +101,9 @@
                   </a>
         </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col-xs-12"><small style="color:#ccc">Copyrights</small></div>
     </div>
+    
   </div>
 
 </body>
