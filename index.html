@@ -19,20 +19,20 @@
 </head>
 
 
-    <body>
-        <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
-        <script>
-		requirejs(['lib/jquery.min'], function($) {
-			requirejs(['lib/bootstrap.min', 'lib/propeller'], function() {
-			});
-		});
-        </script>
+<body>
+  <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
+  <script>
+    requirejs(['lib/jquery.min',"lib/jquery.form.min"], function ($) {
+      requirejs(['lib/bootstrap.min', 'lib/propeller'], function () {
+      });
+    });
+  </script>
 
   <div class="container-fluid main-container">
 
     <div class="row header-popup">
       <div class="pmd-card pmd-z-depth card-custom-view showheader" style="margin-bottom: 4px;">
-        <div class="pmd-card-body"  style="margin:0px;">
+        <div class="pmd-card-body" style="margin:0px;">
           <div class="table custom-size" style="margin:0px;">
             <!-- <div class="media">
               <div class="media-body">
@@ -56,7 +56,8 @@
 
     <div class="row">
       <div class="chat-body pmd-z-depth">
-        <h1 class="pmd-display3 hidden welcome-message">Hello there! I am <b>{Bot Name}</b>. I can help you with queries regarding <b>{use case examples}</b>. You can begin a conversation by typing your query and I will try to answer them <b>:)</b></h1>
+        <h1 class="pmd-display3 hidden welcome-message">Hello there! I am <b>{Bot Name}</b>. I can help you with queries regarding <b>{use case examples}</b>. You can begin
+          a conversation by typing your query and I will try to answer them <b>:)</b></h1>
         <ul id="msg_container" class="list-group pmd-list pmd-card-list hidden background-color-custom"></ul>
       </div>
     </div>
@@ -74,7 +75,9 @@
         <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
                   <i class="material-icons pmd-sm">mic</i>
                 </button>
-        <input onchange="alert('your webhook ajax here');" type="file" class="hidden" name="attachment" />
+        <form class="uploadImage" enctype="multipart/form-data" action="/upload" method="POST">
+          <input type="file" class="hidden" onchange="submituploadform()" name="imagename" id="imagename" />
+        </form>
       </div>
     </div>
 
@@ -99,5 +102,11 @@
 
   </div>
 </body>
+<script>
+  function submituploadform() {
+    $('.uploadImage').submit();
+  }
+
+</script>
 
 </html>
