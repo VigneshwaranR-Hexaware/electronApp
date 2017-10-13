@@ -310,7 +310,73 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             });
         }
 
+        /**
+		 * Mic icon functionality. This will record the speech and transfer the same to text
+		 */
+        $(".speaker-text-response").click(function (e) {
+            switchRecognition();
+        });
 
+        var recognition;
+        function startRecognition() {
+            recognition = new webkitSpeechRecognition();
+
+            recognition.onstart = function (event) {
+                updateRec();
+                $("#btn-input").focus();
+            };
+
+            recognition.onresult = function (event) {
+                recognition.onend = null;
+
+                var text = "";
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    text += event.results[i][0].transcript;
+                }
+                setInput(text);
+                //stopRecognition();
+            };
+
+            recognition.onend = function () {
+                stopRecognition();
+            };
+            recognition.lang = "en-US";
+            recognition.start();
+        }
+
+        function stopRecognition() {
+            if (recognition) {
+                recognition.stop();
+                recognition = null;
+            }
+            updateRec();
+        }
+
+        function switchRecognition() {
+            $("button.speaker-text-response").removeClass(".btn-primary:focus");
+            $("button.speaker-text-response").removeClass(".btn-primary:hover");
+            if (recognition==null) {
+                stopRecognition();
+                $("button.speaker-text-response").addClass(".btn-primary:focus");
+            } else {
+                startRecognition();
+                $("button.speaker-text-response").addClass(".btn-primary:hover");
+            }
+        }
+
+        function setInput(text) {
+            console.log("Rec is " + recognition);
+            $("#btn-input").val(text);
+            send();
+        }
+
+        function updateRec() {
+            //$recBtn.text(recognition ? "Stop" : "Speak");
+            console.log("Click");
+
+        }
+
+        //End of speech to text related functions
 
     });
 });

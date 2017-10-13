@@ -19,7 +19,12 @@ app.get('/', function (req, res) {
   res.send("/richowebsites");
 });
 app.post("/upload", upload.single('imagename'), function (req, res) {
-  res.send(req.file.filename);
+  if(req.file) {
+    res.send(req.file.filename);
+  } else {
+    res.send();
+  }
+  
 })
 app.get('/richowebsite', function (req, res) {
   res.sendfile(__dirname + '/myricoh.html');
