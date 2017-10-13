@@ -27,7 +27,7 @@
 
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
-        
+
       $('[data-toggle="popover"]').each(function () {
                 //the 'is' for buttons that trigger popups
                 //the 'has' for icons within a button that triggers a popup
@@ -36,9 +36,9 @@
                     $(this).trigger('click')
                   }
                 }
-                
-                
-            }); 
+
+
+            });
 
     });
 
@@ -88,6 +88,12 @@
             src="./avatar/bot-logo-image.jpg" /></div>
         <h1 class="pmd-display3 hidden col-xs-12 welcome-message">Hello there! I am <b>{Bot Name}</b>. I can help you with queries regarding <b>{use case examples}</b>. You can begin
           a conversation by typing your query and I will try to answer them <b>:)</b></h1>
+          <div class="header-text-logo hidden" style="background-color: white;height: 14%;border-bottom:2px solid rgba(204, 204, 204, 0.59)"><div class="col-xs-3" style="padding-top: 2%;">
+            <img src="../avatar/bot-logo-image.jpg" class="img-responsive" style="border-radius: 50%; border: 5px solid white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0); padding-top: 0%;"></div>
+          <div class="col-xs-8" style="padding: 5% 0% 0% 0%;font-size: 120%;font-style: roboto;font-family: roboto;font-weight: 12%;color: #606060;"><b>Ricoh Assistant</b></div>
+          <div class="header-subtitle" style="font-family: roboto;font-size: small;color: #606060;padding: 0% 0% 0% 0%;top: -7px;position: relative;">Imagine Change</div>
+        </div>
+
         <ul id="msg_container" class="list-group pmd-list pmd-card-list hidden background-color-custom"></ul>
       </div>
     </div>

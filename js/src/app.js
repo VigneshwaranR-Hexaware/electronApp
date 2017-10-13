@@ -61,6 +61,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                         if (msg_container.hasClass('hidden')) { // can be optimimzed and removed from here
                             msg_container.siblings("h1").addClass('hidden');
                             msg_container.siblings("div.chat-text-para").addClass('hidden');
+                            msg_container.siblings(".header-text-logo").removeClass('hidden');
                             msg_container.removeClass('hidden');
                         }
                         msg_container.append(html);
@@ -89,9 +90,11 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         if (msg_container.find('li').length == 0) {
             msg_container.siblings("h1").removeClass('hidden');
             msg_container.siblings("div.chat-text-para").removeClass('hidden');
+            msg_container.siblings(".header-text-logo").addClass('hidden');
         } else {
             msg_container.siblings("h1").addClass('hidden');
             msg_container.siblings(".chat-text-para").addClass('hidden');
+            msg_container.siblings(".header-text-logo").removeClass('hidden');
 
         }
         $("a#btn-send-message").click(function (e) {
