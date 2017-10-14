@@ -304,7 +304,7 @@ html,body{
 }
 
 .welcome-message {
-    font-size: larger;
+    font-size: inherit;
     color: #5e5e5e;
     position: relative;
 }
@@ -372,4 +372,20 @@ html,body{
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
     background-repeat: repeat-x;*/
     background-color: rgb(79,146,171);
+}
+.center-modal-auto
+{
+  width: 85%;
+  max-width: 28em;
+}
+.no-scroll-x{
+  overflow-x: hidden;
+}
+
+.modal-box-custom{
+    font-family: Roboto;
+    line-height: 1.1;
+    font-size: small;
+    color: gray;
+    border-radius: 10px;
 }
