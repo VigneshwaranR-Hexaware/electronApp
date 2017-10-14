@@ -19,7 +19,7 @@ define(["utils","settings"], function (utils,settings) {
     methods.userplaintext = (data) => {
 
         let html = `<li class="list-group-item background-color-custom">
-            <div class="media-left pull-right">
+            <div class="media-left pull-right animated fadeInRight">
 
             <div class="media-body user-txt-space">
 
@@ -43,7 +43,7 @@ define(["utils","settings"], function (utils,settings) {
     methods.plaintext = (data) => {
         let html = `<li class="list-group-item background-color-custom">
 
-            <div class="media-body bot-txt-space">
+            <div class="media-body bot-txt-space animated fadeInLeft">
 
                 <p class="list-group-item-text-bot">${data.payload}</p>
                 <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>
@@ -71,7 +71,7 @@ define(["utils","settings"], function (utils,settings) {
         let cardButtons = "";
         let cardBody;
         for (let i in data.payload) {
-            cardBody = `<li class="list-group-item background-color-custom">
+            cardBody = `<li class="list-group-item background-color-custom animated fadeInLeft">
             <div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">
                 <!-- Card header -->
                 <div class="pmd-card-title">
@@ -148,7 +148,7 @@ define(["utils","settings"], function (utils,settings) {
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item background-color-custom">
 
-        <div class="media-body">`;
+        <div class="media-body animated fadeInLeft">`;
 
         for (let i in data.payload) {
 
@@ -174,7 +174,7 @@ define(["utils","settings"], function (utils,settings) {
     }
 
     methods.carousel = (data, uniqueId) => {
-        var carousel = `<li class="list-group-item background-color-custom">
+        var carousel = `<li class="list-group-item background-color-custom animated fadeInLeft">
         <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false">
         <!-- Carousel items -->
             <div class="carousel-inner">`;
