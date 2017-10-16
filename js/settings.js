@@ -8,13 +8,13 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define({
 
-    accessToken: "0bd6324ba1b64892ab2d68864808285c",
+    accessToken: "6c7e02249ef94cc68b647881b36f0739",
     chatServerURL : "https://api.api.ai/v1/",
 
     applicationTitle: "RICOH Assistant",
     userTitle : "Me",
     botTitle : "RICOH Assistant",
-    botAvatar : "../avatar/bot-logo-image.jpg",
+    botAvatar : "avatar/bot-logo-image.png",
     userAvatar : "avatar/user.png",
     attachmentUploadURL : "",
     platform : "facebook",
