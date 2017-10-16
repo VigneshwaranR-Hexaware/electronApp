@@ -6,7 +6,7 @@ This file is part of the Innovation LAB - Offline Bot.
 ------------------------------------------------------------------- */
 
 
-define(["utils","settings"], function (utils,settings) {
+define(["utils"], function (utils) {
 
     var methods = {};
 
@@ -19,16 +19,15 @@ define(["utils","settings"], function (utils,settings) {
     methods.userplaintext = (data) => {
 
         let html = `<li class="list-group-item background-color-custom">
-            <div class="media-left pull-right animated fadeInRight">
+            <div class="media-left pull-right">
 
             <div class="media-body user-txt-space">
 
-                <p class="list-group-item-text-user">${data.payload}</p>
-                <p class="user-timestamp"><small>${data.time}</small></p>
+                <div class="list-group-item-text-user"><p>${data.payload}</p></div>
 
             </div>
-
-        </li>`;
+        </li>
+          <p class="user-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -43,15 +42,13 @@ define(["utils","settings"], function (utils,settings) {
     methods.plaintext = (data) => {
         let html = `<li class="list-group-item background-color-custom">
 
-            <div class="media-body bot-txt-space animated fadeInLeft">
+            <div class="media-body bot-txt-space">
 
-                <p class="list-group-item-text-bot">${data.payload}</p>
-                <p class="bot-res-timestamp"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p>
+                <div class="list-group-item-text-bot"><p>${data.payload}</p></div>
 
             </div>
-
-
-        </li>`;
+        </li>
+        <p class="bot-res-timestamp"><small>${data.time}</small></p>`;
 
         return html;
     }
@@ -71,7 +68,7 @@ define(["utils","settings"], function (utils,settings) {
         let cardButtons = "";
         let cardBody;
         for (let i in data.payload) {
-            cardBody = `<li class="list-group-item background-color-custom animated fadeInLeft">
+            cardBody = `<li class="list-group-item background-color-custom">
             <div class="pmd-card pmd-card-default pmd-z-depth custom-infocard">
                 <!-- Card header -->
                 <div class="pmd-card-title">
@@ -98,7 +95,7 @@ define(["utils","settings"], function (utils,settings) {
                 }
                 cardButtons += `</div>`
             }
-            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
+            html = cardBody + cardButtons + `</div></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
         }
         return html;
     }
@@ -148,7 +145,7 @@ define(["utils","settings"], function (utils,settings) {
     methods.quickreplies = (data) => {
         var quickRepliesHtml = `<li class="list-group-item background-color-custom">
 
-        <div class="media-body animated fadeInLeft">`;
+        <div class="media-body">`;
 
         for (let i in data.payload) {
 
@@ -157,45 +154,36 @@ define(["utils","settings"], function (utils,settings) {
                 if (data.payload[i].payload.facebook.hasOwnProperty('quick_replies')) {
                     quickRepliesHtml += `<p class="list-group-item-quick-reply-space">${data.payload[i].payload.facebook.text}</p><div class="quick-replies-buttons">`;
                     for (var j = 0; j < data.payload[i].payload.facebook.quick_replies.length; j++) {
-                      if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('payload')){
-                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload}">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
-                      }
-                      else{
-                        console.log(data.payload[i].payload.facebook.quick_replies[j].url);
-                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.location.href='${data.payload[i].payload.facebook.quick_replies[j].url}'; 'height=400,width=600'" >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
-                        //quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.open('https://server.iad.liveperson.net/hc/70994705/?cmd=file&file=visitorWantsToChat&site=70994705&byhref=1&SESSIONVAR!skill=MyRicohSupport&imageUrl=https://server.iad.liveperson.net/hcp/Gallery/ChatButton-Gallery/English/General/1a?type=individual','_blank'); " >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
-                      }
+                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload
+                            }">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                     }
                 }
             }
         }
-        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`
+        quickRepliesHtml += `</div><p class="bot-res-timestamp-qr"><small>${data.time}</small></p></div></li>`
         return quickRepliesHtml;
     }
 
     methods.carousel = (data, uniqueId) => {
-        var carousel = `<li class="list-group-item background-color-custom animated fadeInLeft">
+        var carousel = `<li class="list-group-item background-color-custom">
         <div id="${uniqueId}" class="carousel slide pmd-card pmd-card-default pmd-z-depth carousel-custom" data-ride="false">
         <!-- Carousel items -->
             <div class="carousel-inner">`;
         var index = 0;
-
-
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
-              if(data.action == "SampleInvoiceCarouselIntent"){
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-3">
                             <a href="#" class="thumbnail custom-image-wrap">
-                                <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" data-src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                                <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
                             <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
                 if (data.buttons && data.payload[i].type == 1) {
                     for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                        carousel += `<button type="button" class="btn-carousel btn-info pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                        carousel += `<button type="button" class="btn-carousel btn-primary pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                     }
                 }
                 carousel += `</div>
@@ -203,35 +191,12 @@ define(["utils","settings"], function (utils,settings) {
                 </div> <!--.item-->`;
                 index = 1;
             }
-            else{
-              carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
-                  <div class="row">
-                      <div class="col-md-12">
-                          <a href="#" class="thumbnail custom-image-wrap">
-                              <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
-                          </a>
-                          <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
-                          <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
-              if (data.buttons && data.payload[i].type == 1) {
-                  for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                      carousel += `<button type="button" class="btn-carousel btn-info pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
-                  }
-              }
-              carousel += `</div>
-                  </div><!--.row-->
-              </div> <!--.item-->`;
-              index = 1;
-            }
-          }
         }
 
         carousel += ` </div><!--.carousel-inner-->
-        
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"><span class="icon-prev" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span></a>
-		<a data-slide="next" href="#${uniqueId}" class="right carousel-control"><span class="icon-next" aria-hidden="true"></span>
-        <span class="sr-only">Next</span></a>
-	  </div><!--.Carousel--></div><p style="bottom: 10px;" class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
+		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
+		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
+	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
 
         return carousel;
     }
