@@ -187,7 +187,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                 callback(null, cardHTML);
                             } else {
                                 let carouselHTML = cards({
-
+                                    "action":response.result.action,
                                     "payload": response.result.fulfillment.messages,
                                     "senderName": config.botTitle,
                                     "senderAvatar": config.botAvatar,
