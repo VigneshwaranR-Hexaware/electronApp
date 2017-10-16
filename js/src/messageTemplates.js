@@ -180,7 +180,6 @@ define(["utils","settings"], function (utils,settings) {
             <div class="carousel-inner">`;
         var index = 0;
 
-
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
@@ -188,7 +187,7 @@ define(["utils","settings"], function (utils,settings) {
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="thumbnail custom-image-wrap">
+                            <a href="#" id="carousel-thumbnail-modal" class="thumbnail custom-image-wrap">
                                 <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" data-src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
                             <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
@@ -226,7 +225,7 @@ define(["utils","settings"], function (utils,settings) {
         }
 
         carousel += ` </div><!--.carousel-inner-->
-        
+
 		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"><span class="icon-prev" aria-hidden="true"></span>
         <span class="sr-only">Previous</span></a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control"><span class="icon-next" aria-hidden="true"></span>
