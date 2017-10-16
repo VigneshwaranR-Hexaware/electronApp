@@ -179,14 +179,17 @@ define(["utils","settings"], function (utils,settings) {
         <!-- Carousel items -->
             <div class="carousel-inner">`;
         var index = 0;
+
+
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
+              if(data.action == "SampleInvoiceCarouselIntent"){
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
                         <div class="col-md-12">
                             <a href="#" class="thumbnail custom-image-wrap">
-                                <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                                <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
                             <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
@@ -200,10 +203,31 @@ define(["utils","settings"], function (utils,settings) {
                 </div> <!--.item-->`;
                 index = 1;
             }
+            else{
+              carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <a href="#" class="thumbnail custom-image-wrap">
+                              <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                          </a>
+                          <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
+                          <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
+              if (data.buttons && data.payload[i].type == 1) {
+                  for (var j = 0; j < data.payload[i].buttons.length; j++) {
+                      carousel += `<button type="button" class="btn-carousel btn-info pmd-btn-outline caroselresponsepayload button-custom" data-carouselpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                  }
+              }
+              carousel += `</div>
+                  </div><!--.row-->
+              </div> <!--.item-->`;
+              index = 1;
+            }
+          }
         }
 
         carousel += ` </div><!--.carousel-inner-->
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
+
+		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"></a>
 		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
 	  </div><!--.Carousel--></div><p style="bottom: 10px;" class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
 

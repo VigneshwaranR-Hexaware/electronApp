@@ -374,7 +374,7 @@ html,body{
     background-image: linear-gradient(to right,rgba(79,146,171,.95) 0,rgba(79,146,171,.0001) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
     background-repeat: repeat-x;*/
-    background-color: rgb(79,146,171);
+    /*background-color: rgb(79,146,171);*/
 }
 .center-modal-auto
 {
@@ -392,3 +392,6 @@ html,body{
     color: gray;
     border-radius: 10px;
 }
+
+/*.material-icons.custom-arrow-color-left { color: #FB8C00; }
+.material-icons.custom-arrow-color-right { color: #FB8C00; }*/
