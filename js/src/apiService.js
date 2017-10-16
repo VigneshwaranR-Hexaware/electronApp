@@ -8,7 +8,6 @@ This file is part of the Innovation LAB - Offline Bot.
 
 define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
     function ($, config, utils, messageTpl, cards, uuidv1) {
-
         class ApiHandler {
 
             constructor() {
@@ -19,7 +18,6 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
             }
 
             userSays(userInput, callback) {
-                console.log(callback);
                 callback(null, messageTpl.userplaintext({
                     "payload": userInput,
                     "senderName": config.userTitle,
@@ -100,8 +98,28 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                 let msgfulfill = response.result.fulfillment.messages[i];
 
                                 if (msgfulfill.type == 4 && msgfulfill.hasOwnProperty("payload") && msgfulfill.payload.hasOwnProperty("facebook")) {
+                                    debugger;
+                                    for(let i in msgfulfill.payload.facebook){
+                                        debugger;
+                                        if(msgfulfill.payload.facebook[i].hasOwnProperty("text")){
+                                            let cardHTML = cards({
+                                                "payload": msgfulfill.payload.facebook[i].text,
+                                                "senderName": config.botTitle,
+                                                "senderAvatar": config.botAvatar,
+                                                "time": utils.currentTime(),
+                                                "className": ''
+                                            }, "plaintext");
+                                            callback(null, cardHTML);
+                                        }
+                                        if (msgfulfill.payload.facebook[i].hasOwnProperty("quick_replies")) {
+                                            debugger;
+                                            isQuickReply = (msgfulfill.payload.facebook[i].quick_replies.length > 0) ? true : false;
+                                            
+                                        }
+                                    }
                                     //Quick Replies
-                                    if (msgfulfill.payload.facebook.hasOwnProperty("quick_replies")) {
+                                    if (msgfulfill.payload.facebook[i].hasOwnProperty("quick_replies")) {
+                                        debugger;
                                         isQuickReply = (msgfulfill.payload.facebook.quick_replies.length > 0) ? true : false;
                                         console.log(isQuickReply);
                                     }
@@ -163,7 +181,9 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
 
 
                             }
-                        } else {
+                        
+                    }
+                        else {
                             let cardHTML = cards({
                                 "payload": response.result.fulfillment.speech,
                                 "senderName": config.botTitle,
@@ -185,7 +205,8 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                     "className": ''
                                 }, "card");
                                 callback(null, cardHTML);
-                            } else {
+                            } 
+                            else {
                                 let carouselHTML = cards({
 
                                     "payload": response.result.fulfillment.messages,
@@ -205,16 +226,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                             callback(null, cardHTML);
                         }
                         //CustomPayload Quickreplies
-                        if (isQuickReply) {
-                            let cardHTML = cards({
-                                "payload": response.result.fulfillment.messages,
-                                "senderName": config.botTitle,
-                                "senderAvatar": config.botAvatar,
-                                "time": utils.currentTime(),
-                                "className": ''
-                            }, "quickreplies");
-                            callback(null, cardHTML);
-                        }
+                        
                         //Apiai Quickreply
                         if (isQuickReplyFromApiai) {
                             let cardHTML = cards(response.result.fulfillment.messages, "quickreplyfromapiai");
@@ -350,6 +362,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                             callback(null, cardHTML);
 
                         }
+                        
 
                     },
                     error: function () {
