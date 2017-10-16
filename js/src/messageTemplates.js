@@ -189,7 +189,7 @@ define(["utils","settings"], function (utils,settings) {
                     <div class="row">
                         <div class="col-md-12">
                             <a href="#" class="thumbnail custom-image-wrap">
-                                <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+                                <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" data-src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
                             </a>
                             <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`

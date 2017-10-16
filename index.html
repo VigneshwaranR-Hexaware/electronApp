@@ -28,7 +28,7 @@
   <script data-main="js/require-setup" src="require.js"></script>
   <script>
 
-  function bindPopoverHide() {
+  function bindJS() {
 
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
@@ -47,6 +47,16 @@
 
     });
 
+    $('.img-modal-trigger').on('click', function() {
+        $('#modal-img-holder').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodal').modal('show');   
+    });     
+
+    //triggered when modal is about to be shown
+$('#center-dialog').on('show.bs.modal', function(e) {
+
+    $('#modal-img-holder').attr('src', $(e.relatedTarget).data('src'));
+});
   }
    require(['lib/jquery.min'], function ($) {
 
@@ -55,7 +65,7 @@
 			require(['lib/bootstrap.min'], function () {
 				require(['lib/propeller'], function () {
           console.log("Loaded :)");
-          bindPopoverHide()
+          bindJS()
 				});
 			});
 		});
@@ -171,7 +181,7 @@
                     <h3 class="pmd-card-title-text">Two-line item</h3>
                       <span class="pmd-card-subtitle-text">Secondary text</span> </div>
                   </div> -->
-                <div class="pmd-modal-media"> <img width="1184" height="666" class="img-responsive" src="http://propeller.in/assets/images/profile-pic.png">
+                <div class="pmd-modal-media"> <img id="modal-img-holder" width="1184" height="666" class="img-responsive" src="http://propeller.in/assets/images/profile-pic.png">
                 </div>
               <!-- <div class="modal-body"> Cards provide context and an entry point to more robust information and views. Don't overload cards with extraneous information or actions.
               </div> -->
