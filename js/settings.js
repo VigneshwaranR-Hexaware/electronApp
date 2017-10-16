@@ -10,7 +10,6 @@ define({
 
     accessToken: "0bd6324ba1b64892ab2d68864808285c",
     chatServerURL : "https://api.api.ai/v1/",
-
     applicationTitle: "RICOH Assistant",
     userTitle : "Me",
     botTitle : "RICOH Assistant",
