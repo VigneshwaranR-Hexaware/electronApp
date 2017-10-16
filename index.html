@@ -47,16 +47,10 @@
 
     });
 
-    $('.img-modal-trigger').on('click', function() {
-        $('#modal-img-holder').attr('src', $(this).find('img').attr('src'));
-        $('#imagemodal').modal('show');   
-    });     
-
     //triggered when modal is about to be shown
-$('#center-dialog').on('show.bs.modal', function(e) {
-
-    $('#modal-img-holder').attr('src', $(e.relatedTarget).data('src'));
-});
+    $('#center-dialog').on('show.bs.modal', function(e) {
+        $('#modal-img-holder').attr('src', $(e.relatedTarget).data('src'));
+    });
   }
    require(['lib/jquery.min'], function ($) {
 
@@ -109,7 +103,7 @@ $('#center-dialog').on('show.bs.modal', function(e) {
             <div class="col-xs-3">
               <img src="../avatar/bot-logo-image.jpg" class="img-responsive" style="border-radius: 50%; border: 5px solid white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0); padding-top: 0%;">
             </div>
-            <div class="col-xs-9" style="padding: 5% 0% 0% 0%;font-size: 120%;font-style: roboto;font-family: roboto;font-weight: 12%;color: #606060;"><b>Ricoh Assistant</b>
+            <div class="col-xs-9" style="padding: 13px 0 0 0;font-size: 120%;font-style: roboto;font-family: roboto;font-weight: 12%;color: #606060;"><b>Ricoh Assistant</b>
             </div>
             <div class="header-subtitle" style="font-family: roboto;font-size: small;color: #606060;padding: 0% 0% 0% 0%;top: -7px;position: relative;">Imagine Change
             </div>

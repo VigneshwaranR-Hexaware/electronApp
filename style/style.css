@@ -374,7 +374,18 @@ html,body{
     background-image: linear-gradient(to right,rgba(79,146,171,.95) 0,rgba(79,146,171,.0001) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
     background-repeat: repeat-x;*/
-    /*background-color: rgb(79,146,171);*/
+    background-color: #CF142B;
+}
+
+.carousel-control .icon-next, .carousel-control .icon-prev {
+  font-size: 30px;
+  font-weight: bold;
+  top: 34%;
+}
+
+.carousel-inner .img-circle {
+  width: 307px;
+  height: 286px;
 }
 .center-modal-auto
 {

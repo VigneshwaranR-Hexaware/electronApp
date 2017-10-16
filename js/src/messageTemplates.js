@@ -226,9 +226,11 @@ define(["utils","settings"], function (utils,settings) {
         }
 
         carousel += ` </div><!--.carousel-inner-->
-
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"></a>
-		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
+        
+		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"><span class="icon-prev" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span></a>
+		<a data-slide="next" href="#${uniqueId}" class="right carousel-control"><span class="icon-next" aria-hidden="true"></span>
+        <span class="sr-only">Next</span></a>
 	  </div><!--.Carousel--></div><p style="bottom: 10px;" class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
 
         return carousel;
