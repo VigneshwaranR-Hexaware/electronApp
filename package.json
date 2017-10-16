@@ -1,23 +1,25 @@
 {
-  "name": "webchatwidget",
-  "productName": "Electron tutorial app",
+  "name": "MYRICOH",
+  "productName": "MyRicoh Bot",
   "version": "0.1.0",
-  "main": "main.js",
+  "main": "webhook.js",
   "scripts": {
-    "start": "node webhook.js"
+    "start": "forever start -a -o ./out.log -e ./err.log --uid 'ricohbot' webhook.js",
+    "stop":"forever stop ricohbot"
   },
   "dependencies": {
-    "express": "^4.16.2"
+  "express": "^4.15.4"
   },
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VigneshwaranR-Hexaware/electronApp.git"
+    "url": "https://github.com/HexaInnovLab/MYRICOH"
   },
-  "author": "",
+  "author": "Innovation team Hexaware Technologies",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VigneshwaranR-Hexaware/electronApp/issues"
+    "url": "https://github.com/HexaInnovLab/MYRICOH/issues"
   },
-  "homepage": "https://github.com/VigneshwaranR-Hexaware/electronApp#readme"
+  "homepage": ""
 }
+
