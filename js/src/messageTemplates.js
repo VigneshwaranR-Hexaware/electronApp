@@ -180,7 +180,6 @@ define(["utils","settings"], function (utils,settings) {
             <div class="carousel-inner">`;
         var index = 0;
 
-
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
