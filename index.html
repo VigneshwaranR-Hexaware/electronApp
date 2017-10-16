@@ -50,7 +50,7 @@
     //triggered when modal is about to be shown
     $('#center-dialog').on('show.bs.modal', function(e) {
         $('#modal-img-holder').attr('src', $(e.relatedTarget).data('src'));
-        $('#download-image').attr('href', $(e.relatedTarget).data('src'));
+        $('#modal-btndownload').attr('href', $(e.relatedTarget).data('src'));
     });
   }
    require(['lib/jquery.min'], function ($) {
@@ -181,14 +181,7 @@
               <!-- <div class="modal-body"> Cards provide context and an entry point to more robust information and views. Don't overload cards with extraneous information or actions.
               </div> -->
                 <div class="pmd-modal-action">
-<<<<<<< HEAD
-                  <a href="" id="download-image" download="custom-filename.jpg" target="_blank">Download</a>
-                  <button data-dismiss="modal"  type="button" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary"> <i class="material-icons pmd-sm">share</i> </button>
-                  <button data-dismiss="modal"  type="button" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary"> <i class="material-icons pmd-sm">thumb_up</i> </button>
-                  <button data-dismiss="modal"  type="button" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary"> <i class="material-icons pmd-sm">drafts</i> </button>
-=======
-                  <button data-dismiss="modal"  type="button" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" id="btndownload"> <i class="material-icons pmd-sm">file_download</i> </button>
->>>>>>> f3122319d80d96f7479f4d93f70d0bee8aca3805
+                  <a download="custom-filename.jpg" target="_blank" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" id="modal-btndownload"> <i class="material-icons pmd-sm">file_download</i> </a>
                 </div>
               </div>
             </div>
