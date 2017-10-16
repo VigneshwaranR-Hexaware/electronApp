@@ -1024,14 +1024,14 @@ h2.pmd-card-title-text {
 
 /* -- Button Info outline --*/
 .pmd-btn-outline.btn-info {
-  color: #03a9f4;
+  color: #4F92AB;
   background-color: transparent;
-  border: solid 1px #03a9f4;
+  border: solid 1px #4F92AB;
 }
 .pmd-btn-outline.btn-info:hover, .pmd-btn-outline.btn-info:focus {
   color: #fff;
-  background-color: #03a9f4;
-  border: solid 1px #03a9f4;
+  background-color: #4F92AB;
+  border: solid 1px #4F92AB;
 }
 
 /* -- Buttons Warning --*/
