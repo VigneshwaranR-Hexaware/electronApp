@@ -18,6 +18,5 @@ define({
     userAvatar : "avatar/user.png",
     attachmentUploadURL : "",
     platform : "facebook",
-
     showHeader: true
 });
