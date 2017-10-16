@@ -170,14 +170,21 @@ define(["utils"], function (utils) {
         <!-- Carousel items -->
             <div class="carousel-inner">`;
         var index = 0;
+
+
+
+
         for (let i in data.payload) {
 
             if (data.payload[i].type == 1) {
                 carousel += `<div class="item ${(index == 0) ? 'active' : ''}">
                     <div class="row">
-                        <div class="col-md-3">
-                            <a href="#" class="thumbnail custom-image-wrap">
-                                <img class="img-circle" src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+
+                        <div class="col-md-12">
+                            <a href="#" id="carousel-thumbnail-modal" class="thumbnail custom-image-wrap">
+                                <img data-target="#center-dialog" data-toggle="modal" class="img-circle" src="${data.payload[i].imageUrl}" data-src="${data.payload[i].imageUrl}" alt="Image" style="max-width:100%;">
+
+
                             </a>
                             <h3 class="carousel-body"><p class="carousel-title">${data.payload[i].title}</p>
                             <p class="carousel-subtitle">${data.payload[i].subtitle}</p>`
@@ -194,9 +201,14 @@ define(["utils"], function (utils) {
         }
 
         carousel += ` </div><!--.carousel-inner-->
-		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control">‹</a>
-		<a data-slide="next" href="#${uniqueId}" class="right carousel-control">›</a>
-	  </div><!--.Carousel--></div><p class="bot-res-timestamp-card"><small>${data.time}</small></p></div></li>`;
+
+
+		<a data-slide="prev" href="#${uniqueId}" class="left carousel-control"><span class="icon-prev" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span></a>
+		<a data-slide="next" href="#${uniqueId}" class="right carousel-control"><span class="icon-next" aria-hidden="true"></span>
+        <span class="sr-only">Next</span></a>
+	  </div><!--.Carousel--></div><p style="bottom: 10px;" class="bot-res-timestamp-card"><small> <img style="border-radius:50%;border:2px solid white;" width="20" height="20" src='${settings.botAvatar}'/>${data.time}</small></p></div></li>`;
+
 
         return carousel;
     }

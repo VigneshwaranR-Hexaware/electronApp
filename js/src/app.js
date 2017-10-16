@@ -253,6 +253,13 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             e.preventDefault();
         });
 
+        $("#btndownload").on('click',function(e){
+          e.preventDefault();
+          var url=$('.img-circle').data().src;
+
+          window.location=(url,'Download');
+        });
+
         //Disabling Header,Right Click and Developer windows Functionality for Web
         if(isWeb !=null || isWeb != undefined){
             $('.showheader').hide();
