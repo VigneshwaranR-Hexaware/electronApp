@@ -25,7 +25,7 @@
 
 
 <body>
-  
+
   <script data-main="js/require-setup" src="require.js"></script>
   <script>
 
@@ -33,11 +33,11 @@
 
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
-    
+
       $('[data-toggle="popover"]').each(function () {
-          
+
         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-            
+
             if ($("#"+ $(this).attr("aria-describedby")+":visible").length){
               $(this).trigger('click')
             }
@@ -156,38 +156,42 @@
 
         </div>
 
-      <div tabindex="-1" class="modal fade" id="simple-dialog" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog center-modal-auto">
-              <div class="modal-content modal-box-custom">
-                <div class="modal-body">
-                  <p><b>Disclaimer</b></br></br>Alerts inform the user about a situation or action that requires their confirmation or acknowledgement before proceeding.
-                  They differ slightly in appearance based upon the severity and impact of the message conveyed.</p>
-                </div>
-              </div>
-          </div>
-      </div>
+        <div tabindex="-1" class="modal fade" id="simple-dialog" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog center-modal-auto">
+                <div class="modal-content modal-box-custom">
+                  <div class="modal-body">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <p></br><b>Disclaimer</b></br></br>Alerts inform the user about a situation or action that requires their confirmation or acknowledgement before proceeding.
+                    They differ slightly in appearance based upon the severity and impact of the message conveyed.</p>For further details,
+                      <button type="button" style="color:blue;padding-left: 0%" class="btn-link" onClick="window.open('https://www.ricoh-usa.com/en/about-us/terms-of-use?alnv=term','_blank'); ">Terms of Use</button>
 
-      <div tabindex="-1" class="modal fade" id="center-dialog" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <!-- <div class="modal-header">
-              <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <div class="media-left"> <a href="javascript:void(0);" class="avatar-list-img"> <img width="40" height="40" src="http://propeller.in/components/list/img/40x40.png"> </a>
+                  </div>
                 </div>
-                  <div class="media-body media-middle">
-                    <h3 class="pmd-card-title-text">Two-line item</h3>
-                      <span class="pmd-card-subtitle-text">Secondary text</span> </div>
-                  </div> -->
-                <div class="pmd-modal-media"> <img id="modal-img-holder" width="1184" height="666" class="img-responsive" src="http://propeller.in/assets/images/profile-pic.png">
-                </div>
-              <!-- <div class="modal-body"> Cards provide context and an entry point to more robust information and views. Don't overload cards with extraneous information or actions.
-              </div> -->
-                <div class="pmd-modal-action">
-                  <a download="custom-filename.jpg" target="_blank" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" id="modal-btndownload"> <i class="material-icons pmd-sm">file_download</i> </a>
+            </div>
+        </div>
+
+        <div tabindex="-1" class="modal fade" id="center-dialog" style="display: none;" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content" style="border-radius:10px">
+              <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                  <!-- <div class="media-left"> <a href="javascript:void(0);" class="avatar-list-img"> <img width="40" height="40" src="http://propeller.in/components/list/img/40x40.png"> </a>
+                  </div>
+                    <div class="media-body media-middle">
+                      <h3 class="pmd-card-title-text">Two-line item</h3>
+                        <span class="pmd-card-subtitle-text">Secondary text</span> </div>
+                    </div> -->
+                  <div class="pmd-modal-media"> <img id="modal-img-holder" width="1184" height="666" class="img-responsive" src="http://propeller.in/assets/images/profile-pic.png">
+                  </div>
+                <!-- <div class="modal-body"> Cards provide context and an entry point to more robust information and views. Don't overload cards with extraneous information or actions.
+                </div> -->
+                  <div class="pmd-modal-action" style="position: relative;text-align: right;">
+                    <a download="invoice_example.jpg" target="_blank" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" id="modal-btndownload"> <i class="material-icons pmd-sm">file_download</i> </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+
 
 
 
