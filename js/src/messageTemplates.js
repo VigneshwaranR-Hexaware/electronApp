@@ -161,13 +161,13 @@ define(["utils","settings"], function (utils,settings) {
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload}">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                       }
                       else if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('url')){
-                        console.log(data.payload[i].payload.facebook.quick_replies[j].url);
+                        console.log("URL : "+data.payload[i].payload.facebook.quick_replies[j].url);
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.location.href='${data.payload[i].payload.facebook.quick_replies[j].url}'; 'height=400,width=600'" >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
 
                       }
                       else if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('tab')){
-                        console.log(data.payload[i].payload.facebook.quick_replies[j].tab);
-                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.open('${data.payload[i].payload.facebook.quick_replies[j].url}','_blank'); " >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+                        console.log("TAB : "+data.payload[i].payload.facebook.quick_replies[j].tab);
+                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.open('${data.payload[i].payload.facebook.quick_replies[j].tab}','_blank'); " >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                       }
                     }
                 }
