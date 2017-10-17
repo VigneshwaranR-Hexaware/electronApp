@@ -25,6 +25,7 @@
 
 
 <body>
+  
   <script data-main="js/require-setup" src="require.js"></script>
   <script>
 
@@ -32,18 +33,18 @@
 
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
-
+    
       $('[data-toggle="popover"]').each(function () {
-                //the 'is' for buttons that trigger popups
-                //the 'has' for icons within a button that triggers a popup
-                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                  if ($(this).next('div.popover:visible').length){
-                    $(this).trigger('click')
-                  }
-                }
+          
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            
+            if ($("#"+ $(this).attr("aria-describedby")+":visible").length){
+              $(this).trigger('click')
+            }
+          }
 
 
-            });
+      });
 
     });
 
@@ -52,10 +53,11 @@
         $('#modal-img-holder').attr('src', $(e.relatedTarget).data('src'));
         $('#modal-btndownload').attr('href', $(e.relatedTarget).data('src'));
     });
+
+    document.getElementById("btn-input").focus();
+
   }
    require(['lib/jquery.min'], function ($) {
-
-
 
 			require(['lib/bootstrap.min'], function () {
 				require(['lib/propeller'], function () {
@@ -116,8 +118,8 @@
 
     <div class="row">
       <div class="col-md-12">
-        <button style="margin-left: 0px; width: 26px; min-width: 10px" data-trigger="click" data-toggle="popover" data-placement="top" data-content="<h1 class='popup-msgbox' style='cursor:pointer;padding:0;margin:0'><span onclick='showmesgtext(this);return false;'  class='laughter' style='margin-right:3px;'>&#128516;</span><span  onclick='showmesgtext(this);return false;' class='winking'  style='margin-right:3px;'>&#128521;</span><span onclick='showmesgtext(this);return false;' class='delicious'  style='margin-right:3px;'>&#128523;</span><span onclick='showmesgtext(this);return false;' class='heart-shaped' style='margin-right:3px;' >&#128525;</span><span onclick='showmesgtext(this);return false;' style='margin-right:3px;' class='crying'>&#128546;</span><span onclick='showmesgtext(this);return false;' style='margin-right:3px;' class='angry'>&#128544;</span></h1>"
-          data-html="true" class="emoji-message btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="emojiPicker" >
+        <button style="margin-left: 0px; width: 26px; min-width: 10px" data-container="body" data-trigger="click" data-toggle="popover" data-placement="top" data-content="<h1 class='popup-msgbox' style='cursor:pointer;padding:0;margin:0'><span onclick='showmesgtext(this);return false;'  class='laughter' style='margin-right:3px;'>&#128516;</span><span  onclick='showmesgtext(this);return false;' class='winking'  style='margin-right:3px;'>&#128521;</span><span onclick='showmesgtext(this);return false;' class='delicious'  style='margin-right:3px;'>&#128523;</span><span onclick='showmesgtext(this);return false;' class='heart-shaped' style='margin-right:3px;' >&#128525;</span><span onclick='showmesgtext(this);return false;' style='margin-right:3px;' class='crying'>&#128546;</span><span onclick='showmesgtext(this);return false;' style='margin-right:3px;' class='angry'>&#128544;</span></h1>"
+          data-html="true" class="emoji-message btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="emojiPicker">
                   <i class="material-icons pmd-sm">face</i>
         </button>
         <!--<button onclick="$(this).parent().find('input[type=file]').click();" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary"
