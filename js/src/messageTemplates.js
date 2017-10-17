@@ -160,10 +160,14 @@ define(["utils","settings"], function (utils,settings) {
                       if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('payload')){
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" data-quickRepliesPayload="${data.payload[i].payload.facebook.quick_replies[j].payload}">${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                       }
-                      else{
+                      else if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('url')){
                         console.log(data.payload[i].payload.facebook.quick_replies[j].url);
                         quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.location.href='${data.payload[i].payload.facebook.quick_replies[j].url}'; 'height=400,width=600'" >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
-                        //quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.open('https://server.iad.liveperson.net/hc/70994705/?cmd=file&file=visitorWantsToChat&site=70994705&byhref=1&SESSIONVAR!skill=MyRicohSupport&imageUrl=https://server.iad.liveperson.net/hcp/Gallery/ChatButton-Gallery/English/General/1a?type=individual','_blank'); " >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
+
+                      }
+                      else if(data.payload[i].payload.facebook.quick_replies[j].hasOwnProperty('tab')){
+                        console.log(data.payload[i].payload.facebook.quick_replies[j].tab);
+                        quickRepliesHtml += `<button type="button"  class="btn pmd-btn-outline pmd-ripple-effect btn-info QuickreplybtnPayload" onClick="window.open('${data.payload[i].payload.facebook.quick_replies[j].url}','_blank'); " >${data.payload[i].payload.facebook.quick_replies[j].title}</button>`
                       }
                     }
                 }
