@@ -327,7 +327,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             };
 
             recognition.onresult = function (event) {
-                recognition.onend = null;
+                //recognition.onend = null;
 
                 var text = "";
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -353,21 +353,22 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         }
 
         function switchRecognition() {
-            $("button.speaker-text-response").removeClass(".btn-primary:focus");
-            $("button.speaker-text-response").removeClass(".btn-primary:hover");
-            if (recognition==null) {
+         //   $("button.speaker-text-response").removeClass(".btn-primary:focus");
+          //  $("button.speaker-text-response").removeClass(".btn-primary:hover");
+          console.log(recognition);
+            if (recognition) {
                 stopRecognition();
-                $("button.speaker-text-response").addClass(".btn-primary:focus");
+            //    $("button.speaker-text-response").addClass(".btn-primary:focus");
             } else {
                 startRecognition();
-                $("button.speaker-text-response").addClass(".btn-primary:hover");
+              //  $("button.speaker-text-response").addClass(".btn-primary:hover");
             }
         }
 
         function setInput(text) {
             console.log("Rec is " + recognition);
             $("#btn-input").val(text);
-            send();
+            //sendMessage($("#btn-input"), e);
         }
 
         function updateRec() {
