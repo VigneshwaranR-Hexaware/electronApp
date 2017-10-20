@@ -16,11 +16,19 @@
 		.popover {
 			max-width: 420px;
 		}
+
+		body {
+			background-image: url("images/ricoh-website-background-2.png");
+			background-repeat: no-repeat;
+			background-color: #FFF;
+			background-position: top center;
+			height: 300px
+		}
+
 	</style>
 </head>
 
-<body background="images/ricoh-website-background.png">
-	<a href="#" onclick="createWindow('http://localhost:3000/?popup=1',334,661)" style="float: right;background-color: #4f92ac;color: white;position: relative;right: 20%;top: 50px;padding-left: 11px;padding-right: 11px;font-weight: 600;">Click to chat</a>
+<body>
 	<footer>
 		<!--<div class="menu pmd-floating-action" role="navigation">
 
@@ -40,6 +48,10 @@
 
 		function bindPopoverEvents() {
 
+			$("body").click(function(){
+			
+				createWindow('http://localhost:3000/?popup=1',334,661)
+			})
 			$('#webChat').on('hide.bs.popover', function () {
 
 				$("#webChatPrimaryIcon").show();

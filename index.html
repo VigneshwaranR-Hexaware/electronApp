@@ -29,8 +29,11 @@
   <script>
 
   function updateChatBodyHeight() {
-    $('.chat-body').css('height', (window.innerHeight - 140) +'px')
-    $('.main-container').css('opacity', '1');
+    
+    $('.chat-body').css('height', (window.innerHeight - 140) +'px');
+    
+    setTimeout(function(){ $('.main-container').css('opacity', '1'); }, 300);
+    
   }
 
 
