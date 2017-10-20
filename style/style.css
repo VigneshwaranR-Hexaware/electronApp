@@ -421,6 +421,7 @@ html,body{
 .carousel .carousel-control { opacity: 0; transition: opacity 0.5s ease-in;}
 .carousel:hover .carousel-control { opacity: 1; transition: opacity 0.5s ease-in;}
 
+.mobile-device .carousel .carousel-control { opacity: 1;}
 .pmd-textfield textarea.form-control:focus {
   border-bottom: 0px;
 }
