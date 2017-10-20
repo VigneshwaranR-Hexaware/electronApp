@@ -7,12 +7,19 @@ This file is part of the Innovation LAB - Offline Bot.
 
 html,body{
     height:100%;
-     overflow-y: hidden;
+    overflow-y: hidden;
+    
 }
 .main-container{
     background-color: #fff;
-     height:100%;
-     overflow-y: hidden;
+    height:100%;
+    overflow-y: hidden;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    opacity: 0;
 }
 
 .chat-body {
@@ -320,8 +327,8 @@ html,body{
 }
 
 .quick-replies-buttons {
-  text-align: center;
-  margin-bottom: 11px;
+  text-align: left;
+  margin-bottom: 14px;
 }
 
 .bot-res-timestamp-qr {
