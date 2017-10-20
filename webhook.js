@@ -9,7 +9,7 @@ app.get('/', function(req, res) {
   res.send("/richowebsites");
 });
 
-app.get('/richowebsite', function(req, res) {
+app.get('/ricohwebsite', function(req, res) {
   res.sendfile(__dirname + '/myricoh.html');
 });
 

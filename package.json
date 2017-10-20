@@ -5,10 +5,10 @@
   "main": "webhook.js",
   "scripts": {
     "start": "forever start -a -o ./out.log -e ./err.log --uid 'ricohbot' webhook.js",
-    "stop":"forever stop ricohbot"
+    "stop": "forever stop ricohbot"
   },
   "dependencies": {
-  "express": "^4.15.4"
+    "express": "^4.15.4"
   },
   "description": "",
   "repository": {
@@ -22,4 +22,3 @@
   },
   "homepage": ""
 }
-
