@@ -28,11 +28,19 @@
   <script data-main="js/require-setup" src="require.js"></script>
   <script>
 
-  function bindJS() {
-
-
+  function updateChatBodyHeight() {
     $('.chat-body').css('height', (window.innerHeight - 140) +'px')
     $('.main-container').css('opacity', '1');
+  }
+
+
+  function bindJS() {
+
+    updateChatBodyHeight()
+
+    $(window).on('resize', function(){
+      updateChatBodyHeight()
+    });
 
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
