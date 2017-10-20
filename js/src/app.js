@@ -103,7 +103,9 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //Chatbox Send message
         $("textarea#btn-input").keypress(function (e) {
             if (e.which == 13) {
-                sendMessage($(this), e);
+                if($.trim($(this).val())!=""){
+                    sendMessage($(this), e);
+                }
             }
         });
 //
