@@ -31,6 +31,10 @@
 
   function bindJS() {
 
+
+    $('.chat-body').css('height', (window.innerHeight - 140) +'px')
+    $('.main-container').css('opacity', '1');
+
     //hide emoji popover on outside click
     $(document).on('click', function (e) {
 
@@ -102,7 +106,7 @@
           a conversation by typing your query and I will try to answer them.</h1>
 
 
-          <div class="header-text-logo hidden" style="background-color: white;height: 16%;border-bottom:2px solid rgba(204, 204, 204, 0.59)">
+          <div class="header-text-logo hidden" style="background-color: white;height: 70px; padding-top: 5px; border-bottom:2px solid rgba(204, 204, 204, 0.59)">
             <div class="col-xs-3">
               <img src="../avatar/bot-logo-image.jpg" class="img-responsive" style="border-radius: 50%; border: 5px solid white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0); padding-top: 0%;">
             </div>
