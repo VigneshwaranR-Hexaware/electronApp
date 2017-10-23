@@ -199,7 +199,7 @@ html,body{
 
 .custom-infocard {
     border-radius: 15px;
-    padding: 15px 10px;
+    padding: 0px 10px;
     margin-right: 25px;
     max-width: 75%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.21), 0 6px 20px 0 rgba(0, 0, 0, 0);
@@ -424,4 +424,39 @@ html,body{
 .mobile-device .carousel .carousel-control { opacity: 1;}
 .pmd-textfield textarea.form-control:focus {
   border-bottom: 0px;
+}
+.pmd-card-actions {
+  text-align: right;
+  padding: 8px 4px;
+}
+
+.infocard-btn-custom{
+  background-color: #ffffff;
+  color: #CF142B;
+  font-weight: 800;
+}
+
+.pmd-card-actions .btn:first-child {
+  margin-right: 0px;
+  padding: 8px;
+}
+.pmd-card-actions .btn:last-child {
+  margin-right: 0px;
+  padding: 8px;
+}
+
+.pmd-card-actions .btn {
+  min-width: inherit;
+  /*padding: 10px 8px;*/
+}
+.pmd-card-actions .btn {
+  min-width: inherit;
+  padding: 3px 8px;
+}
+
+.btn-primary:hover,.dropdown-toggle.btn-primary:hover {
+  background-color: #CF124B;
+}
+.btn-primary:focus,.dropdown-toggle.btn-primary:focus {
+  background-color: #CF142B;
 }

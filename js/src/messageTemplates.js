@@ -94,7 +94,7 @@ define(["utils","settings"], function (utils,settings) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
                 for (var j = 0; j < data.payload[i].buttons.length; j++) {
-                    cardButtons += ` <button type="button" class="btn btn-primary cardresponsepayload" data-cardpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                    cardButtons += ` <button type="button" class="btn btn-primary infocard-btn-custom cardresponsepayload" data-cardpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
                 }
                 cardButtons += `</div>`
             }

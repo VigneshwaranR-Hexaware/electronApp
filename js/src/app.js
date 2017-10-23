@@ -128,9 +128,10 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         });
         //Card Response Postback button
         $(document).on('click', '.cardresponsepayload', function (e) {
+          var textInput=$(this).text();
             var payloadInput = $(this).data().cardpayloadbutton;
             console.log('Button Payload' + payloadInput);
-            processor.askBot(payloadInput, payloadInput, function (error, html) {
+            processor.askBot(payloadInput, textInput, function (error, html) {
                 if (error) {
                     console.log("error occured while processing your Request") //change into some inline fancy display, show error in chat window.
                 }
@@ -285,6 +286,8 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             //     }
             // });
         }
+
+
 
 
 
