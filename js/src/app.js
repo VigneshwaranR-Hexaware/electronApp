@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 /* -------------------------------------------------------------------
 Copyright (c) 2017-2017 Hexaware Technologies
@@ -108,10 +108,8 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 }
             }
         });
-//
         //Quick Replies payload button Click
         $(document).on('click', '.QuickreplybtnPayload', function (e) {
-            // debugger;
             var textInput = $(this).text();
             var payloadInput = $(this).data().quickrepliespayload;
             processor.askBot(payloadInput, textInput, function (error, html) {
@@ -137,7 +135,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -152,7 +149,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -168,7 +164,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -185,7 +180,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -196,7 +190,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
             var payloadInput = $(this).attr("data");
             console.log('Button Payload' + payloadInput);
             window.open(payloadInput, "__blank", 'width=1024,height=700,resizable=no');
-
             e.preventDefault();
         });
         $(document).on('click', '.genericTemplate', function (e) {
@@ -209,7 +202,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -224,7 +216,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -239,7 +230,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -256,7 +246,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 if (html) {
                     msg_container.append(html);
                     utils.scrollSmoothToBottom($('div.chat-body'));
-
                 }
             });
             e.preventDefault();
@@ -265,7 +254,6 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         $("#btndownload").on('click',function(e){
           e.preventDefault();
           var url=$('.img-circle').data().src;
-
           window.location=(url,'Download');
         });
 
@@ -276,14 +264,14 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
                 return false;
             });
 
-            // $(document).keydown(function (event) {
-            //     if (event.keyCode == 123) {
-            //         return false;
-            //     }
-            //     else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-            //         return false;  //Prevent from ctrl+shift+i
-            //     }
-            // });
+            $(document).keydown(function (event) {
+                if (event.keyCode == 123) {
+                     return false;
+                }
+                else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+                     return false;  //Prevent from ctrl+shift+i
+                }
+            });
         }
 
 
