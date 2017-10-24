@@ -472,3 +472,7 @@ html,body{
     background-color: rgba(148, 147, 147, 0.32);
     background-repeat: repeat-x;
 }
+
+.pmd-textfield-focused {
+  background-color: #CF142B;
+}
