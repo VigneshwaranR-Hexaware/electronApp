@@ -460,3 +460,15 @@ html,body{
 .btn-primary:focus,.dropdown-toggle.btn-primary:focus {
   background-color: #CF142B;
 }
+
+.custom-carousel-left{
+    background-color: rgba(148, 147, 147, 0.32);
+    background-repeat: repeat-x;
+}
+
+.carousel-control.right{
+    right: 0;
+    left: auto;
+    background-color: rgba(148, 147, 147, 0.32);
+    background-repeat: repeat-x;
+}
