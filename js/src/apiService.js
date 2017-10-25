@@ -105,62 +105,8 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                         isQuickReply = (msgfulfill.payload.facebook.quick_replies.length > 0) ? true : false;
                                         console.log(isQuickReply);
                                     }
-                                    if (msgfulfill.payload.facebook.hasOwnProperty("attachment") && msgfulfill.payload.facebook.attachment.hasOwnProperty("payload")) {
-                                        //video attachment
-                                        if (msgfulfill.payload.facebook.attachment.type == "video") {
-                                            isVideo = true;
-                                            videoUrl = msgfulfill.payload.facebook.attachment.payload.url;
-                                        }
-
-                                        if (msgfulfill.payload.facebook.attachment.type == "audio") {
-                                            isAudio = true;
-                                            audioUrl = msgfulfill.payload.facebook.attachment.payload.url;
-                                        }
-                                        //file attachment
-                                        isFile = (msgfulfill.payload.facebook.attachment.type == "file") ? true : false;
-                                        fileUrl = msgfulfill.payload.facebook.attachment.payload.url;
-                                        //receipt template
-                                        isReceipt = (msgfulfill.payload.facebook.attachment.payload.template_type == "receipt") ? true : false;
-                                        receiptData = msgfulfill.payload.facebook.attachment.payload;
-                                        //list template
-                                        if (msgfulfill.payload.facebook.attachment.payload.template_type == "list") {
-                                            isList = (msgfulfill.payload.facebook.attachment.payload.elements.length > 0) ? true : false;
-
-                                        }
-                                        //Airline Boarding Pass
-                                        if ((msgfulfill.payload.facebook.attachment.payload.template_type === 'airline_boardingpass')) {
-                                            isAirlineBoardingPass = (msgfulfill.payload.facebook.attachment.payload.boarding_pass.length > 0) ? true : false;
-
-                                        }
-                                        // View boarding Pass with barcode
-                                        if ((response.result.metadata.intentName === 'AirLineWith_Barcode')) {
-                                            isViewBoardingPassBarCode = (msgfulfill.payload.facebook.attachment.payload.boarding_pass.length > 0) ? true : false;
-                                        }
-                                        //Airline checkin template
-                                        if ((msgfulfill.payload.facebook.attachment.payload.template_type === 'airline_checkin')) {
-                                            isAirlineCheckin = (msgfulfill.payload.facebook.attachment.payload.flight_info.length > 0) ? true : false;
-                                        }
-                                        //Airline flight update template
-                                        if ((msgfulfill.payload.facebook.attachment.payload.template_type === 'airline_update')) {
-                                            // isAirlingFlightUpdate = response.result.fulfillment.messages[i].payload.facebook.attachment.payload.message.attachment.payload.update_flight_info;
-                                            isAirlingFlightUpdate = true;
-
-                                        }
-                                        //Generic template
-                                        if (response.result.metadata.intentName != 'Buy') {
-                                            if (msgfulfill.payload.facebook.attachment.payload.template_type == 'generic') {
-                                                genericTemplate = true;
-                                                genericElement = msgfulfill.payload.facebook.attachment.payload.elements;
-                                            }
-                                        }
-                                        else if (response.result.metadata.intentName == 'Buy') {
-                                            genericCheckout = msgfulfill.payload.facebook.attachment.payload.elements;
-                                            genericBuy = true;
-                                        }
-                                    }
 
                                 }
-
 
                             }
                         } else {

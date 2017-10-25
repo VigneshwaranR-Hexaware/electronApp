@@ -35,55 +35,7 @@ define(['messageTemplates', 'uuid'], function (messageTpl, uuidv1) {
                 return messageTpl.quickreplies(this.data);
             }
 
-            // airlines intergration of Airline boarding pass template
-            if (this.responseType == "airlineBoarding") {
-                return messageTpl.airlineBoarding(this.data);
-            }
-            // airlines intergration of Airline boarding pass with view bar code template
-            if (this.responseType == "ViewBoardingPassBarCode") {
-                return messageTpl.ViewBoardingPassBarCode(this.data);
-            }
-            // airlines intergration of Airline Checkin template
-            if (this.responseType == "airlineCheckin") {
-                return messageTpl.airlineCheckin(this.data);
-            }
-            // airlines intergration of Airline Flight Update template
-            if (this.responseType == "airlineFlightUpdate") {
-                return messageTpl.airlineFlightUpdate(this.data);
-            }
-            //Return Video Response Type Payload
-            if (this.responseType == "video") {
-                console.log(this.data);
-                return messageTpl.video(this.data);
-            }
-            //Return Audio Response Type Payload
-            if (this.responseType == "audio") {
-                console.log(this.data);
-                return messageTpl.audio(this.data);
-            }
-            //Return File Response Type Payload
-            if (this.responseType == "file") {
-                console.log(this.data);
-                return messageTpl.file(this.data);
-            }
-            //Return Receipt Response Type Payload
-            if (this.responseType == "receipt") {
-                console.log(this.data);
-                return messageTpl.receipt(this.data);
-            }
-            //Return Receipt Response Type Payload
-            if (this.responseType == "list") {
-                return messageTpl.list(this.data);
-            }
-            // Generic Templates Response Type Payload
-
-            if (this.responseType == "generic") {
-                //console.log(JSON.stringify(this.data));
-                return messageTpl.generic(this.data);
-            }
-            if (this.responseType == "buybutton") {
-                return messageTpl.buybutton(this.data);
-            }
+          
         }
     }
 
