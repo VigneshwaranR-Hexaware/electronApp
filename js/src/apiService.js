@@ -106,6 +106,18 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                         console.log(isQuickReply);
                                     }
 
+                                    if (msgfulfill.payload.facebook.hasOwnProperty("attachment")) {
+                                        count = count + 1;
+                                        response.result.fulfillment.messages = response.result.fulfillment.messages[i]["payload"]["facebook"]["attachment"]["payload"]["elements"]
+                                        
+                                        for (let j in response.result.fulfillment.messages) {
+                                            response.result.fulfillment.messages[j]["type"] = 1
+                                            response.result.fulfillment.messages[j]["imageUrl"] = response.result.fulfillment.messages[j]["image_url"]
+                                        }
+
+                                        hasbutton = (response.result.fulfillment.messages[i].buttons.length > 0) ? true : false;
+                                        isCardorCarousel = true;
+                                    }
                                 }
 
                             }
