@@ -261,7 +261,7 @@ define(['jquery', 'settings', 'apiService', 'utils'], function ($, config, apiSe
         //Disabling Header,Right Click and Developer windows Functionality for Web
         if (isWeb != null || isWeb != undefined) {
             $('.showheader').hide();
-            $("body").on("contextmenu", function (e) {
+            $("chat-body").on("contextmenu", function (e) {
                 return false;
             });
 
