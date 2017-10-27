@@ -109,7 +109,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                                     if (msgfulfill.payload.facebook.hasOwnProperty("attachment")) {
                                         count = count + 1;
                                         response.result.fulfillment.messages = response.result.fulfillment.messages[i]["payload"]["facebook"]["attachment"]["payload"]["elements"]
-                                        
+
                                         for (let j in response.result.fulfillment.messages) {
                                             response.result.fulfillment.messages[j]["type"] = 1
                                             response.result.fulfillment.messages[j]["imageUrl"] = response.result.fulfillment.messages[j]["image_url"]
@@ -123,6 +123,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                             }
                         } else {
                             let cardHTML = cards({
+                                "action":response.result.action,
                                 "payload": response.result.fulfillment.speech,
                                 "senderName": config.botTitle,
                                 "senderAvatar": config.botAvatar,
@@ -135,6 +136,7 @@ define(['jquery', 'settings', 'utils', 'messageTemplates', 'cards', 'uuid'],
                         if (isCardorCarousel) {
                             if (count == 1) {
                                 let cardHTML = cards({
+                                    "action":response.result.action,
                                     "payload": response.result.fulfillment.messages,
                                     "senderName": config.botTitle,
                                     "senderAvatar": config.botAvatar,

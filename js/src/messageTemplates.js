@@ -73,7 +73,13 @@ define(["utils","settings"], function (utils,settings) {
                 console.log("Buttons" + data);
                 cardButtons = `<div class="pmd-card-actions">`
                 for (var j = 0; j < data.payload[i].buttons.length; j++) {
+                  if(data.payload[i].buttons[j].postback=="other_queries_non_invoice"){
+                    cardButtons += `<button type="button"  class="btn btn-primary infocard-btn-custom cardresponsepayload" data-cardpayloadButton = "${data.payload[i].buttons[j].postback}" onClick="window.location.href='https://server.iad.liveperson.net/hc/70994705/?cmd=file&file=visitorWantsToChat&site=70994705&byhref=1&SESSIONVAR!skill=MyRicohSupport&imageUrl=https://server.iad.liveperson.net/hcp/Gallery/ChatButton-Gallery/English/General/1a'; 'height=400,width=600'" >${data.payload[i].buttons[j].text}</button>`
+                  }
+                  else{
                     cardButtons += ` <button type="button" class="btn btn-primary infocard-btn-custom cardresponsepayload" data-cardpayloadButton = "${data.payload[i].buttons[j].postback}" >${data.payload[i].buttons[j].text}</button>`
+                  }
+
                 }
                 cardButtons += `</div>`
             }
